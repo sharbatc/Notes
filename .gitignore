@@ -1,0 +1,5 @@
+# Remove the additional files created when compiling with Latex
+
+*.aux
+*.log
+
