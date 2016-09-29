@@ -2,4 +2,6 @@
 
 *.aux
 *.log
+*.toc
+*.synctex.gz
 
