@@ -16,12 +16,14 @@
 \usepackage{fancybox}
 \usepackage{tikz}
 \usepackage{capt-of}
-\usepackage{verbatim}
-
 
 % print code
 \usepackage{listings}
 \usepackage{algorithm2e}
+\usepackage{verbatim}
+
+% push at the bottom
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
 
 % landscape
 \usepackage{pdflscape}
@@ -38,36 +40,29 @@
 
 \pagestyle{plain}
 
+% --- equations ---
 \def \be {\begin{equation}}
 \def \ee {\end{equation}}
 %\def \dd  {{\rm d}}m
 
-
+% --- links ---
 \newcommand{\mail}[1]{{\href{mailto:#1}{#1}}}
 \newcommand{\ftplink}[1]{{\href{ftp://#1}{#1}}}
 
-\def \ExprList {\textit{ExprList}}
-\def \ClassList {\textit{ClassList}}
-\def \ClassTree {\textit{ClassTree}}
-\def \ScoreClassTree {\textit{ScoreClassTree}}
-\def \DirectScoreTree {\textit{DirectScoreTree}}
-\def \Completor {\textit{Completor}}
-
-\def \pathExprList {\path{leon.comparison.ComparatorExprList}}
-\def \pathClassList {\path{leon.comparison.ComparatorClassList}}
-\def \pathClassTree {\path{leon.comparison.ComparatorClassTree}}
-\def \pathScoreClassTree {\path{leon.comparison.ComparatorScoreClassTree}}
-\def \pathDirectScoreTree {\path{leon.comparison.ComparatorDirectScoreTree}}
-\def \pathCompletor {\path{leon.comparison.Completor}}
 
 
-
-\fancyhead[L]{Applied Data Analysis}
-\fancyhead[R]{Summary}
 
 
 
 % ======= Document ======
+
+%----------------------------------------------------------------------------------------
+% HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+% --- header ---
+\fancyhead[L]{Applied Data Analysis}
+\fancyhead[R]{Summary}
 
 \begin{document}
 \begin{titlepage} %Titre
@@ -75,9 +70,11 @@
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
 \center % Center everything on the page
  
+ 
+ %----------------------------------------------------------------------------------------
+% TITLE SECTION
 %----------------------------------------------------------------------------------------
-% HEADING SECTIONS
-%----------------------------------------------------------------------------------------
+
 
 
 
@@ -94,28 +91,37 @@
 \textsc{\Large School Of Computer And Communication Sciences}\\[0.5cm] % Major heading such as course name
 \textsc{\Large }\\% Minor heading such as course title
 %\textsc{ \Large Master Semester Project}\\ % Minor heading such as course title
-%----------------------------------------------------------------------------------------
-% TITLE SECTION
-%----------------------------------------------------------------------------------------
+
 
 \HRule \\[0.4cm]
 { \huge \bfseries Applied Data Analysis \\Summary}\\[0.4cm] % Title of your document
 \HRule \\[1.5cm]
 
+% ---- Lovelace -----
+\begin{center}
+\includegraphics[width = 5 cm]{pic/lovelace} % Include a department/university logo - this will require the graphicx package
+\end{center}
+
+
+
+\begin{bottompar}
+% ---- Professor -----
 \begin{flushleft} \large
 Prof. \textsc{Catasta} Michele\\
 Distributed Information Systems Laboratory (LSIR) \\
 \mail{michele.catasta@epfl.ch} \\ 
 \end{flushleft}
 
+% ---- date
+{\large June 10, 2016}\\[1cm] % Date, change the \today to a set date if you want to be precise
+
+\end{bottompar}
  
 %%----------------------------------------------------------------------------------------
 %% AUTHOR SECTION
 %%----------------------------------------------------------------------------------------
 
-\begin{center}
-\includegraphics[width = 5 cm]{pic/lovelace} % Include a department/university logo - this will require the graphicx package
-\end{center}
+
 %
 %
 %
@@ -156,7 +162,7 @@ Distributed Information Systems Laboratory (LSIR) \\
 
 %{\Large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
 
-{\Large June 10, 2016}\\[1cm] % Date, change the \today to a set date if you want to be precise
+
 %
 %\begin{center}
 %\abstract{\large Experiment various methods to compare functional trees between them. Given a function, use these algorithms to find the most similar tree contained in a corpus of functions. Try to suggest an autocompletion for a "hole" in a tree, based on this corpus.}
