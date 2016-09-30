@@ -41,6 +41,13 @@
 \setlength{\oddsidemargin}{0.56cm}
 \setlength{\evensidemargin}{0.56cm}
 
+% quotes
+\usepackage{framed}
+\newcommand*{\signed}[1]{%
+  \unskip\hspace*{1em plus 1fill}%
+  \nolinebreak[3]\hspace*{\fill}\mbox{#1}
+}
+
 \pagestyle{plain}
 
 % --- equations ---
@@ -197,7 +204,7 @@ Distributed Information Systems Laboratory (LSIR) \\
 
 \subsection{General information about the course}
 
-This course covers multiple topics in the data science field such as {\bf Data Management}, {\bf Data Mining}, {\bf Machine Learning}, {\bf Visualization}, {\bf Statistics} and {\bf Story telling}. It's about {\bf breadth}, not depth. Indeed, Data science is evolving really quickly, hence learning in depth a specific tool won't pay off. 
+This course covers multiple topics in the data science field such as \textbf{Data Wrangling}, {\bf Data Management}, {\bf Data Mining}, {\bf Machine Learning}, {\bf Visualization}, {\bf Statistics} and {\bf Story telling}. It's about {\bf breadth}, not depth. Indeed, Data science is evolving really quickly, hence learning in depth a specific tool won't pay off. 
 
 \subsection{Data Science}
 
@@ -205,14 +212,11 @@ When we talk about Data Science, we often use the term Big Data as the enormous 
 understood this many years ago.
 \\ \\
 An accurate definition of Data Analysis is given by Wikipedia:
-
-\say{{\it {\bf Analysis of data} is a process of {\bf inspecting}, {\bf cleaning}, {\bf transforming}, and {\bf modeling data} with the goal of {\bf discovering useful information}, suggesting conclusions, and supporting decision-making.
-%
-Data analysis has multiple facets and approaches, encompassing diverse techniques under a variety of names, {\bf in different business}, science, and social science {\bf domains}.}} 
-\begin{flushright}
- \vspace{-0.8cm}
- \href{https://en.wikipedia.org/wiki/Data\_analysis}{Wikipedia - Data Analysis}
-\end{flushright}
+\begin{framed}
+{\it {\bf Analysis of data} is a process of {\bf inspecting}, {\bf cleaning}, {\bf transforming}, and {\bf modeling data} with the goal of {\bf discovering useful information}, suggesting conclusions, and supporting decision-making.
+Data analysis has multiple facets and approaches, encompassing diverse techniques under a variety of names, {\bf in different business}, science, and social science {\bf domains}.}
+\signed{\href{https://en.wikipedia.org/wiki/Data\_analysis}{Wikipedia - Data Analysis}}
+\end{framed}
 
 Therefore, a Data Scientist has to master different kind of skills such as {\bf Mathematics} (for the Statistics), {\bf Programming} and the {\bf Domain Expertise}. Drew Conway's Venn diagram, Figure \ref{img:venn}, shows the different combination man can obtain with these three skills.
 
