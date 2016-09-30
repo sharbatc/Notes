@@ -6,8 +6,8 @@ all: $(PDF_FILES)
 	@echo "all done"
 
 %.pdf: *.tex
-	rubber -f -d $(wordlist 1,$(words $^), $^)
-
+	rubber -f -d --pdf $(wordlist 1,$(words $^), $^)
+	xdg-open summary.pdf
 
 clean:
-	rm -rf *.dvi *.aux *.snm *.vrb *.toc *.log *.out *~ *.nav
+	rm -rf *.dvi *.aux *.snm *.vrb *.toc *.log *.out *~ *.nav *.pdf

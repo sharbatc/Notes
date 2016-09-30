@@ -1,7 +1,7 @@
 %
 % LATEXBONES
 %
-\documentclass[a4paper,12pt,twoside]{article}
+\documentclass[a4paper,11pt,twoside]{article}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage[english]{babel}
@@ -11,6 +11,7 @@
 \usepackage{here}
 \usepackage{wrapfig}
 \usepackage{fancyhdr}
+\usepackage{dirtytalk}
 
 %drow graph
 \usepackage{fancybox}
@@ -33,6 +34,8 @@
 
 \setlength{\textheight}{235mm}
 \setlength{\topmargin}{-1.2cm} 
+
+\setlength{\parindent}{0pt}
 
 \setlength{\textwidth}{15cm}
 \setlength{\oddsidemargin}{0.56cm}
@@ -80,8 +83,8 @@
 
 \begin{figure} [h] %----------- SubGraph ---------------------
 \centerline{
-\subfigure{\includegraphics[height = 2 cm]{pic/epfl}  }
-\subfigure{\includegraphics[height = 2 cm]{pic/ada-logo}} 
+\subfigure{\includegraphics[height = 2 cm]{./pic/EPFL.png}  }
+\subfigure{\includegraphics[height = 2 cm]{./pic/ADA-logo.png}} 
 } 
 \end{figure}
 
@@ -120,7 +123,6 @@ Distributed Information Systems Laboratory (LSIR) \\
 %%----------------------------------------------------------------------------------------
 %% AUTHOR SECTION
 %%----------------------------------------------------------------------------------------
-
 
 %
 %
@@ -177,21 +179,92 @@ Distributed Information Systems Laboratory (LSIR) \\
 
 
 \pagestyle{fancy}
-% ================Table des matières ==============
+% ================ Table of content ==============
 \newpage
 \tableofcontents 
 
 \baselineskip=16pt
-\parindent=15pt
-\parskip=5pt
+%\parindent=15pt
+%\parskip=5pt
 
 \newpage
 
 
 
 
-%=========================================
-\section{Introduction} 
+% ================ Introduction ==============
+\section{Introduction}
+
+\subsection{General information about the course}
+
+This course covers multiple topics in the data science field such as {\bf Data Management}, {\bf Data Mining}, {\bf Machine Learning}, {\bf Visualization}, {\bf Statistics} and {\bf Story telling}. It's about {\bf breadth}, not depth. Indeed, Data science is evolving really quickly, hence learning in depth a specific tool won't pay off. 
+
+\subsection{Data Science}
+
+When we talk about Data Science, we often use the term Big Data as the enormous amount of data that exist in the world. But Big Data is not only about collecting huge amount of data. It is challenging but not enough. The real value comes from the insights. The {\it internet} companies (Google, Facebook, etc.) 
+understood this many years ago.
+\\ \\
+An accurate definition of Data Analysis is given by Wikipedia:
+
+\say{{\it {\bf Analysis of data} is a process of {\bf inspecting}, {\bf cleaning}, {\bf transforming}, and {\bf modeling data} with the goal of {\bf discovering useful information}, suggesting conclusions, and supporting decision-making.
+%
+Data analysis has multiple facets and approaches, encompassing diverse techniques under a variety of names, {\bf in different business}, science, and social science {\bf domains}.}} 
+\begin{flushright}
+ \vspace{-0.8cm}
+ \href{https://en.wikipedia.org/wiki/Data\_analysis}{Wikipedia - Data Analysis}
+\end{flushright}
+
+Therefore, a Data Scientist has to master different kind of skills such as {\bf Mathematics} (for the Statistics), {\bf Programming} and the {\bf Domain Expertise}. Drew Conway's Venn diagram, Figure \ref{img:venn}, shows the different combination man can obtain with these three skills.
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=7cm]{./pic/Data_Science_VD.png}
+ \caption{\label{img:venn} Venn Diagram describing the different combination of skills used by a Data Scientist (by Drew Conway)}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=10cm]{./pic/tweet_wills.png}
+ \caption{\label{img:tweet_wills} A tweet from Josh Wills, Data Scientist at Slack.}
+\end{figure}
+
+{\bf A practical definition of Data Science} 
+
+Data Science is about the whole processing pipeline to extract information out of data. As such, a Data Scientist {\bf understands and cares about the whole data pipeline}.
+
+\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=8cm]{./pic/pipeline.png}
+\end{figure}
+\end{minipage} \hfill
+\begin{minipage}{0.45\textwidth}
+A {\bf data pipeline} consists of 3 steps:
+\begin{enumerate}
+ \item Preparing to run a model. \\
+  {\it Gathering, cleaning, integrating, restructuring, transforming, loading, filtering, deleting, combining, merging, verifying, extracting, shaping}
+ \item Running the model
+ \item Communicating the results
+\end{enumerate}
+\vspace{0.5cm}
+ A ``good'' Data Scientist will always go back and forth between the steps. The diagram on the left shows exactly what can happen. 
+\end{minipage}
+\\ \\
+In this course, you will develop the following skills:
+\begin{description}
+ \item[data muning/scraping/sampling/cleaning] in order to get an informative, manageable data setlength
+ \item[data storage and management] in order to be able to access data quickly and reliably during subsequent analysis
+ \item[exploratory data analysis] to generate hypotheses and intuition about the data
+ \item[prediction] based on statistical tools such as regression, classification, and clustering
+ \item[communication of results] through visualization, stories and interpretable summaries
+\end{description}
+
+\section{Data Wrangling}
+
+
+
+
+
 
 
 %======= TABLEAU ===========
@@ -209,7 +282,7 @@ Distributed Information Systems Laboratory (LSIR) \\
 %\includegraphics[width=12cm]{graph/ampli2} 
 %\end{center}
 %\caption{\em  \label{label}
-%Légende
+%LÔøΩgende
 %}
 %\end{figure}
 
@@ -221,7 +294,7 @@ Distributed Information Systems Laboratory (LSIR) \\
 %\subfigure[ sublegend ] {\label{sfig:thetafin} \includegraphics[width=7cm]{ graph/graph_convtfin } } 
 %}
 %\caption{\label{ label } 
-%Légende
+%LÔøΩgende
 %} 
 %\end{figure}
 
