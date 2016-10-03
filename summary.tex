@@ -266,7 +266,10 @@ In this course, you will develop the following skills:
 
 % ================ Definition ==============
 % maybe to be moved at the end if it becomes a dictionnary
-\section{Definition}
+\section{Basic concepts}
+
+A data science student is attended to understand the \textbf{Grammar of Data Science}. Having some backgrounds in SQL concepts is also a good thing because, as it is very common, people loves to make example with it. Here is a brief refresh of some definitions and concepts about data science.
+
 \begin{itemize}
   \item {\bf Data model} is a collection of concepts for describing data.
   \begin{itemize}
@@ -274,22 +277,153 @@ In this course, you will develop the following skills:
   \end{itemize}
   \item {\bf Schema} is a description of a particular collection of data, using a given data model.
   \begin{itemize}
-  	\item (Relational model) \textbf{Cardinality} is the number of rows (number of items)
-	\item (Relational model) \textbf{Degree} or \textbf{Arity} is the number of columns (number of attributes)
+  	\item (Relational model) \textbf{Cardinality} is the \#rows (number of items)
+	\item (Relational model) \textbf{Degree} or \textbf{Arity} is the \#columns (number of attributes)
   \end{itemize}
-  \item 
+  \item A {\bf JOIN} is a mean to combine tables based on shared attributes (most of the time some \textbf{IDs}). Despite its apparent simplicity beware of the many ways to compute a JOIN and check what is the default JOIN of a language before using it. The FIG \ref{join_SQL} summurizes these possibilities.
+  \item \textbf{Aggregation} or \textbf{reduction} is the action of reducing data with a common opperation (\textbf{sum}, \textbf{count}, \textbf{average}, ...) to summurize them.
+  \begin{itemize}
+  	\item (SQL command) GroupBy
+  \end{itemize}
+  
+  \item (Panda) \textbf{Series} is a named and ordered dictionary
+    \begin{itemize}
+  	\item keys are indexes
+	\item built on \textbf{numpy.ndarray} (so values can be any Numpy data type)
+    \end{itemize}
+  \item (Panda) \textbf{DataFrame} is a table with named column
+      \begin{itemize}
+      	\item the columns are series
+  	\item it is indeed a dictionary with (columnName $\rightarrow$ series)
+    \end{itemize}
 \end{itemize}
 
+\begin{figure}%---------------FIG--------------
+ \centering
+ \includegraphics[width=12cm]{./pic/SQL_joins}
+ \caption{\label{join_SQL} Different ways to join two tables and the related SQL command.}
+\end{figure}
 
 
+\subsection{Panda vs SQL}
+
+Panda is built to allow easy and fast \textbf{data exploration} and not to be a database manager, as SQL is. Thus there are benefits and drawbacks of using it.
 
 
+\begin{center} %---------------TAB--------------
+\begin{tabular} {| l | l |}
+\hline
+\bf Pros & \bf Cons \\ \hline
+Lightweight \& fast & Tables stored directly in memory \\
+Great expressivness (combine SQL + Python) & No post-load indexing functionality\\
+Easy plot for data visualization (eg Matplotlib) & No transactions, journalings\\ 
+& Large, complex joins are slower \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{OnLine Analytical Processing (OLAP cubes)}
+
+OLAP tools enable users to analyze multidimensional data interactively from multiple perspectives. Conceptually, it is like an n-dimensional spreadsheet (a cube) on which we can apply various opperations to take decisions.
+
+OLAP cubes are an other way to see data table and are contructed based on them, as shows FIG \ref{OLAP_cubes}.
+
+\begin{figure}%---------------FIG--------------
+ \centering
+ \includegraphics[width=12cm]{./pic/OLAP_cube}
+ \caption{\label{OLAP_cubes} Construction of an OLAP cube from a table.}
+\end{figure}
+
+Operations on OLAP cubes are the following and are illustrated on FIG \ref{OLAP_operations}
+\begin{itemize}
+	\item \textbf{Slicing} fixes one or more variable
+	\item \textbf{Dicing} selects a range of one or more variable
+	\item \textbf{Driling up/down} changes levels of a hierarchically-indexed variable, ie "zoom" on a variable and see the sub-categories it contains.
+	\item \textbf{Pivoting} change the point of view of the cube. Swap an aggregated variable an a detailed one.
+\end{itemize}
+
+\begin{figure} [h] %----------- SubGraph ---------------------
+\centerline{
+\subfigure[Slincing] {\includegraphics[width=7cm]{pic/Slicing} }
+\subfigure[Dicing] {\includegraphics[width=7cm]{pic/Dicing} } 
+}
+\centerline{
+\subfigure[Driling up/down] {\includegraphics[width=7cm]{pic/Drilling_up_down} }
+\subfigure[Pivoting] {\includegraphics[width=7cm]{pic/Pivoting} } 
+}
+\caption{\label{OLAP_operations} Operations on OLAP cubes} 
+\end{figure}
+
+\begin{center} %---------------TAB--------------
+\begin{tabular} {| l | l |}
+\hline
+\bf Pros & \bf Cons \\ \hline
+& \\
+\parbox[t][][t]{7cm}{The main adventage of OLAP cubes is that their are \textbf{conceptualy simpler} to understand by a non-scientist person, eg a business man who have to take day-to-day decisions based on company's data. Aggregations are limited but cover the main common cases that we can encounter.
+}&
+\parbox[t][][t]{7cm}{Because of the "on-line" behaviour of this approach, all type of aggregation must be pre-calculated amoung all combination of axis which is very \textbf{expensive in memory and in time} (when updating the data)}\\
+& \\
+\hline
+\end{tabular}
+\end{center}
 
 
 
 % ================ Data Wrangling ==============
 \section{Data Wrangling}
 
+\begin{figure}%---------------FIG--------------
+ \centering
+ \includegraphics[width=12cm]{./pic/path_data_wrangling}
+ \caption{\label{path_data_wrangling}Things do not always happen as expected...}
+\end{figure}
+
+Before any analysis, data need to be transformed from "dirty" to clean and processable data. 
+
+Data comes from different sources (excel or SQL?), sometime collected through different methods over time, with different conventions (space or NaN?), etc ... Data wrangling's goal is to \textbf{extract and standardize these raw data}. The best way to do it is to \textbf{combine automation with visualizations} in order to find outliers. 
+
+Data's problem can come from (non-exhaustive): 
+\begin{itemize}
+  \item Missing data
+  \item Incorrect data
+  \item Inconsistent representations of the same data
+  \item Non-standardized data (centimeter or inches? farenheit or celsuis ?)
+  \item Duplicated data
+\end{itemize}
+
+About 75\% of theses problem will need \textbf{human intervention} to be corrected (by the data-scientist or by crowdsourcing).
+
+Even if it seems really dirty, \textbf{beware not to over-sanitize the data!}. Applying what we can call "defensive programming" is not a good idea because we risk to lose any interesting data, keeping only the ones that fit perfectly in our model.
+
+\subsection{Dealing with missing values}
+
+Values can often miss from the data we have, because of various events (war, fire, ...). We must detect and correct these values with different method according with the domain we are working in.
+
+Whatever the method used, it's good to keep track of these changes to know which are original data and which are modified ones.
+
+\begin{itemize}
+  \item Set values to zero FIG \ref{miss_val}a
+  \item Interpolate based on existing data FIG \ref{miss_val}b
+  \item Omit missing data FIG \ref{miss_val}c
+  \item Interpolation with track kept \ref{miss_val}d
+\end{itemize}
+
+\begin{figure}%---------------FIG--------------
+ \centering
+ \includegraphics[width=12cm]{./pic/missing_values}
+ \caption{\label{miss_val}To deal with missing values.}
+\end{figure}
+
+\subsection{General procedure}
+
+Once the data are well wrangled and before trying to analyse them we must take care of two more steps:
+
+\begin{enumerate}
+  \item \textbf{Deal with uncertain data} (can arise from measurement errors, wrong sampling strategies, etc.)
+  \item \textbf{Parse/trasform data} (with aggregation and reduction techniques) to obtain meaningful records
+\end{enumerate}
+ 
+It's always ideal to have the code and/or the documentation about the dataset you are analyzing (provenance)
+ 
 
 
 
