@@ -4,4 +4,5 @@
 *.log
 *.toc
 *.synctex.gz
+*.tex.backup
 
