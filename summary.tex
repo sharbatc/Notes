@@ -374,8 +374,6 @@ Operations on OLAP cubes are the following and are illustrated on FIG \ref{OLAP_
 \end{tabular}
 \end{center}
 
-
-
 % ================ Data Wrangling ==============
 \section{Data Wrangling}
 
@@ -436,7 +434,7 @@ Whatever the method used, it's good to keep track of these changes to know which
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
- \includegraphics[width=12cm]{./pic/missing_values}
+ \includegraphics[width=15cm]{./pic/missing_values}
  \caption{\label{miss_val}To deal with missing values.}
 \end{figure}
 
@@ -451,9 +449,105 @@ Once the data are well wrangled and before trying to analyse them we must take c
  
 It's always ideal to have the code and/or the documentation about the dataset you are analyzing (provenance).
  
+% ================ Data Variety ==============
+\section{Data Variety}
 
+The ``3 Vs'' of Big Data: {\it Volume}, {\it Velocity} and {\bf Variety}. A course on Database will cover the {\it Volume} and {\it Velocity} parts. In this course, we try to figure out how to address the {\bf Variety} part.
+\\\\
+{\bf ETL}:
+\begin{itemize}
+ \item {\bf Extract} from the {\it source(s)}.
+ \item {\bf Load} data into the {\it sink}. 
+ \item {\bf Transform} data at the source, sink, or in a {\it staging area}.
+\end{itemize}
+Semi-structured data: no strict structure, but some info are given. => Data range comes from very structured data in DB to totally unstructered data such as web pages.
+\\\\
+Traditional DB are {\bf schema-on-write}. (You can't load data into a table without a schema!) But NoSQL (Next generation) DB are {\bf schema-on-read} or {\bf schemaless}. You can either avoid having a schema or have a schema only when you read data. Examples of schemaless: Youtube, Google Cache.
+\\\\
+Schema-on-write data type: SQL
+Schema-rn-read data type: XML (when stored without a schema, the numerical data is stored as {\bf strings}) Using a parser, we can return a typed data. (Faster because number not string + can make checks. => Type is good)
+\\\\
+XML and {\bf DOM} (Document-Object Models). Every webpage on internet becomes a DOM. Tree-structured. 
+XML QUeries: allows a DB to interpret data when running queries, {\it i.e.} to do {\bf arithmetic} or {\bf range queries} on the numerical values. (With or without a schema)
+\\\\
+{\bf JSON} (Javascript Object Notation) Totally schemaless. But we can also use with schema. It's used to represent {\bf hierachical data structures} directly in the languages. (Lot of libraries to do that). Transformation on the data are {\bf \color{red} procedural} in the target language. Easier for some tasks, but painful for e.g. schema changes.
+\\\\
+Data Tools:
+\begin{itemize}
+ \item {\bf XML}
+ \begin{itemize}
+  \item Separation between schema and data.
+  \item Data can be represented and stored without schema (as strings).
+  \item More verbose (but not true after compression or in DB).
+  \item Standard Query/Transformation languages XSLT and Xquery.
+ \end{itemize}
+ \item {\bf JSON}
+ \begin{itemize}
+  \item Types inferred inline. Schema rarely used but can be.
+  \item Data without schema uses type inference (string, int, float, ...).
+  \item More succinct in ASCII form.
+  \item Transformation/ingestion rely on code (Java or Javascript).
+ \end{itemize}
+\end{itemize}
 
+{\bf Tabular Data} -> CSV or TSV
+Description of a table: 
+- A {\bf table} is a collection of {\bf rows} and {\bf columns}
+- Each row has an {\bf index}
+- Each column has a {\bf name}
+- A {\bf cell} is specified by (index, name) pair
+- A cell may or may not have a {\bf value}
+Schema = (minimal) column types) 
+\\\\
+Sensors output data in the form of time series -> tabular data. Systems dealing with sensor data should
+\begin{itemize}
+ \item support both long-term ({\bf trend}) and short-term ({\bf real-time}) queries
+ \item have {\bf low latency} but also efficient, real-time indexing for longer-term queries
+ \item support triggers (alerts) for a variety of conditions
+\end{itemize}
+{\bf \color{red} Complexity of data format does not determine complexity of the system required to handle it. -> Stock market}
+\\\\
+{\bf Log Files}
+Processes, usually daemons, create logs. (https, mysqld, syslogd, ...)
+Syslog - Standard for System messages. Enables rich analysis. ``Spelunking'' for bugs -> Splunk: Monitor ressources many machines. 
+\\\\
+{\bf Processing XML and JSON}
+DOM is an easy object to work with: all the data is accessible by links once it's in the memory. The problem is that I might not care about most of the data => we might {\bf not be able to fit the DOM for a large object in RAM}.
+\\\\
+{\bf SAX}: Event-Driven Parsing. Helps to deal with Big Data. Exists with pretty much any format that exists. It finds all the {\bf open-close-tag events} in an XML documents, and {\bf does callbacks to user code}.
 
+Pros:
++ User code can respond to only a subset of events corresponding to the tags.
++ User code cna correctly computer aggregates from the data rathen than create a record for each tag.
++ User code can implement felxible error recovery strategies for ill-formed XML
+- User code must implement a state machine to keep track of ``where it is'' in the DOM tree.
+\\\\
+Most JSON parsers construct the ``DOM'' directly. Sometimes SAY-style is the only way to handle ill-formed dataset (endless array of objects)
+\\\\
+{\bf Binary formats}
+Often the key to performance, {\bf avoiding expensive parsing}! Modern formats support nested structures, various levels of schema enforcement, {\bf compression}, etc. {\bf \color{red} Consider converting to one of those formats at the beginning of your processing pipeline (especially on a project with Big Data!)}
+\begin{itemize}
+ \item Protocol Buffers (Goggle)
+ \item Avro (supports schema evolution)
+ \item Parquet (column oriented, first-class citizen in Spark)
+ \item etc.
+\end{itemize}
+{\bf HTML}
+Common Crawl has 0.1\% of Google's web crawl. Because Google can scrape data which are behind the form (hidden link, authentication, forms, etc.) using their technology. Common Crawl just uses a simple ``algorithm'' to extract links.
+\\
+List and describe in one line the different HTML stuff. WikiData, schema.org, etc. 
+\\\\
+{\bf Web Services}
+Large web sites discourage to do screen-scraping. User Web Service APIs. This is the {\bf right} was to get data from online sources.
+\\
+{\bf W3C}: A ``Web service'' is ``a software system designed to support interoperable machine-to-machine interaction over a network''. Two kinds:
+- XML-base RPC-style messages: SOAP
+- REST-stly stateless interactions, URLs encode state.
+\\\\
+{\bf REST}: REpresentation State Transfer
+DEFINITION HERE! slide 47-48
+\\\\
+{\bf REST vs RPC}
 
 
 
