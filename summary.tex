@@ -452,102 +452,147 @@ It's always ideal to have the code and/or the documentation about the dataset yo
 % ================ Data Variety ==============
 \section{Data Variety}
 
-The ``3 Vs'' of Big Data: {\it Volume}, {\it Velocity} and {\bf Variety}. A course on Database will cover the {\it Volume} and {\it Velocity} parts. In this course, we try to figure out how to address the {\bf Variety} part.
-\\\\
-{\bf ETL}:
+The ``3 Vs'' of Big Data: {\it Volume}, {\it Velocity} and {\bf Variety}. In this course, we don't address the {\it Volume} and {\it Velocity} parts (A course on Database does). Since there is a lot of variety in the data, we need to prepare the data. This flow is called {\bf ETL}:
 \begin{itemize}
  \item {\bf Extract} from the {\it source(s)}.
- \item {\bf Load} data into the {\it sink}. 
  \item {\bf Transform} data at the source, sink, or in a {\it staging area}.
+ \item {\bf Load} data into the {\it sink}.  
 \end{itemize}
-Semi-structured data: no strict structure, but some info are given. => Data range comes from very structured data in DB to totally unstructered data such as web pages.
+The sources can be really different, {\it e.g.} files, database, logs, etc. The Data ranges comes from very stru data in databases, for example, to totally unstructered data such as web pages.
+
+\subsection{Role of Schema}
+The {\bf Schema}, which specifies the {\it structure} and {\it types} of data repository, is changing. Traditional databases are {\bf schema-on-write}, {\it i.e.} you cannot load data into a table without a schema. But new data stores (NoSQL for example) are {\bf schema-on-read} or {\bf schemaless}. You can either have a schema only when you read the data or just avoid having a schema. Youtube and Google Cache are some examples of schemaless data storage.
 \\\\
-Traditional DB are {\bf schema-on-write}. (You can't load data into a table without a schema!) But NoSQL (Next generation) DB are {\bf schema-on-read} or {\bf schemaless}. You can either avoid having a schema or have a schema only when you read data. Examples of schemaless: Youtube, Google Cache.
-\\\\
-Schema-on-write data type: SQL
-Schema-rn-read data type: XML (when stored without a schema, the numerical data is stored as {\bf strings}) Using a parser, we can return a typed data. (Faster because number not string + can make checks. => Type is good)
-\\\\
-XML and {\bf DOM} (Document-Object Models). Every webpage on internet becomes a DOM. Tree-structured. 
-XML QUeries: allows a DB to interpret data when running queries, {\it i.e.} to do {\bf arithmetic} or {\bf range queries} on the numerical values. (With or without a schema)
-\\\\
-{\bf JSON} (Javascript Object Notation) Totally schemaless. But we can also use with schema. It's used to represent {\bf hierachical data structures} directly in the languages. (Lot of libraries to do that). Transformation on the data are {\bf \color{red} procedural} in the target language. Easier for some tasks, but painful for e.g. schema changes.
-\\\\
-Data Tools:
+SQL is a {\bf schema-on-write} data type, {\it i.e.} we must create a table before inserting anything. XML is a {\bf schema-on-read} data type. If the data are stored without a schema, everything is simply stored as a string. We need to use a parser to return a typed data. 
+
+\subsection{Examples of data}
+
+\subsubsection{XML and DOM}
+
+The XML data are used mostly with HTML and specifies the data structure. An XML schema can be applied to interpret the XML data and specifies the {\bf data types}. Figure \ref{pic:xml} shows the XML data \ref{pic:xml_data} and the schema \ref{pic:xml_schema} used to parse and type the data.
+
+\begin{figure} [h] %----------- SubGraph ---------------------
+\centerline{
+\subfigure[XML data \label{pic:xml_data}] {\includegraphics[width=5cm]{pic/xml_data} }
+\subfigure[XML schema\label{pic:xml_schema}] {\includegraphics[width=7cm]{pic/xml_schema} } 
+}
+\caption{\label{pic:xml} Example of XML.} 
+\end{figure}
+
+The XML is a text format that encodes {\bf DOM} (Document-Object Models). It's a data structure often used by Web pages. The DOM is tree-structured. An example of a DOM is given in Figure \ref{pic:dom}.
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./pic/dom}
+ \caption{\label{pic:dom} Example of a DOM tree for an HTML Web page.}
+\end{figure}
+
+THe XML schema allows a database to interpret the data when running queries. It can do arithmetic or range queries on numerical values, for example.
+
+\subsubsection{JSON}
+
+{\bf JSON} stands for Javascript Object Notation. It's a schemaless data. Schema support was added later. An example of JSON data is shown in Figure \ref{pic:json}
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=8cm]{./pic/json}
+ \caption{\label{pic:json} Example of a JSON data.}
+\end{figure}
+
+JSON is typically used to represent {\bf hierachical data structures} directly in the target language (Javascript or Java at the beginning). The transformation on the data are procedural in the target languages. It is often easier for some tasks. But it can be painful for the schema changes, for example.
+
+\subsubsection{Tabular data}
+
+A Tabular Data is simply data put into a table such as CSV or TSV. Definition of a table:
 \begin{itemize}
- \item {\bf XML}
- \begin{itemize}
-  \item Separation between schema and data.
-  \item Data can be represented and stored without schema (as strings).
-  \item More verbose (but not true after compression or in DB).
-  \item Standard Query/Transformation languages XSLT and Xquery.
- \end{itemize}
- \item {\bf JSON}
- \begin{itemize}
-  \item Types inferred inline. Schema rarely used but can be.
-  \item Data without schema uses type inference (string, int, float, ...).
-  \item More succinct in ASCII form.
-  \item Transformation/ingestion rely on code (Java or Javascript).
- \end{itemize}
+ \item A {\bf table} is a collection of {\bf rows} and {\bf columns}.
+ \item Each row has an {\bf index}.
+ \item Each column has a {\bf name}.
+ \item A {\bf cell} is specified by an (index, name) pair.
+ \item A cell may or may not have a {\bf value}.
 \end{itemize}
 
-{\bf Tabular Data} -> CSV or TSV
-Description of a table: 
-- A {\bf table} is a collection of {\bf rows} and {\bf columns}
-- Each row has an {\bf index}
-- Each column has a {\bf name}
-- A {\bf cell} is specified by (index, name) pair
-- A cell may or may not have a {\bf value}
-Schema = (minimal) column types) 
-\\\\
-Sensors output data in the form of time series -> tabular data. Systems dealing with sensor data should
+It's a very simple yet powerful data type. For example, the sensors usually output data in the form of time series, transformed into a tabular format. However, a system dealing with sensor data should:
 \begin{itemize}
  \item support both long-term ({\bf trend}) and short-term ({\bf real-time}) queries
- \item have {\bf low latency} but also efficient, real-time indexing for longer-term queries
- \item support triggers (alerts) for a variety of conditions
+ \item have {\bf low latency} but also efficient. It should use {\bf real-time indexing} for longer-term queries.
+ \item support triggers ({\bf alerts}) for a variety of conditions.
 \end{itemize}
-{\bf \color{red} Complexity of data format does not determine complexity of the system required to handle it. -> Stock market}
-\\\\
-{\bf Log Files}
-Processes, usually daemons, create logs. (https, mysqld, syslogd, ...)
-Syslog - Standard for System messages. Enables rich analysis. ``Spelunking'' for bugs -> Splunk: Monitor ressources many machines. 
-\\\\
-{\bf Processing XML and JSON}
-DOM is an easy object to work with: all the data is accessible by links once it's in the memory. The problem is that I might not care about most of the data => we might {\bf not be able to fit the DOM for a large object in RAM}.
-\\\\
-{\bf SAX}: Event-Driven Parsing. Helps to deal with Big Data. Exists with pretty much any format that exists. It finds all the {\bf open-close-tag events} in an XML documents, and {\bf does callbacks to user code}.
+Therefore, the {\bf complexity of a data format} does not determine the {\bf complexity of the system required to properly handle it}.
 
-Pros:
-+ User code can respond to only a subset of events corresponding to the tags.
-+ User code cna correctly computer aggregates from the data rathen than create a record for each tag.
-+ User code can implement felxible error recovery strategies for ill-formed XML
-- User code must implement a state machine to keep track of ``where it is'' in the DOM tree.
-\\\\
-Most JSON parsers construct the ``DOM'' directly. Sometimes SAY-style is the only way to handle ill-formed dataset (endless array of objects)
-\\\\
-{\bf Binary formats}
-Often the key to performance, {\bf avoiding expensive parsing}! Modern formats support nested structures, various levels of schema enforcement, {\bf compression}, etc. {\bf \color{red} Consider converting to one of those formats at the beginning of your processing pipeline (especially on a project with Big Data!)}
+\subsubsection{Log files}
+
+The log files are simple text files giving information about process. The daemons, such as \verb+httpd+, \verb+mysqld+ or \verb+syslogd+, usually create logs. {\bf \verb+syslog+} was developed by Eric Allman. It's a way for devices to send event messages to a server that will log all the events. Splunk is a company that built a successfull business model around the syslog events.
+
+\subsubsection{Binary formats}
+
+They are often the key to performance because we {\bf avoid expensive parsing}. The modern formats even support nested structures, various level of schema enforcement, {\bf compression}, etc. Somes examples: Protocol Buffers (Google), Avro, Parquet, etc.
+
+\subsection{Processing the data (JSON and XML)}
+
+In order to process XML, we can use the DOM. It can also be used to process JSON data. The DOM is very easy to work with: all the data are directly accessible by links. The problem is that we {\bf might not care about most of the data} and if the data are big, they {\bf might not fit into the RAM}. In order to deal with these two problems, we can use a {\bf SAX} parser which is an event-driven parser. It will find all the {\bf open-close-tag events} in an XML document and will {bf do callbacks to user code}.
+
 \begin{itemize}
- \item Protocol Buffers (Goggle)
- \item Avro (supports schema evolution)
- \item Parquet (column oriented, first-class citizen in Spark)
- \item etc.
+\renewcommand{\labelitemi}{{\bf +}}
+ \item User code can respond to only a subset of events corresponding to the tag it is interested in.
+ \item User code can correctly compute aggregates from the data rather than create a record for each tag.
+ \item User code can implement flexible error recovery strategies for ill-formed XML.
+\renewcommand{\labelitemi}{{\bf --}}
+ \item User code must implement a state machine to keep track of ``where it is'' in the DOM tree.
 \end{itemize}
-{\bf HTML}
-Common Crawl has 0.1\% of Google's web crawl. Because Google can scrape data which are behind the form (hidden link, authentication, forms, etc.) using their technology. Common Crawl just uses a simple ``algorithm'' to extract links.
+
+For JSON, most parsers construct the ``DOM'' directly. But there are a few SAX-style parsers: Jackson, JSON-simple, etc. Sometimes {\bf SAX-style is the way to handle ill-formed datasets}, an endless array of objects for example.
+
+\subsection{HTML and Web Services}
+
+\subsubsection{HTML}
+
+Internet contains an ``enormous'' amount of data. Some crawlers such as Common Crawl dataset contains about 1.82 billions web pages (for 145 TB). We can use different tools to crawl data from the web. Examples for Python: Beautiful Soup, Requests, Scrapy, etc. 
+\\\\
+Most of the time, the Web pages are considered as unstructered data. But you can find some semi-structured data, {\it e.g.} Google WebTables. Some big ``internet'' companies (Google, Yahoo, Yandex and Microsoft) are sponsoring a project called {\bf schema.org} to create structured or semi-structured Web pages. A core vocabulary for the type of fields is given. schema.org is more and more used. It's also used by knowledge bases such as Google Knowledge Graph. {\bf WikiData} is a community project to create an open database of structured data taken from Wikipedia.
+
+\subsubsection{Web Services}
+
+Screen-scraping the content of a large website is really difficult due to the hidden links, forms, etc. Therefore they are providing Web Service APIs\footnote{Application Program Interface: Set of subroutine definitions, protocols, and tools for building software and applications. In this particular case, the APIs are used to retrieve the data from the Web page, {\it e.g.} Facebook API to retrieve the contacts.}. There are two kinds of Web Services:
+\begin{itemize}
+ \item The old way: XML-based RPC-style messages: SOAP
+ \item The new way: REST-style stateless interactions, URLs encode state
+\end{itemize}
+{\bf RPC}
 \\
-List and describe in one line the different HTML stuff. WikiData, schema.org, etc. 
-\\\\
-{\bf Web Services}
-Large web sites discourage to do screen-scraping. User Web Service APIs. This is the {\bf right} was to get data from online sources.
+The SOAP RPC\footnote{SOAP = Simple Object Access Protocal, RPC = Remote Procedure Call} messages typically encode arguments that are presented to the calling profram as parameters and return values. HTTP POST/GET are used to communicate.
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./pic/soap-rpc}
+ \caption{\label{pic:soap-rpc} Example of a SOAP RPC exchange.}
+\end{figure}
+This kind of procedure (same for XML-RPC) requires a request-response cycle. This often leads to longer ``conversations''. The RPC-style is being quickly superseded by newer and more user-friendly technologies.\\\\
+In {\bf RPC systems}, the design emphasis is on {\bf verbs}. It uses functions such as {\it getUser()}, {\it addUser()}, etc.
+
+%---------------NEWPAGE--------------
+\newpage
+{\bf REST}
 \\
-{\bf W3C}: A ``Web service'' is ``a software system designed to support interoperable machine-to-machine interaction over a network''. Two kinds:
-- XML-base RPC-style messages: SOAP
-- REST-stly stateless interactions, URLs encode state.
-\\\\
-{\bf REST}: REpresentation State Transfer
-DEFINITION HERE! slide 47-48
-\\\\
-{\bf REST vs RPC}
+REST\footnote{REpresentation State Transfer} is a {\bf stateless} client/server protocol. The principles are:
+\begin{enumerate}
+ \item Each message in the protocol contains all the information needed by the receiver to understand and/or process it. This constraint attempts to {\it ``keep things simple''} and avoids needless complexity.
+ \item Set of Uniquely Addressable Resources
+ \begin{itemize}
+  \item {\it ``Everything is a Resource''} in a RESTful system
+  \item Requires universal syntax for resource identification, {\it e.g.} URI.
+ \end{itemize}
+ \item Set of Well-Defined Operations that can be applied to all resources
+ \begin{itemize}
+  \item In the context of HTTP (REST APIs), the primary methods are: \\
+  {\bf POST}, {\bf GET}, {\bf PUT}, and {\bf DELETE} \\
+  These are similar (but not exactly) to the database notion of CRUD (Create, Read, Update, and Delete)
+ \end{itemize}
+ \item The use of Hypermedia both for Application Information and State Transitions
+ \begin{itemize}
+  \item Resources are typically stored in a structured data format that supports hypermedia links, such as XHTML or JSON.
+ \end{itemize}
+\end{enumerate}
+In {\bf REST systems}, the design emphasis is on {\bf nouns}. It uses the HTTP Protocols (POST, GET, PUT, and DELETE) a {\it User}, a {\it Location}, etc. 
 
 
 
