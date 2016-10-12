@@ -606,6 +606,109 @@ REST\footnote{REpresentation State Transfer} is a {\bf stateless} client/server 
 \end{enumerate}
 In {\bf REST systems}, the design emphasis is on {\bf nouns}. It uses the HTTP Protocols (POST, GET, PUT, and DELETE) a {\it User}, a {\it Location}, etc. 
 
+% ================ Read the Stats carefully ==============
+\section{Read the Stats carefully (TO BE CHANGED)}
+\subsection{???}
+Slide 2: \\
+median = 50\% quartile. Very important measure. Sometimes more than the mean.
+\\\\
+Robust Statistics: \\
+Statistic is robust if it's {\bf not sensitive to outliers}. Mean, std not robust. Median, quartiles are robust. Mean close to median implies few outliers. 
+\\\\
+Anscombe's quartet:\\
+Slide 4: Outliers in plot 3 and 4. (Not enough to have only descriptive stat. Need visualization)
+Illustrates the importance of looking at a set of data {\bf graphically}. See Wikipedia (LINK)
+\\\\
+Simpson's paradox:\\
+UC Berkeley gender bias: Left is aggregate table. Women tended to apply to competitive departments => aggregate: they have a lower acceptance rate.\\
+If trend appears in different groups, it can {\bf disappear or reverse when the groups are combined}. 
+\subsection{Refresh of basic stats}
+Proba: mathematical theory that describes uncertainty. \\
+Stats: Set of techniques for extracting useful info from data. \\
+They are close, but not exactly the same. Remember: Bayes theorem, random variables, law of large numbers, etc.
+\\\\
+Measurement on Samples: \\
+Many datasets are samples from an infinite population. We have acces only to a {\bf sample} of a whole population. Therefore, measurements are hard because:
+\begin{itemize}
+ \item Samples measurements have {\bf variance}: Variation between samples
+ \item Samples measurements have {\bf bias}: Systematic variation from the population value. (Thermometer say temp is 10 degrees more than pop)
+\end{itemize}
+Normal Distribution, Mean and Variance: \\
+Mean is the average of all values. Variance measure the width of a distribution. (EQUATION) Standard deviation = sqrt of variance. (IMAGE?) 
+\\\\
+Central Limit Theorem: \\
+Distribution of the sum (or mean) of a set of n identically-distributed random variables Xi {\bf approaches a normal distribution as n  $->\infty$.} \\
+Common parametric statistical test, like t-test and ANOVA, assume normally-distributed data, but {\bf depend on sample mean and variance measures of the data.} \\
+They typically work reasonably well for data that are not normally distributed as long as the samples are not too small!
+\\
+Often the data are not normally distributed. (But the stat tools assume that.) Therefore, check the data!
+\\\\
+Distributions: \\
+\begin{description}
+ \item[Poisson] Distrib of counts that occur at a certain rate.
+ \begin{itemize}
+  \item Observed frequency of a given term in corpus.
+  \item Number of visits to a web site in a fixed time interval.
+  \item Number of website clicks in an hour.
+ \end{itemize}
+ \item[Exponential] Interval between two such events.
+ \item[Zipf/Pareto/Yule distrib] govern the frequencies of different terms in a document, or web site visits.
+ \item[Binomial/Multinomial] govern the number of counts of event (e.g. die tosses = 6) out of $n$ trials.
+\end{description}
+{\bf \color{red}  You should understand the distribution of your data before applying a model!}
+\\\\
+Rhine Paradox: \\
+Joseph Rhine was a parapsychologist. Experiment: 10 hidden cards are red or blue. Result: 1 personne out of 1000 could guess the color of all 10 cards. Proba to guess everything right: 1/1024. WRONG! Stats can be useful.
+\\\\
+Hypothesis Testing: \\
+\begin{itemize}
+ \item We want to prove a hypothesis $H_A$ by means of {\bf disproving a null hypothesis $H_0$}.
+ \item A {\bf test statistic} is some measurement we can make on the data which is likely to be {\bf big under $H_A$} but {\bf small under $H_0$}.
+\end{itemize}
+{\huge \bf Je pense que l'exemple pourrait etre ajouter.. Slides 18 - 21} \\
+One-tailed takes care of only one tail of the distribution. The two-tailed takes care of both tails of the distribution. Add the image of the two-tailed test! \\
+Testing is a bit like {\bf finding the right recipe} based on these ingredients:
+\begin{enumerate}
+ \item Question
+ \item Data type
+ \item Sample size
+ \item Variance known? 
+ \item Variance of several groups equals?
+ \item ...
+\end{enumerate}
+{\bf Plenty of tables available!} PICTURE Slide 25!!
+\\\\
+Multiple Hypothese Testing: \\
+If you perform experiments over and over, you're bound to find something. Significance level must be adjusted down when performing multiple hypothesis tests. 
+\\\\
+Familywise Error Rate: \\
+Error rate when too many experiments are done.. Je te laisse developer =P. There are some corrections: Bonferroni and Sidak.
+\\\\
+Non-Parametric Tests: \\
+All the tests so fare assume that the data are {\bf normally distributed} and that the samples are {\bf independent of each other and all have the same distribution.} (IID) They may be innacurate if those assumptions are not met. Therefore, make sure the data satisfies the assumptions of the test we're using. Watch out for:
+\begin{description}
+ \item[Outliers] will corrupt many tests that use variance estimates.
+ \item[Correlated values as samples], e.g. if you repeated measurements on the same subjective
+ \item[Skewed (bias) distributions] give invalid results.
+\end{description}
+K-S test: \\
+K-S (Kolmogorov-Smirnov) test is a very useful test for checking whether two (continuous or discrete) distributions are the same. 
+\begin{itemize}
+ \item In the {\bf one-sided test}, an observed distribution (e.g. some observed values or a histrogram) is compared against a reference distribution (e.g., power-law).
+ \item In the {\bf two-sided test}, two observed distrubtions are compared.
+ \item The K-S statistic is just the {\bf max distance between the CDFs} (Cumulative Distribution Function) of the two distributions.
+ \item The K-S test can be used to test {\bf whether a data sample has  anormal distribution} or not.
+ \item Thus it can be used as a sanity check for any common parametric test (which assumes normally-distributed data).
+ \item It can also be used to compared distributions of data values in large data pipeline: {\bf Most errors will distort the distribution of a data parameter and a K-S test can detect this.}
+\end{itemize}
+This test is expensive! 
+\\
+{\bf WE NEED TO ADD MORE STUFF ON THE K-S TEST. CHECK ON WIKIPEDIA.. =) }
+   
+
+
+
+
 
 
 %======= TABLEAU ===========
