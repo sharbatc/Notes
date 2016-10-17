@@ -4,6 +4,7 @@
 \documentclass[a4paper,11pt,twoside]{article}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage[english]{babel}
 \usepackage[applemac]{inputenc}
 \usepackage[colorlinks,bookmarks=false,linkcolor=blue,urlcolor=blue]{hyperref}
@@ -606,27 +607,118 @@ REST\footnote{REpresentation State Transfer} is a {\bf stateless} client/server 
 \end{enumerate}
 In {\bf REST systems}, the design emphasis is on {\bf nouns}. It uses the HTTP Protocols (POST, GET, PUT, and DELETE) a {\it User}, a {\it Location}, etc. 
 
-% ================ Read the Stats carefully ==============
-\section{Read the Stats carefully (TO BE CHANGED)}
-\subsection{???}
-Slide 2: \\
-median = 50\% quartile. Very important measure. Sometimes more than the mean.
-\\\\
-Robust Statistics: \\
-Statistic is robust if it's {\bf not sensitive to outliers}. Mean, std not robust. Median, quartiles are robust. Mean close to median implies few outliers. 
-\\\\
-Anscombe's quartet:\\
-Slide 4: Outliers in plot 3 and 4. (Not enough to have only descriptive stat. Need visualization)
-Illustrates the importance of looking at a set of data {\bf graphically}. See Wikipedia (LINK)
-\\\\
-Simpson's paradox:\\
-UC Berkeley gender bias: Left is aggregate table. Women tended to apply to competitive departments => aggregate: they have a lower acceptance rate.\\
-If trend appears in different groups, it can {\bf disappear or reverse when the groups are combined}. 
+% ================ Statistics ==============
+\section{Statistics on the Data}
+
+When we explore and analyze data, it would be great if we only had to look at some statistics numbers and make automatically a conclusion about them. Sadly, it's not the case. At all.
+% ================  Famous mistakes ==============
+\subsection{Example of famous mistakes due to statistics}
+
+%=================== Anscombe's quartet ===================
+\subsubsection{Anscombe's quartet: Sensivity of outliers \& Robust statistics}
+
+The FIG \ref{pic:anscombe} show four differents data distribution that present, despite all of that, the same means on $x$ and $y$, the same variance on $x$ and $y$, and, thus, the same linear regression function. This is due to the statistics used to define them. 
+
+\begin{itemize}
+    \item Min, Max, Mean, Standart Deviation (Std) and Range are sensitives to outliers and then are \textbf{not robust statistics}.
+    \item Median, quartils, (and others) are not sensitives and then are said to be \textbf{robust statistics}. 
+\end{itemize}
+
+
+
+\begin{figure}[h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./pic/anscombe}
+ \caption{\label{pic:anscombe} Anscombe's quartet}
+\end{figure}
+
+%================ Simpson paradox =================
+\subsubsection{Simpson's paradox: aggregation of data}
+
+\textbf{Certain tendencies can appear, disappear or even reverse themself when aggregating the data!} This was the case when media started blaming Berkey of being unfair with women applications (looking at left table of FIG \ref{pic:Berkley}). After further investigation (and de-aggregation of the data) it appeared that at the opposite... Berklay was unfair with men! (Right table of the same FIG).
+
+This paradox comes from the fact that women (according with these tables) tended to apply for more competitiv departments, with lower rates of admission. \textbf{When aggregating the data, we lost this subtlety and then draw a wrong conclusion.} 
+
+Simpson's paradox can appear in a lot of cases and can be very hard to detect. The \href{https://en.wikipedia.org/wiki/Simpsons_paradox}{wikipedia page of Simpson's paradox} describes a lot of examples and, for the ones interested, a great book relates lots of statistical errors that drove to miscarriages of justice: \href{https://books.google.ch/books/about/Math_on_Trial.html?id=PFAIb6FTgY4C&source=kp_cover&redir_esc=y&hl=fr}{Leila Schneps and Coralie Colmez, Math on Trial: How Numbers Get Used and Abused in the Courtroom} 
+
+\begin{figure}[h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./pic/Berkley}
+ \caption{\label{pic:Berkley}Berkley admission tables of 1973}
+\end{figure}
+
+% ================ Basic stats ==============
 \subsection{Refresh of basic stats}
-Proba: mathematical theory that describes uncertainty. \\
-Stats: Set of techniques for extracting useful info from data. \\
-They are close, but not exactly the same. Remember: Bayes theorem, random variables, law of large numbers, etc.
-\\\\
+
+Definitions: 
+\begin{itemize}
+	\item {\bf Probabilities}: mathematical theory that describes uncertainty. \\
+	\item {\bf Statistics}: Set of techniques for extracting useful info from data
+\end{itemize}
+
+\begin{framed}
+{\it {\bf Probability and Statistics} are related areas of mathematics which concern themselves with analyzing the relative frequency of events. Still, there are fundamental differences in the way they see the world:\\
+\textbf{Probability deals with predicting the likelihood of future events}, while \textbf{statistics involves the analysis of the frequency of past events}. \\  
+Probability is primarily a theoretical branch of mathematics, which studies the consequences of mathematical definitions. Statistics is primarily an applied branch of mathematics, which tries to make sense of observations in the real world.}
+\signed{\href{http://www3.cs.stonybrook.edu/~skiena/jaialai/excerpts/node12.html}{Steven S. Skiena, "Calculated Bets", Cambridge University Press, 2001}}
+\end{framed}
+
+% ================ Bayes Theorem ==============
+\subsubsection{Bayes Theorem}
+The theorem express the very intuitiv statment that:
+
+{\it The probability of observing event A and B is the probability of observing B multiplied by the probability of observing A knowing that B occured.}
+
+Mathematicaly it's expressed as: 
+\be
+P(A\vert B)P(B)=P(A\cap B)=P(B\vert A)P(A)
+\ee
+Or equivalently
+\be
+P(A|B)={\frac  {P(B|A)P(A)}{P(B)}}
+\ee
+
+More about Bayes Theorem on \href{https://en.wikipedia.org/wiki/Bayes_theorem}{wikipedia}.
+
+% ================ Random Variables ==============
+\subsubsection{Random Variables}
+A \textbf{random variable} is a quatitiy that can take variouse values, each one associated with a probabitlity of apparition. The some of these probability will always be 1.
+\be
+X\colon \Omega \to E
+\ee
+
+$\Omega$ being a probability space and $E$ a measurable space (usualy $E = \mathbb{R}$).
+
+Any random variable can be described by its \href{https://en.wikipedia.org/wiki/Cumulative_distribution_function}{cumulative distribution function}, which describes the probability that the random variable will be less than or equal to a certain value.
+
+Two \textbf{independent variables} are defined as
+
+\be
+{\mathbb  {P}}(A\cap B)={\mathbb  {P}}(A)\cdot {\mathbb  {P}}(B).
+\ee
+or equivalently (by Bayes Theorem)
+\be
+\label{indep}
+{\mathbb  {P}}(A\mid B) =  {\mathbb  {P}}(A)
+\ee
+
+More about Bayes Theorem on \href{https://en.wikipedia.org/wiki/Random_variable}{wikipedia}.
+
+\subsubsection{Law of Large Numbers}
+
+The Law of Large Numbers links, in some way, the probability to the statistics. It's, again, a very intuitive statment, even if not so easy to proove (as always in mathematic).
+
+\begin{framed}
+In probability theory, the\textbf{ law of large numbers} (LLN) is a theorem that describes the result of performing the same experiment a large number of times. According to the law, \textbf{the average of the results obtained from a large number of trials should be close to the expected value}, and will tend to become closer as more trials are performed.
+\signed{\href{https://en.wikipedia.org/wiki/Law_of_large_numbers}{Wikipedia}}
+\end{framed}
+
+A common mistake is to deduce that, in the case of playing heads or tails, observing a lot of time \textbf{heads} increase the probability of observing \textbf{tails}. This is absolutely wrong. The variables are perfectly independent and, according with Eq \ref{indep}, the probability stays exactly 50\%.
+
+
+% ================ Measurement ==============
+\subsection{Measurement on Samples}
+
 Measurement on Samples: \\
 Many datasets are samples from an infinite population. We have acces only to a {\bf sample} of a whole population. Therefore, measurements are hard because:
 \begin{itemize}
