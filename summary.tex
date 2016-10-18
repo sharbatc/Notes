@@ -107,7 +107,7 @@
 
 \vspace{0.5cm}
 %\textsc{\LARGE EPFL}\\[1.5cm] % Name of your university/college
-\textsc{\Large School Of Computer And Communication Sciences}\\[0.5cm] % Major heading such as course name
+\textsc{\Large School of Computer and Communication Sciences}\\[0.5cm] % Major heading such as course name
 \textsc{\Large }\\% Minor heading such as course title
 %\textsc{ \Large Master Semester Project}\\ % Minor heading such as course title
 
@@ -227,7 +227,7 @@ Data analysis has multiple facets and approaches, encompassing diverse technique
 \signed{\href{https://en.wikipedia.org/wiki/Data\_analysis}{Wikipedia - Data Analysis}}
 \end{framed}
 
-Therefore, a Data Scientist has to master different kind of skills such as {\bf Mathematics} (for the Statistics), {\bf Programming} and the {\bf Domain Expertise}. Drew Conway's Venn diagram, Figure \ref{img:venn}, shows the different combination man can obtain with these three skills.
+Therefore, a Data Scientist has to master different kinds of skills such as {\bf Mathematics} (for the Statistics), {\bf Programming} and the {\bf Domain Expertise}. Drew Conway's Venn diagram, Figure \ref{img:venn}, shows the different combination man can obtain with these three skills.
 
 \begin{figure}[H]
  \centering
@@ -265,7 +265,7 @@ A {\bf data pipeline} consists of 3 steps:
 \\ \\
 In this course, you will develop the following skills:
 \begin{description}
- \item[data muning/scraping/sampling/cleaning] in order to get an informative, manageable data setlength
+ \item[data mining/scraping/sampling/cleaning] in order to get an informative, manageable data setlength
  \item[data storage and management] in order to be able to access data quickly and reliably during subsequent analysis
  \item[exploratory data analysis] to generate hypotheses and intuition about the data
  \item[prediction] based on statistical tools such as regression, classification, and clustering
@@ -277,7 +277,7 @@ In this course, you will develop the following skills:
 % maybe to be moved at the end if it becomes a dictionnary
 \section{Basic concepts}
 
-A data science student is attended to understand the \textbf{Grammar of Data Science}. Having some backgrounds in SQL concepts is also a good thing because, as it is very common, people loves to make example with it. Here is a brief refresh of some definitions and concepts about data science.
+A data science student is attended to understand the \textbf{Grammar of Data Science}. Having some backgrounds in SQL concepts is also a good thing because, as it is very common, people love to make examples with it. Here is a brief refresh of some definitions and concepts about data science.
 
 \begin{itemize}
  \item {\bf Structured data} requires two key concepts:
@@ -289,7 +289,7 @@ A data science student is attended to understand the \textbf{Grammar of Data Sci
  \begin{itemize}
   \item The {\bf Schema}. \\ For example, \verb+Students(sid: string, name:string, age:integer)+
   \item The {\bf Instance}, {\it i.e.} the data at a given time. \\
-  Definitons:
+  Definitions:
   \begin{itemize}
    \item {\bf Cardinality} is the number of rows. (Number of items)
    \item {\bf Degree} or {\bf Arity} is the number of fields. (Number of attributes)
@@ -298,7 +298,7 @@ A data science student is attended to understand the \textbf{Grammar of Data Sci
  \item Definitions of some ``Database'' terms:
  \begin{itemize}
   \item A {\bf JOIN} is a mean to combine tables based on shared attributes (most of the time some \textbf{IDs}). Despite its apparent simplicity beware of the many ways to compute a JOIN and check what is the default JOIN of a language before using it. The FIG \ref{join_SQL} summarises these possibilities.
-  \item \textbf{Aggregation}, \textbf{reduction}, and {\bf groupby} are the action of reducing data with a common opperation (\textbf{sum}, \textbf{count}, \textbf{average}, ...) to summarise them. 
+  \item \textbf{Aggregation}, \textbf{reduction}, and {\bf groupby} are the action of reducing data with a common operation (\textbf{sum}, \textbf{count}, \textbf{average}, ...) to summarise them. 
  \end{itemize}
  \item Definitions of some ``Pandas'' terms:
  \begin{itemize}
@@ -332,17 +332,17 @@ Panda is built to allow easy and fast \textbf{data exploration} and not to be a 
 \hline
 \bf Pros & \bf Cons \\ \hline
 Lightweight \& fast & Tables stored directly in memory \\
-Great expressivness (combine SQL + Python) & No post-load indexing functionality\\
-Easy plot for data visualization (eg Matplotlib) & No transactions, journalings\\ 
+Great expressiveness (combine SQL + Python) & No post-load indexing functionality\\
+Easy plot for data visualization (e.g. Matplotlib) & No transactions, journalings\\ 
 & Large, complex joins are slower \\ \hline
 \end{tabular}
 \end{center}
 
 \subsection{OnLine Analytical Processing (OLAP cubes)}
 
-OLAP tools enable users to analyze multidimensional data interactively from multiple perspectives. Conceptually, it is like an n-dimensional spreadsheet (a cube) on which we can apply various opperations to take decisions.
+OLAP tools enable users to analyze multidimensional data interactively from multiple perspectives. Conceptually, it is like an n-dimensional spreadsheet (a cube) on which we can apply various operations to take decisions.
 
-OLAP cubes are an other way to see data table and are contructed based on them, as shows FIG \ref{OLAP_cubes}.
+OLAP cubes are another way to see data tables and are constructed based on them, as shows FIG \ref{OLAP_cubes}.
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -354,8 +354,8 @@ Operations on OLAP cubes are the following and are illustrated on FIG \ref{OLAP_
 \begin{itemize}
 	\item \textbf{Slicing} fixes one or more variable
 	\item \textbf{Dicing} selects a range of one or more variable
-	\item \textbf{Driling up/down} changes levels of a hierarchically-indexed variable, ie "zoom" on a variable and see the sub-categories it contains.
-	\item \textbf{Pivoting} change the point of view of the cube. Swap an aggregated variable an a detailed one.
+	\item \textbf{Drilling up/down} change levels of a hierarchically indexed variable, i.e. "zoom" on a variable and see the subcategories it contains.
+	\item \textbf{Pivoting} change the point of view of the cube. Swap an aggregated variable and a detailed one.
 \end{itemize}
 
 \begin{figure} [h] %----------- SubGraph ---------------------
@@ -375,9 +375,9 @@ Operations on OLAP cubes are the following and are illustrated on FIG \ref{OLAP_
 \hline
 \bf Pros & \bf Cons \\ \hline
 & \\
-\parbox[t][][t]{7cm}{The main adventage of OLAP cubes is that their are \textbf{conceptualy simpler} to understand by a non-scientist person, eg a business man who have to take day-to-day decisions based on company's data. Aggregations are limited but cover the main common cases that we can encounter.
+\parbox[t][][t]{7cm}{The main advantage of OLAP cubes is that they are \textbf{conceptually simpler} to understand by a non-scientist person, e.g. a business man who has to take day-to-day decisions based on company's data. Aggregations are limited but cover the main common cases that we can encounter.
 }&
-\parbox[t][][t]{7cm}{Because of the "on-line" behaviour of this approach, all type of aggregation must be pre-calculated amoung all combination of axis which is very \textbf{expensive in memory and in time} (when updating the data)}\\
+\parbox[t][][t]{7cm}{Because of the "on-line" behaviour of this approach, all types of aggregation must be pre-calculated among all combinations of axes which is very \textbf{expensive in memory and in time} (when updating the data)}\\
 & \\
 \hline
 \end{tabular}
@@ -394,26 +394,26 @@ Operations on OLAP cubes are the following and are illustrated on FIG \ref{OLAP_
 
 Before any analysis, data need to be transformed from "dirty" to clean and processable data. 
 
-Data comes from different sources (excel or SQL?), sometime collected through different methods over time, with different conventions (space or NaN?), etc ... Data wrangling's goal is to \textbf{extract and standardize these raw data}. The best way to do it is to \textbf{combine automation with visualizations} in order to find outliers. 
+Data comes from different sources (excel or SQL?), sometime collected through different methods over time, with different conventions (space or NaN?), etc ... Data wrangling goal is to \textbf{extract and standardize these raw data}. The best way to do it is to \textbf{combine automation with visualizations} in order to find outliers. 
 
-Data's problem can come from (non-exhaustive): 
+Data problems can come from (non-exhaustive): 
 \begin{itemize}
   \item Missing data
   \item Incorrect data
   \item Inconsistent representations of the same data
-  \item Non-standardized data (centimeter or inches? farenheit or celsuis ?)
+  \item Non-standardized data (centimeter or inches? Fahrenheit or Celsuis ?)
   \item Duplicated data
 \end{itemize}
 
-About 75\% of theses problem will need \textbf{human intervention} to be corrected (by the data-scientist or by crowdsourcing).
+About 75\% of theses problems will need \textbf{human intervention} to be corrected (by the data-scientist or by crowdsourcing).
 
-Even if it seems really dirty, \textbf{beware not to over-sanitize the data!}. Applying what we can call "defensive programming" is not a good idea because we risk to lose any interesting data, keeping only the ones that fit perfectly in our model.
+Even if it seems really dirty, \textbf{beware not to over-sanitize the data!}. Applying what we can call "defensive programming" is not a good idea because we risk losing any interesting data, keeping only the ones that fit perfectly in our model.
 
 \subsection{Diagnosis of the data}
 
-One of the most important aspect of Data Wrangling is to {\bf understand} the data and to {\bf find possible problems}. In order to ``diagnose'' the data, two tools can be used:
+One of the most important aspects of Data Wrangling is to {\bf understand} the data and to {\bf find possible problems}. In order to ``diagnose'' the data, two tools can be used:
 \begin{itemize}
- \item {\bf Visualization} (A {\it toughtful} visualization will always help)
+ \item {\bf Visualization} (A {\it thoughtful} visualization will always help)
  \item {\bf Basic Statistics} 
 \end{itemize}
 
@@ -430,7 +430,7 @@ Matrix visualizations of the facebook graph is shown in Figure \ref{pic:fb}. The
 
 \subsection{Dealing with missing values}
 
-Values can often miss from the data we have, because of various events (war, fire, ...). We must detect and correct these values with different method according with the domain we are working in.
+Values can often miss from the data we have, because of various events (war, fire, ...). We must detect and correct these values with different methods according to the domain we are working in.
 
 Whatever the method used, it's good to keep track of these changes to know which are original data and which are modified ones.
 
@@ -438,7 +438,7 @@ Whatever the method used, it's good to keep track of these changes to know which
   \item Set values to zero FIG \ref{miss_val}(a)
   \item Interpolate based on existing data FIG \ref{miss_val}(b)
   \item Omit missing data FIG \ref{miss_val}(c)
-  \item Interpolation with track kept \ref{miss_val}(d)
+  \item Interpolation with tracks kept \ref{miss_val}(d)
 \end{itemize}
 
 \begin{figure}[H]%---------------FIG--------------
@@ -449,11 +449,11 @@ Whatever the method used, it's good to keep track of these changes to know which
 
 \subsection{General procedure}
 
-Once the data are well wrangled and before trying to analyse them we must take care of two more steps:
+Once the data are well wrangled and before trying to analyse them, we must take care of two more steps:
 
 \begin{enumerate}
   \item \textbf{Deal with uncertain data} (can arise from measurement errors, wrong sampling strategies, etc.)
-  \item \textbf{Parse/trasform data} (with aggregation and reduction techniques) to obtain meaningful records
+  \item \textbf{Parse/transform data} (with aggregation and reduction techniques) to obtain meaningful records
 \end{enumerate}
  
 It's always ideal to have the code and/or the documentation about the dataset you are analyzing (provenance).
@@ -467,14 +467,14 @@ The ``3 Vs'' of Big Data: {\it Volume}, {\it Velocity} and {\it Variety}. In thi
  \item {\bf Transform} data at the source, sink, or in a {\it staging area}.
  \item {\bf Load} data into the {\it sink}.  
 \end{itemize}
-This variety of the data comes, in a first place, from the many different sources from which we extract them: {\it files, databases, logs, ... } Each of these sources uses (or not!) its proper convention and can contains structured (DB), semi-structured (logs) or unstructured (web page) data. 
+This variety of the data comes, in a first place, from the many different sources from which we extract them: {\it files, databases, logs, ... } Each of these sources uses (or not!) its proper convention and can contain structured (DB), semi-structured (logs) or unstructured (web page) data. 
 
 \subsection{Role of Schema}
 The {\bf Schema}, which specifies the {\it structure} and {\it types} of data repository, is changing. Traditional databases are {\bf schema-on-write}, {\it i.e.} you cannot load data into a table without a schema. But new data stores (NoSQL for example) are {\bf schema-on-read} or {\bf schemaless}. 
 
 \begin{itemize}
-	\item {\bf Schema-on-write} is typically SQL, where we must create a table before inserting data in our system. Data must scale the defined schema and this is both the strength and weakness of the system. Strength because the data is perfectly oriented and respect the constraints we establish. Weakness because schemas are always subjective in some ways and data (which are perfectly corrects) may not fit with it. 
-	\item {\bf Schema-on-read} is for instance XML, where you create the schema according with the data you read.
+	\item {\bf Schema-on-write} is typically SQL, where we must create a table before inserting data in our system. Data must scale the defined schema and this is both the strength and weakness of the system. Strength because the data is perfectly oriented and respect the constraints we establish. Weakness because schemas are always subjective in some ways and data (which are perfectly correct) may not fit with it. 
+	\item {\bf Schema-on-read} is for instance XML, where you create the schema according to the data you read.
 	\item Youtube and Google Cache where the first {\bf schemaless} data system. Without schema, everything is simply stored as a string and we need a parser to return a typed data.
 \end{itemize}
 
@@ -512,7 +512,7 @@ THe XML schema allows a database to interpret the data when running queries. It 
  \caption{\label{pic:json} Example of a JSON data.}
 \end{figure}
 
-JSON is typically used to represent {\bf hierachical data structures} directly in the target language (Javascript or Java at the beginning). The transformation on the data are procedural in the target languages. It is often easier for some tasks, but it can be painful for some of them: for example schema changes.
+JSON is typically used to represent {\bf hierarchical data structures} directly in the target language (Javascript or Java at the beginning). The transformation on the data is procedural in the target languages. It is often easier for some tasks, but it can be painful for some of them: for example schema changes.
 
 \subsubsection{Tabular data}
 
@@ -535,11 +535,11 @@ Therefore, the {\bf complexity of a data format} does not determine the {\bf com
 
 \subsubsection{Log files}
 
-The log files are simple text files giving information about process. The daemons, such as \verb+httpd+, \verb+mysqld+ or \verb+syslogd+, usually create logs. {\bf \verb+syslog+} was developed by Eric Allman. It's a way for devices to send event messages to a server that will log all the events. Splunk is a company that built a successfull business model around the syslog events.
+The log files are simple text files giving information about the process. The daemons, such as \verb+httpd+, \verb+mysqld+ or \verb+syslogd+, usually create logs. {\bf \verb+syslog+} was developed by Eric Allman. It's a way for devices to send event messages to a server that will log all the events. Splunk is a company that built a successful business model around the syslog events.
 
 \subsubsection{Binary formats}
 
-They are often the key to performance because we {\bf avoid expensive parsing}. The modern formats even support nested structures, various level of schema enforcement, {\bf compression}, etc. Somes examples: Protocol Buffers (Google), Avro, Parquet, etc.
+They are often the key to performance because we {\bf avoid expensive parsing}. The modern formats even support nested structures, various levels of schema enforcement, {\bf compression}, etc. Some examples: Protocol Buffers (Google), Avro, Parquet, etc.
 
 \subsection{Processing the data (JSON and XML)}
 
@@ -554,15 +554,15 @@ In order to process XML, we can use the DOM. It can also be used to process JSON
  \item User code must implement a state machine to keep track of ``where it is'' in the DOM tree.
 \end{itemize}
 
-For JSON, most parsers construct the ``DOM'' directly. But there are a few SAX-style parsers: Jackson, JSON-simple, etc. Sometimes {\bf SAX-style is the way to handle ill-formed datasets}, an endless array of objects for example.
+For JSON, most parsers construct the ``DOM'' directly. But there are a few SAX-style parsers: Jackson, JSON-simple, etc. Sometimes {\bf SAX-style is the way to handle ill-formed datasets}, an endless array of objects, for example.
 
 \subsection{HTML and Web Services}
 
 \subsubsection{HTML}
 
-Internet contains an ``enormous'' amount of data. Some crawlers such as Common Crawl dataset contains about 1.82 billions web pages (for 145 TB). We can use different tools to crawl data from the web. Examples for Python: Beautiful Soup, Requests, Scrapy, etc. 
+Internet contains an ``enormous'' amount of data. Some crawlers such as Common Crawl datasets contains about 1.82 billion web pages (for 145 TB). We can use different tools to crawl data from the web. Examples for Python: Beautiful Soup, Requests, Scrapy, etc. 
 \\\\
-Most of the time, the Web pages are considered as unstructered data. But you can find some semi-structured data, {\it e.g.} Google WebTables. Some big ``internet'' companies (Google, Yahoo, Yandex and Microsoft) are sponsoring a project called {\bf schema.org} to create structured or semi-structured Web pages. A core vocabulary for the type of fields is given. schema.org is more and more used. It's also used by knowledge bases such as Google Knowledge Graph. {\bf WikiData} is a community project to create an open database of structured data taken from Wikipedia.
+Most of the time, the Web pages are considered as unstructured data. But you can find some semi-structured data, {\it e.g.} Google WebTables. Some big ``internet'' companies (Google, Yahoo, Yandex and Microsoft) are sponsoring a project called {\bf schema.org} to create structured or semi-structured Web pages. A core vocabulary for the type of fields is given. schema.org is more and more used. It's also used by knowledge bases such as Google Knowledge Graph. {\bf WikiData} is a community project to create an open database of structured data taken from Wikipedia.
 
 \subsubsection{Web Services}
 
@@ -574,7 +574,7 @@ Screen-scraping the content of a large website was possible before, but become m
 
 \paragraph{RPC}
 
-The SOAP RPC \footnote{SOAP = Simple Object Access Protocal, RPC = Remote Procedure Call} messages typically encode arguments that are presented to the calling profram as parameters and return values. HTTP POST/GET are used to communicate.
+The SOAP RPC \footnote{SOAP = Simple Object Access Protocol, RPC = Remote Procedure Call} messages typically encode arguments that are presented to the calling program as parameters and return values. HTTP POST/GET are used to communicate.
 \begin{figure}[H]%---------------FIG--------------
  \centering
  \includegraphics[width=13cm]{./pic/soap-rpc}
@@ -617,11 +617,11 @@ When we explore and analyze data, it would be great if we only had to look at so
 %=================== Anscombe's quartet ===================
 \subsubsection{Anscombe's quartet: Sensivity of outliers \& Robust statistics}
 
-The FIG \ref{pic:anscombe} show four differents data distribution that present, despite all of that, the same means on $x$ and $y$, the same variance on $x$ and $y$, and, thus, the same linear regression function. This is due to the statistics used to define them. 
+The FIG \ref{pic:anscombe} show four different data distribution that present, despite all of that, the same means on $x$ and $y$, the same variance on $x$ and $y$, and, thus, the same linear regression function. This is due to the statistics used to define them. 
 
 \begin{itemize}
-    \item Min, Max, Mean, Standart Deviation (Std) and Range are sensitives to outliers and then are \textbf{not robust statistics}.
-    \item Median, quartils, (and others) are not sensitives and then are said to be \textbf{robust statistics}. 
+    \item Min, Max, Mean, Standard Deviation (Std) and Range are sensitive to outliers and then are \textbf{not robust statistics}.
+    \item Median, quartils, (and others) are not sensitive and then are said to be \textbf{robust statistics}. 
 \end{itemize}
 
 
@@ -635,9 +635,9 @@ The FIG \ref{pic:anscombe} show four differents data distribution that present, 
 %================ Simpson paradox =================
 \subsubsection{Simpson's paradox: aggregation of data}
 
-\textbf{Certain tendencies can appear, disappear or even reverse themself when aggregating the data!} This was the case when media started blaming Berkey of being unfair with women applications (looking at left table of FIG \ref{pic:Berkley}). After further investigation (and de-aggregation of the data) it appeared that at the opposite... Berklay was unfair with men! (Right table of the same FIG).
+\textbf{Certain tendencies can appear, disappear or even reverse themselves when aggregating the data!} This was the case when media started blaming Berkey of being unfair with women applications (looking at left table of FIG \ref{pic:Berkley}). After further investigation (and de-aggregation of the data), it appeared that at the opposite... Berkeley was unfair with men! (Right table of the same FIG).
 
-This paradox comes from the fact that women (according with these tables) tended to apply for more competitiv departments, with lower rates of admission. \textbf{When aggregating the data, we lost this subtlety and then draw a wrong conclusion.} 
+This paradox comes from the fact that women (according to these tables) tended to apply for more competitive departments, with lower rates of admission. \textbf{When aggregating the data, we lost this subtlety and then draw a wrong conclusion.} 
 
 Simpson's paradox can appear in a lot of cases and can be very hard to detect. The \href{https://en.wikipedia.org/wiki/Simpsons_paradox}{wikipedia page of Simpson's paradox} describes a lot of examples and, for the ones interested, a great book relates lots of statistical errors that drove to miscarriages of justice: \href{https://books.google.ch/books/about/Math_on_Trial.html?id=PFAIb6FTgY4C&source=kp_cover&redir_esc=y&hl=fr}{Leila Schneps and Coralie Colmez, Math on Trial: How Numbers Get Used and Abused in the Courtroom} 
 
@@ -657,18 +657,18 @@ Simpson's paradox can appear in a lot of cases and can be very hard to detect. T
 
 \begin{framed}
 {\it {\bf Probability and Statistics} are related areas of mathematics which concern themselves with analyzing the relative frequency of events. Still, there are fundamental differences in the way they see the world:\\
-\textbf{Probability deals with predicting the likelihood of future events}, while \textbf{statistics involves the analysis of the frequency of past events}. \\  
+\textbf{Probability deals with predicting the likelihood of future events}, while \textbf{statistics involve the analysis of the frequency of past events}. \\  
 Probability is primarily a theoretical branch of mathematics, which studies the consequences of mathematical definitions. Statistics is primarily an applied branch of mathematics, which tries to make sense of observations in the real world.}
 \signed{\href{http://www3.cs.stonybrook.edu/~skiena/jaialai/excerpts/node12.html}{Steven S. Skiena, "Calculated Bets", Cambridge University Press, 2001}}
 \end{framed}
 
 % ================ Bayes Theorem ==============
 \subsubsection{Bayes Theorem}
-The theorem express the very intuitiv statment that:
+The theorem express the very intuitive statement that:
 
-{\it The probability of observing event A and B is the probability of observing B multiplied by the probability of observing A knowing that B occured.}
+{\it The probability of observing event A and B is the probability of observing B multiplied by the probability of observing A knowing that B occurred.}
 
-Mathematicaly it's expressed as: 
+Mathematically it's expressed as: 
 \be
 P(A\vert B)P(B)=P(A\cap B)=P(B\vert A)P(A)
 \ee
@@ -681,12 +681,12 @@ More about Bayes Theorem on \href{https://en.wikipedia.org/wiki/Bayes_theorem}{w
 
 % ================ Random Variables ==============
 \subsubsection{Random Variables}
-A \textbf{random variable} is a quatitiy that can take variouse values, each one associated with a probabitlity of apparition. The some of these probability will always be 1.
+A \textbf{random variable} is a quantity that can take various values, each one associated with a probability of apparitions. The some of these probabilities will always be 1.
 \be
 X\colon \Omega \to E
 \ee
 
-$\Omega$ being a probability space and $E$ a measurable space (usualy $E = \mathbb{R}$).
+$\Omega$ being a probability space and $E$ a measurable space (usually $E = \mathbb{R}$).
 
 Any random variable can be described by its \href{https://en.wikipedia.org/wiki/Cumulative_distribution_function}{cumulative distribution function}, which describes the probability that the random variable will be less than or equal to a certain value.
 
@@ -705,14 +705,14 @@ More about Bayes Theorem on \href{https://en.wikipedia.org/wiki/Random_variable}
 % ================ Law of Large Number ==============
 \subsubsection{Law of Large Numbers}
 
-The Law of Large Numbers links, in some way, the probability to the statistics. It's, again, a very intuitive statment, even if not so easy to proove (as always in mathematic).
+The Law of Large Numbers links, in some way, the probability to the statistics. It's, again, a very intuitive statement, even if not so easy to prove (as always in mathematics).
 
 \begin{framed}
 In probability theory, the\textbf{ law of large numbers} (LLN) is a theorem that describes the result of performing the same experiment a large number of times. According to the law, \textbf{the average of the results obtained from a large number of trials should be close to the expected value}, and will tend to become closer as more trials are performed.
 \signed{\href{https://en.wikipedia.org/wiki/Law_of_large_numbers}{Wikipedia}}
 \end{framed}
 
-A common mistake is to deduce that, in the case of playing heads or tails for example, observing a lot of time \textbf{heads} increase the probability of observing \textbf{tails}. This is absolutely wrong. The variables are perfectly independent and, according with Eq \ref{indep}, the probability stays exactly 50\%. This is the perfect example of confusing probabilities with statistics.
+A common mistake is to deduce that, in the case of playing heads or tails for example, observing a lot of time \textbf{heads} increase the probability of observing \textbf{tails}. This is absolutely wrong. The variables are perfectly independent and, according to Eq \ref{indep}, the probability stays exactly 50\%. This is the perfect example of confusing probabilities with statistics.
 
 % ================ CLT ==============
 \subsubsection{Central Limit Theorem}
@@ -727,17 +727,17 @@ A common mistake is to deduce that, in the case of playing heads or tails for ex
 	$f(x\;|\;\mu ,\sigma ^{2})={\frac {1}{\sqrt {2\sigma ^{2}\pi }}}\;e^{-{\frac {(x-\mu )^{2}}{2\sigma ^{2}}}}$
 	\href{https://en.wikipedia.org/wiki/Gaussian_distribution}{More on wikipedia}
 	
-	\item \textbf{Poisson Distribution} (fig \ref{poisson}) describe the observation of events happening in a delimited time-laps. E.g: an event happen in average 4 times each 10 minutes ($\lambda = 4$). What's probability that it appears after only 3 times in this same interval ($k = 3$)? $p(k) = \frac{\lambda ^k}{k!}e^{-\lambda}$ \href{https://en.wikipedia.org/wiki/Poisson_distribution}{More on wikipedia}
+	\item \textbf{Poisson Distribution} (fig \ref{poisson}) describe the observation of events happening in a delimited time-laps. E.g: an event happens in average 4 times each 10 minutes ($\lambda = 4$). What's the probability that it appears after only 3 times in this same interval ($k = 3$)? $p(k) = \frac{\lambda ^k}{k!}e^{-\lambda}$ \href{https://en.wikipedia.org/wiki/Poisson_distribution}{More on wikipedia}
 
 	\item \textbf{Exponential Distribution} (fig \ref{exp}) describes the time between two events in a Poisson process. $P(x) = \lambda e^{- \lambda x}$ \href{https://en.wikipedia.org/wiki/Exponential_distribution}{More on wikipedia}
 	
-	\item \textbf{Binomial Distribution} (fig \ref{binomial}) describes the discret distribution on success in a yes/no experiment. (E.g. coin tossing or any win/lose game). $f(k;n,p)=\Pr(X=k)={\binom {n}{k}}p^{k}(1-p)^{n-k}$ \href{https://en.wikipedia.org/wiki/Binomial_distribution}{More on wikipedia}
+	\item \textbf{Binomial Distribution} (fig \ref{binomial}) describes the discrete distribution on success in a yes/no experiment. (E.g. coin tossing or any win/lose game). $f(k;n,p)=\Pr(X=k)={\binom {n}{k}}p^{k}(1-p)^{n-k}$ \href{https://en.wikipedia.org/wiki/Binomial_distribution}{More on wikipedia}
 	
 	\item \textbf{Multinomial Distribution} generalizes Binomial law. \href{https://en.wikipedia.org/wiki/Multinomial_distribution}{More on wikipedia}
 	
 	\item \textbf{Zipf Distribution} is an empirical discret description of word frequency in a text. \href{https://en.wikipedia.org/wiki/Zipfs_law}{More on wikipedia}
 	
-	\item \textbf{Pareto Distribution} is equivalent of Zipf in a continuous space. It allows, amongst other things, to give a theoretical base of the "80-20 principle" (20\% of the causes produce 80\% of the effects). \href{https://en.wikipedia.org/wiki/Pareto_distribution}{More on wikipedia}
+	\item \textbf{Pareto Distribution} is the equivalent of Zipf in a continuous space. It allows, amongst other things, to give a theoretical base of the "80-20 principle" (20\% of the causes produce 80\% of the effects). \href{https://en.wikipedia.org/wiki/Pareto_distribution}{More on wikipedia}
 	
 	\item \textbf{Yule-Simon distribution} describes discret frequencies of term too. \href{https://en.wikipedia.org/wiki/Yule?Simon_distribution}{More on wikipedia}
 \end{itemize}
@@ -780,37 +780,37 @@ Binomial distribution
 % ================ Measurement ==============
 \subsection{Measurement on Samples}
 
-In practice, we (almost) never analyse the entire population. We always work on a subset of it called \textbf{sample}. The \textbf{variance} is the variation between elements of our sample, that we hope to be the same as the population. The \textbf{biais} is the systematic variation between the entire population and the sample we chose.
+In practice, we (almost) never analyse the entire population. We always work on a subset of it called \textbf{sample}. The \textbf{variance} is the variation between elements of our sample, that we hope to be the same as the population. The \textbf{biases} is the systematic variation between the entire population and the sample we chose.
 
-When randomly select elements of the population to be part of the sample, we have a great chance that the biais is small (i.e. that the distribution of the sample correspond to the distribution of the population). But do not forget that there is a probability (even if a small one) to select elements that \textbf{biased our measures}! This probability can even increase when you clean the data, if you don't do it wisely.
+When randomly select elements of the population to be part of the sample, we have a great chance that the bias is small (i.e. that the distribution of the sample corresponds to the distribution of the population). But do not forget that there is a probability (even if a small one) to select elements that \textbf{biased our measures}! This probability can even increase when you clean the data, if you don't do it wisely.
 
 A stupid example could be a study on population education in which, during the cleaning, you remove the answers containing misspelling. Uneducated people are more likely to commit misspelling so, removing them, you artificially biais the sample.
 
 % ================ Test Statistic ==============
 \subsection{Test Statistic}
 
-(The only good and easy-to-understand explanation about test statistic I ever found is available on \href{http://hamelg.blogspot.ch/2015/11/python-for-data-analysis-part-24.html?view=flipcard}{hamelg.blogspot})
+(The only good and easy-to-understand explanation about test statistics I ever found is available on \href{http://hamelg.blogspot.ch/2015/11/python-for-data-analysis-part-24.html?view=flipcard}{hamelg.blogspot})
 
-The idea behind test statistic is \textbf{instead of proving that our assumption is true, let's calculate the probability that our observations occur by chance (null hypothesis or $H_0$). If this probability is very low, then there is a good chance that our hypothethis is true!}
+The idea behind test statistics is \textbf{instead of proving that our assumption is true, let's calculate the probability that our observations occur by chance (null hypothesis or $H_0$). If this probability is very low, then there is a good chance that our hypothesis is true!}
 
-The probability that this happen by chance is called $pvalue$ and we usualy consider that if $pvalue \leq 0.05$ our hypothesis is true ($pvalue \leq 0.01$ in some strict cases).
+The probability that this happens by chance is called $pvalue$ and we usually consider that if $pvalue \leq 0.05$ our hypothesis is true ($pvalue \leq 0.01$ in some strict cases).
 
 % ================ Test Statistic ==============
 \subsubsection{Example with t-test}
 
-Let's take the example on FIG \ref{pic:ttest}. The \textbf{Null Hypthesis} $H_0$ represents the distribution of observation we can do, assuming there is no correlation between the values we measured. The \textbf{Alternative} is $H_A$, our hypothesis which states that, at the opposite, their is correlations.
+Let's take the example on FIG \ref{pic:ttest}. The \textbf{Null Hypthesis} $H_0$ represents the distribution of observation we can do, assuming there is no correlation between the values we measured. The \textbf{Alternative} is $H_A$, our hypothesis which states that, at the opposite, there is correlations.
 \begin{itemize}
 	\item If the observation we test is $x=3$, there is \textbf{less than 5\% probabilities that it was produced by $H_0$} ($pvalue \leq 0.05$). Our hypothesis $H_A$ is considered true.
 
-	\item If the observation we test is $x=0$, there is \textbf{more than 5\% probabilities that it was produced by $H_0$} (more or less 40\%). Our hypothesis $H_A$ is considered false.
+	\item If the observation we test is $x=0$, there are \textbf{more than 5\% probabilities that it was produced by $H_0$} (more or less 40\%). Our hypothesis $H_A$ is considered false.
 \end{itemize}
 
-{\color{red} An important thing to notice is that \textbf{it does not provide truth on statistic}, it only provides information about how likely is the null hypothesis! Let's look back to the example}
+{\color{red} An important thing to notice is that \textbf{it does not provide the truth on statistic}, it only provides information about how likely is the null hypothesis! Let's look back to the example}
 
 \begin{itemize}
-	\item The $x=3$ observation \textbf{could have been produced by the red area}, meaning that it's part of the small 5\% chance of being produced by the $H_0$. The test will say that our hypthesis is true, which will be a \textbf{false positiv}.
+	\item The $x=3$ observation \textbf{could have been produced by the red area}, meaning that it's part of the small 5\% chance of being produced by the $H_0$. The test will say that our hypothesis is true, which will be a \textbf{false positiv}.
 
-	\item The $x=0$ observation \textbf{could have been produced by the blue area}, meaning that even it $H_0$ have great chance to produce it, it's was in fact produced by $H_A$.  The test will say that our hypthesis is false, which will be a \textbf{false negativ}.
+	\item The $x=0$ observation \textbf{could have been produced by the blue area}, meaning that even it $H_0$ have great chance to produce it, it was in fact produced by $H_A$.  The test will say that our hypothesis is false, which will be a \textbf{false negativ}.
 \end{itemize}
 
 \begin{figure}[h]%---------------FIG--------------
@@ -822,7 +822,7 @@ Let's take the example on FIG \ref{pic:ttest}. The \textbf{Null Hypthesis} $H_0$
 % ================ Test Statistic ==============
 \subsubsection{Choose the right test}
 
-A lot of test exists and we must choose wisely which one to use, according with data and hypothesis characteristics. FIG \ref{pic:testtree} show a decision tree helping to choose the test which suits best our situation.
+A lot of tests exist and we must choose wisely which one to use, according to data and hypothesis characteristics. FIG \ref{pic:testtree} show a decision tree helping to choose the test which suits best our situation.
 
 \begin{itemize}
  \item Question ? 
@@ -836,20 +836,20 @@ A lot of test exists and we must choose wisely which one to use, according with 
 \begin{figure}[h]%---------------FIG--------------
  \centering
  \includegraphics[width=15cm]{./pic/choose_test}
- \caption{\label{pic:testtree} Statistical test descision tree}
+ \caption{\label{pic:testtree} Statistical test decision tree}
 \end{figure}
 
 
 
 
-Multiple Hypothese Testing: \\
-If you perform experiments over and over, you're bound to find something. Significance level must be adjusted down when performing multiple hypothesis tests. 
+Multiple Hypotheses Testing: \\
+If you perform experiments over and over, you're bound to find something. Significance levels must be adjusted down when performing multiple hypothesis tests. 
 \\\\
 Familywise Error Rate: \\
 Error rate when too many experiments are done.. Je te laisse developer =P. There are some corrections: Bonferroni and Sidak.
 \\\\
 Non-Parametric Tests: \\
-All the tests so fare assume that the data are {\bf normally distributed} and that the samples are {\bf independent of each other and all have the same distribution.} (IID) They may be innacurate if those assumptions are not met. Therefore, make sure the data satisfies the assumptions of the test we're using. Watch out for:
+All the tests so fare assume that the data are {\bf normally distributed} and that the samples are {\bf independent of each other and all have the same distribution.} (IID) They may be inaccurate if those assumptions are not met. Therefore, make sure the data satisfy the assumptions of the test we're using. Watch out for:
 \begin{description}
  \item[Outliers] will corrupt many tests that use variance estimates.
  \item[Correlated values as samples], e.g. if you repeated measurements on the same subjective
@@ -858,11 +858,11 @@ All the tests so fare assume that the data are {\bf normally distributed} and th
 K-S test: \\
 K-S (Kolmogorov-Smirnov) test is a very useful test for checking whether two (continuous or discrete) distributions are the same. 
 \begin{itemize}
- \item In the {\bf one-sided test}, an observed distribution (e.g. some observed values or a histrogram) is compared against a reference distribution (e.g., power-law).
- \item In the {\bf two-sided test}, two observed distrubtions are compared.
+ \item In the {\bf one-sided test}, an observed distribution (e.g. some observed values or a histogram) is compared against a reference distribution (e.g., power-law).
+ \item In the {\bf two-sided test}, two observed distributions are compared.
  \item The K-S statistic is just the {\bf max distance between the CDFs} (Cumulative Distribution Function) of the two distributions.
- \item The K-S test can be used to test {\bf whether a data sample has  anormal distribution} or not.
- \item Thus it can be used as a sanity check for any common parametric test (which assumes normally-distributed data).
+ \item The K-S test can be used to test {\bf whether a data sample has  a normal distribution} or not.
+ \item Thus it can be used as a sanity check for any common parametric test (which assumes normally distributed data).
  \item It can also be used to compared distributions of data values in large data pipeline: {\bf Most errors will distort the distribution of a data parameter and a K-S test can detect this.}
 \end{itemize}
 This test is expensive! 
