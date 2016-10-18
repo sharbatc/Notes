@@ -791,16 +791,16 @@ A stupid example could be a study on population education in which, during the c
 
 (The only good and easy-to-understand explanation about test statistic I ever found is available on \href{http://hamelg.blogspot.ch/2015/11/python-for-data-analysis-part-24.html?view=flipcard}{hamelg.blogspot})
 
-The idea behind test statistic is \textbf{instead of proving that our assumption is true, let's calculate the probability that our observations occur by chance. If this probability is very low, then there is a good chance that our hypothethis is true!}
+The idea behind test statistic is \textbf{instead of proving that our assumption is true, let's calculate the probability that our observations occur by chance (null hypothesis or $H_0$). If this probability is very low, then there is a good chance that our hypothethis is true!}
 
-The probability that this happen by chance is called \textbf{null hypothesis} $H_0$. The hypothesis we made is $H_A$.
+The probability that this happen by chance is called $pvalue$ and we usualy consider that if $pvalue \leq 0.05$ our hypothesis is true ($pvalue \leq 0.01$ in some strict cases).
 
 % ================ Test Statistic ==============
 \subsubsection{Example with t-test}
 
 Let's take the example on FIG \ref{pic:ttest}. The \textbf{Null Hypthesis} $H_0$ represents the distribution of observation we can do, assuming there is no correlation between the values we measured. The \textbf{Alternative} is $H_A$, our hypothesis which states that, at the opposite, their is correlations.
 \begin{itemize}
-	\item If the observation we test is $x=3$, there is \textbf{less than 5\% probabilities that it was produced by $H_0$} ($pvalue \leq 0.5$). Our hypothesis $H_A$ is considered true.
+	\item If the observation we test is $x=3$, there is \textbf{less than 5\% probabilities that it was produced by $H_0$} ($pvalue \leq 0.05$). Our hypothesis $H_A$ is considered true.
 
 	\item If the observation we test is $x=0$, there is \textbf{more than 5\% probabilities that it was produced by $H_0$} (more or less 40\%). Our hypothesis $H_A$ is considered false.
 \end{itemize}
