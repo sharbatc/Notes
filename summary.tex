@@ -14,6 +14,7 @@
 \usepackage{fancyhdr}
 \usepackage{dirtytalk}
 
+
 %drow graph
 \usepackage{fancybox}
 \usepackage{tikz}
@@ -209,15 +210,35 @@ Distributed Information Systems Laboratory (LSIR) \\
 
 
 % ================ Introduction ==============
+\section*{Course content}
+
+The purpose of the course is to present multiple topics in the data science field such as \emph{Data Wrangling}, \emph{Data Management}, \emph{Data Mining}, \emph{Machine Learning}, \emph{Visualization}, \emph{Statistics} and \emph{Story telling}. The course has not the presumption to go deeply into each argument. It is due to the extent of the subject and the fact that it is evolving really quickly, hence learning in depth a specific tool will not pay off.
+
+\subsection*{Skills to develop}
+
+In this course, you will work, thus develop, the following skills:
+
+\begin{description}
+ \item \emph{Data mining/scraping/sampling/cleaning} in order to get an informative, manageable data setlength
+ \item \emph{Data storage and management} in order to be able to access data quickly and reliably during subsequent analysis
+ \item \emph{Exploratory data analysis} to generate hypotheses and intuition about the data
+ \item \emph{Prediction} based on statistical tools such as regression, classification, and clustering
+ \item \emph{Communication of results} through visualization, stories and interpretable summaries
+\end{description}
+
+\subsection*{Structure of the notes}
+
+The notes of the lectures are put in writing with the aim of summarizing the main topics and concepts illustrated during the classes. To those who are curious, it points to external links that may help you to an in-depth understanding of the field. Each chapter corresponds to a lecture. The hope is that the work could be useful for the current and future students. 
+
+
+\clearpage
+
+
 \section{Introduction}
 
-\subsection{General information about the course}
+\subsection{What is Data Science?}
 
-This course covers multiple topics in the data science field such as \textbf{Data Wrangling}, {\bf Data Management}, {\bf Data Mining}, {\bf Machine Learning}, {\bf Visualization}, {\bf Statistics} and {\bf Story telling}. It's about {\bf breadth}, not depth. Indeed, Data science is evolving really quickly, hence learning in depth a specific tool won't pay off. 
-
-\subsection{Data Science}
-
-When we talk about Data Science, we often use the term Big Data as the enormous amount of data that exist in the world. But Big Data is not only about collecting huge amount of data. It is challenging but not enough. The real value comes from the insights. The {\it internet} companies (Google, Facebook, etc.) 
+When we talk about Data Science, we often use the term Big Data as the enormous amount of data that exists in the world. But Big Data is not only about collecting huge amount of data. It is challenging but not enough. The real value comes from the insights. The {\it internet} companies (Google, Facebook, etc.) 
 understood this many years ago.
 \\ \\
 An accurate definition of Data Analysis is given by Wikipedia:
@@ -227,12 +248,12 @@ Data analysis has multiple facets and approaches, encompassing diverse technique
 \signed{\href{https://en.wikipedia.org/wiki/Data\_analysis}{Wikipedia - Data Analysis}}
 \end{framed}
 
-Therefore, a Data Scientist has to master different kinds of skills such as {\bf Mathematics} (for the Statistics), {\bf Programming} and the {\bf Domain Expertise}. Drew Conway's Venn diagram, Figure \ref{img:venn}, shows the different combination man can obtain with these three skills.
+Therefore, a Data Scientist has to master different kinds of skills such as {\bf Mathematics} , {\bf Statistics}, {\bf Programming} and the {\bf Domain Expertise}. \href{http://videolectures.net/kdd2014\_conway\_social\_science/}{Drew Conway's Venn diagram}, Figure \ref{img:venn}, shows the different combination man can obtain with these three skills.
 
 \begin{figure}[H]
  \centering
  \includegraphics[width=7cm]{./pic/Data_Science_VD.png}
- \caption{\label{img:venn} Venn Diagram describing the different combination of skills used by a Data Scientist (by Drew Conway)}
+ \caption{\label{img:venn} Venn Diagram describing the different combination of skills used by a Data Scientist (by Drew Conway)} 
 \end{figure}
 
 \begin{figure}[H]
@@ -241,7 +262,7 @@ Therefore, a Data Scientist has to master different kinds of skills such as {\bf
  \caption{\label{img:tweet_wills} A tweet from Josh Wills, Data Scientist at Slack.}
 \end{figure}
 
-{\bf A practical definition of Data Science} 
+{\bf A more practical definition} 
 
 Data Science is about the whole processing pipeline to extract information out of data. As such, a Data Scientist {\bf understands and cares about the whole data pipeline}.
 
@@ -254,7 +275,7 @@ Data Science is about the whole processing pipeline to extract information out o
 \begin{minipage}{0.45\textwidth}
 A {\bf data pipeline} consists of 3 steps:
 \begin{enumerate}
- \item Preparing to run a model. \\
+ \item Preparing to run a model: \\
   {\it Gathering, cleaning, integrating, restructuring, transforming, loading, filtering, deleting, combining, merging, verifying, extracting, shaping}
  \item Running the model
  \item Communicating the results
@@ -263,57 +284,72 @@ A {\bf data pipeline} consists of 3 steps:
  A ``good'' Data Scientist will always go back and forth between the steps. The diagram on the left shows exactly what can happen. 
 \end{minipage}
 \\ \\
-In this course, you will develop the following skills:
-\begin{description}
- \item[data mining/scraping/sampling/cleaning] in order to get an informative, manageable data setlength
- \item[data storage and management] in order to be able to access data quickly and reliably during subsequent analysis
- \item[exploratory data analysis] to generate hypotheses and intuition about the data
- \item[prediction] based on statistical tools such as regression, classification, and clustering
- \item[communication of results] through visualization, stories and interpretable summaries
-\end{description}
 
+\clearpage
 
 % ================ Definition ==============
 % maybe to be moved at the end if it becomes a dictionnary
-\section{Basic concepts}
 
-A data science student is attended to understand the \textbf{Grammar of Data Science}. Having some backgrounds in SQL concepts is also a good thing because, as it is very common, people love to make examples with it. Here is a brief refresh of some definitions and concepts about data science.
+\section{Basic concepts}
+\subsection{A taste of "grammar"}
+
+A data science student is attended to understand the \emph{Grammar of Data Science}. We are going to learn the core data manipulations, so no matter what is the backend. \texttt{SQL, pandas} and \texttt{R}(with \texttt{dplyr}) all share the same\emph{ grammar}. 
+For sure having some backgrounds in SQL concepts is a good thing because, as it is very common, people love to make examples with it. Here is a brief refresh of some definitions and concepts that are essential and we need to be aware of.
+
+Let's start with two key concepts that \emph{Structured data} requires:
 
 \begin{itemize}
- \item {\bf Structured data} requires two key concepts:
- \begin{itemize}
-  \item {\bf Data model} is a collection of concepts for describing data.
-  \item {\bf Schema} is a description of a particular collection of data, using a given data model.
- \end{itemize}
- \item The {\bf Relational model} is on of the most common approach to manage data (SQL like) and can handle most of the data. A counter example is the facebook-like data which requires {\bf graph model}. This model is made of 2 parts:
- \begin{itemize}
-  \item The {\bf Schema}. \\ For example, \verb+Students(sid: string, name:string, age:integer)+
+  \item {\bf Data model}: a collection of concepts for describing data.
+  \item {\bf Schema}: a description of a particular collection of data, using a given data model.
+\end{itemize}
+
+The most common and ubiquitous approach to manage data is the \emph{Relational model} (\href{https://en.wikipedia.org/wiki/Edgar\_F.\_Codd}{E. F., Ted Codd}). It can handle most of the data, so most of it is "reduced" to this model. To have an idea, a counter example is the facebook-like data which requires {\bf graph model}. 
+
+The \emph{Relational model} is composed by relations. A \emph{relation} is made up two parts:
+
+ \begin{enumerate}
+ \item The {\bf Schema} specifies name of relation, plus name and type of each column. \\ For example, \verb+Students(sid: string, name:string, age:integer)+
   \item The {\bf Instance}, {\it i.e.} the data at a given time. \\
   Definitions:
   \begin{itemize}
-   \item {\bf Cardinality} is the number of rows. (Number of items)
-   \item {\bf Degree} or {\bf Arity} is the number of fields. (Number of attributes)
+   \item {\bf Cardinality} is the number of rows (= number of items)
+   \item {\bf Degree} or {\bf Arity} is the number of fields ( = number of attributes)
   \end{itemize}
- \end{itemize}
- \item Definitions of some ``Database'' terms:
+ \end{enumerate}
+
+\subsection*{Database vocabulary}
+
+Here follows a list of basic words and operations that should be kept in mind when we talk about \emph{Databases}.
+
  \begin{itemize}
-  \item A {\bf JOIN} is a mean to combine tables based on shared attributes (most of the time some \textbf{IDs}). Despite its apparent simplicity beware of the many ways to compute a JOIN and check what is the default JOIN of a language before using it. The FIG \ref{join_SQL} summarises these possibilities.
-  \item \textbf{Aggregation}, \textbf{reduction}, and {\bf groupby} are the action of reducing data with a common operation (\textbf{sum}, \textbf{count}, \textbf{average}, ...) to summarise them. 
+  \item A \texttt{JOIN} is a mean to combine tables based on shared attributes (most of the time some \texttt{IDs}). Despite its apparent simplicity beware of the many ways to compute a \texttt{JOIN} and check what is the default \texttt{JOIN} of a language before using it. Every different \texttt{JOIN} operation has implications on the resulting relation. The Figure \ref{join_SQL} summarises these possibilities.
+  \item \emph{Aggregation}, \emph{reduction}, and \texttt{groupby} are the actions of reducing data with a common operation (\texttt{sum}, \texttt{count}, \texttt{average}, ...) to summarize them. Remember that you always need to specify the \emph{attribute} you are going to perform the \emph{aggregation} on.
  \end{itemize}
- \item Definitions of some ``Pandas'' terms:
- \begin{itemize}
-  \item {\bf Series} are a name, ordered dictionary
-  \begin{itemize}
-   \item keys are indexes
-   \item built on \textbf{numpy.ndarray} (so values can be any Numpy data type)
-  \end{itemize}  
-  \item \textbf{DataFrame} is a table with named column
-  \begin{itemize}
-   \item the columns are series
-   \item it is indeed a dictionary with (columnName $\rightarrow$ series)
-  \end{itemize}  
- \end{itemize}
+  
+\subsection{Our tools}
+
+During this course and, likely, in your future, to handle data you are going to use a \emph{'magic'} \texttt{Python}'s tool that has a black and white coat, with black fur around its eyes: \texttt{pandas}. 
+
+The basic ingredients of our beloved \texttt{pandas}:
+
+\begin{itemize}
+ \item \texttt{Series} are a name, ordered dictionary
+\begin{itemize}
+ \item keys are indexes
+ \item built on \texttt{numpy.ndarray} (so values can be any \texttt{Numpy} data type)
+\end{itemize} 
 \end{itemize}
+
+
+\begin{itemize} 
+ \item \texttt{DataFrame} is a table with named column
+  \begin{itemize}
+  \item the columns are series
+  \item it is indeed a dictionary with (columnName $\rightarrow$ series)
+  \end{itemize}  
+\end{itemize}
+
+Learn how to use \href{https://github.com/ADAEPFL/Labs/tree/master/02\%20-\%20Intro\%20to\%20Pandas}{\texttt{pandas}} and discover the beauty of \href{https://github.com/ADAEPFL/Labs/tree/master/01\%20-\%20Intro\%20to\%20Tools}{\texttt{IPython Notebooks}}.
 
 \begin{figure}%---------------FIG--------------
  \centering
