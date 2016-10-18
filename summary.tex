@@ -720,7 +720,7 @@ A common mistake is to deduce that, in the case of playing heads or tails for ex
 \textbf{Central Limit Theorem} states that the mean of independent and identically-distributed random variables will converge to \textbf{Gaussian Distribution} (Normal Distribution).
 
 % ================ CLT ==============
-\subsubsection{Most common distributions}
+\subsection{Most common distributions}
 
 \begin{itemize}
 	\item \textbf{Gaussian Distribution} (fig \ref{gauss}) results from independent and identically-distributed variables 
@@ -744,34 +744,31 @@ A common mistake is to deduce that, in the case of playing heads or tails for ex
 
 {\bf \color{red}  You should understand the distribution of your data before applying a model!}
 
-\begin{figure} [h] %----------- SubGraph ---------------------
+\begin{figure}[H] %----------- SubGraph ---------------------
 \centerline{
-\subfigure[Probability density function] {\includegraphics[width=6cm]{pic/gauss_density}}
-\subfigure[Cumulative distribution function] {\includegraphics[width=6cm]{pic/gauss_cumul}} 
+\subfigure[Probability density function] {\includegraphics[width=5.5cm]{pic/gauss_density}}
+\subfigure[Cumulative distribution function] {\includegraphics[width=5.5cm]{pic/gauss_cumul}} 
 }
 \caption{\label{gauss} 
 Gaussian distribution 
 } 
 \centerline{
-\subfigure[Probability density function] {\includegraphics[width=6cm]{pic/Poisson_pmf}}
-\subfigure[Cumulative distribution function] {\includegraphics[width=6cm]{pic/Poisson_cdf}} 
+\subfigure[Probability density function] {\includegraphics[width=5.5cm]{pic/Poisson_pmf}}
+\subfigure[Cumulative distribution function] {\includegraphics[width=5.5cm]{pic/Poisson_cdf}} 
 }
 \caption{\label{poisson} 
 Poisson distribution 
 }
-\end{figure}
-
-\begin{figure} [h] %----------- SubGraph ---------------------
 \centerline{
-\subfigure[Probability density function] {\includegraphics[width=6cm]{pic/exp_pmf}}
-\subfigure[Cumulative distribution function] {\includegraphics[width=6cm]{pic/exp_cdf}} 
+\subfigure[Probability density function] {\includegraphics[width=5.5cm]{pic/exp_pmf}}
+\subfigure[Cumulative distribution function] {\includegraphics[width=5.5cm]{pic/exp_cdf}} 
 }
 \caption{\label{exp} 
 Exponential distribution 
 } 
 \centerline{
-\subfigure[Probability density function] {\includegraphics[width=6cm]{pic/binomial_pmf}}
-\subfigure[Cumulative distribution function] {\includegraphics[width=6cm]{pic/binomial_cdf}} 
+\subfigure[Probability density function] {\includegraphics[width=5.5cm]{pic/binomial_pmf}}
+\subfigure[Cumulative distribution function] {\includegraphics[width=5.5cm]{pic/binomial_cdf}} 
 }
 \caption{\label{binomial} 
 Binomial distribution 
@@ -788,28 +785,63 @@ In practice, we (almost) never analyse the entire population. We always work on 
 When randomly select elements of the population to be part of the sample, we have a great chance that the biais is small (i.e. that the distribution of the sample correspond to the distribution of the population). But do not forget that there is a probability (even if a small one) to select elements that \textbf{biased our measures}! This probability can even increase when you clean the data, if you don't do it wisely.
 
 A stupid example could be a study on population education in which, during the cleaning, you remove the answers containing misspelling. Uneducated people are more likely to commit misspelling so, removing them, you artificially biais the sample.
-\\\\
-Rhine Paradox: \\
-Joseph Rhine was a parapsychologist. Experiment: 10 hidden cards are red or blue. Result: 1 personne out of 1000 could guess the color of all 10 cards. Proba to guess everything right: 1/1024. WRONG! Stats can be useful.
-\\\\
-Hypothesis Testing: \\
+
+% ================ Test Statistic ==============
+\subsection{Test Statistic}
+
+(The only good and easy-to-understand explanation about test statistic I ever found is available on \href{http://hamelg.blogspot.ch/2015/11/python-for-data-analysis-part-24.html?view=flipcard}{hamelg.blogspot})
+
+The idea behind test statistic is \textbf{instead of proving that our assumption is true, let's calculate the probability that our observations occur by chance. If this probability is very low, then there is a good chance that our hypothethis is true!}
+
+The probability that this happen by chance is called \textbf{null hypothesis} $H_0$. The hypothesis we made is $H_A$.
+
+% ================ Test Statistic ==============
+\subsubsection{Example with t-test}
+
+Let's take the example on FIG \ref{pic:ttest}. The \textbf{Null Hypthesis} $H_0$ represents the distribution of observation we can do, assuming there is no correlation between the values we measured. The \textbf{Alternative} is $H_A$, our hypothesis which states that, at the opposite, their is correlations.
 \begin{itemize}
- \item We want to prove a hypothesis $H_A$ by means of {\bf disproving a null hypothesis $H_0$}.
- \item A {\bf test statistic} is some measurement we can make on the data which is likely to be {\bf big under $H_A$} but {\bf small under $H_0$}.
+	\item If the observation we test is $x=3$, there is \textbf{less than 5\% probabilities that it was produced by $H_0$} ($pvalue \leq 0.5$). Our hypothesis $H_A$ is considered true.
+
+	\item If the observation we test is $x=0$, there is \textbf{more than 5\% probabilities that it was produced by $H_0$} (more or less 40\%). Our hypothesis $H_A$ is considered false.
 \end{itemize}
-{\huge \bf Je pense que l'exemple pourrait etre ajouter.. Slides 18 - 21} \\
-One-tailed takes care of only one tail of the distribution. The two-tailed takes care of both tails of the distribution. Add the image of the two-tailed test! \\
-Testing is a bit like {\bf finding the right recipe} based on these ingredients:
-\begin{enumerate}
- \item Question
- \item Data type
+
+{\color{red} An important thing to notice is that \textbf{it does not provide truth on statistic}, it only provides information about how likely is the null hypothesis! Let's look back to the example}
+
+\begin{itemize}
+	\item The $x=3$ observation \textbf{could have been produced by the red area}, meaning that it's part of the small 5\% chance of being produced by the $H_0$. The test will say that our hypthesis is true, which will be a \textbf{false positiv}.
+
+	\item The $x=0$ observation \textbf{could have been produced by the blue area}, meaning that even it $H_0$ have great chance to produce it, it's was in fact produced by $H_A$.  The test will say that our hypthesis is false, which will be a \textbf{false negativ}.
+\end{itemize}
+
+\begin{figure}[h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./pic/t-test}
+ \caption{\label{pic:ttest} T-Test example}
+\end{figure}
+
+% ================ Test Statistic ==============
+\subsubsection{Choose the right test}
+
+A lot of test exists and we must choose wisely which one to use, according with data and hypothesis characteristics. FIG \ref{pic:testtree} show a decision tree helping to choose the test which suits best our situation.
+
+\begin{itemize}
+ \item Question ? 
+ \item Data type ?
  \item Sample size
  \item Variance known? 
  \item Variance of several groups equals?
  \item ...
-\end{enumerate}
-{\bf Plenty of tables available!} PICTURE Slide 25!!
-\\\\
+\end{itemize}
+
+\begin{figure}[h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=15cm]{./pic/choose_test}
+ \caption{\label{pic:testtree} Statistical test descision tree}
+\end{figure}
+
+
+
+
 Multiple Hypothese Testing: \\
 If you perform experiments over and over, you're bound to find something. Significance level must be adjusted down when performing multiple hypothesis tests. 
 \\\\
