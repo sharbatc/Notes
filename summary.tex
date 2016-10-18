@@ -612,7 +612,7 @@ In {\bf REST systems}, the design emphasis is on {\bf nouns}. It uses the HTTP P
 
 When we explore and analyze data, it would be great if we only had to look at some statistics numbers and make automatically a conclusion about them. Sadly, it's not the case. At all.
 % ================  Famous mistakes ==============
-\subsection{Example of famous mistakes due to statistics}
+\subsection{Examples of famous mistakes due to statistics}
 
 %=================== Anscombe's quartet ===================
 \subsubsection{Anscombe's quartet: Sensivity of outliers \& Robust statistics}
@@ -648,9 +648,8 @@ Simpson's paradox can appear in a lot of cases and can be very hard to detect. T
 \end{figure}
 
 % ================ Basic stats ==============
-\subsection{Refresh of basic stats}
+\subsection{Refresh of basic statistics concept}
 
-Definitions: 
 \begin{itemize}
 	\item {\bf Probabilities}: mathematical theory that describes uncertainty. \\
 	\item {\bf Statistics}: Set of techniques for extracting useful info from data
@@ -692,7 +691,6 @@ $\Omega$ being a probability space and $E$ a measurable space (usualy $E = \math
 Any random variable can be described by its \href{https://en.wikipedia.org/wiki/Cumulative_distribution_function}{cumulative distribution function}, which describes the probability that the random variable will be less than or equal to a certain value.
 
 Two \textbf{independent variables} are defined as
-
 \be
 {\mathbb  {P}}(A\cap B)={\mathbb  {P}}(A)\cdot {\mathbb  {P}}(B).
 \ee
@@ -704,6 +702,7 @@ or equivalently (by Bayes Theorem)
 
 More about Bayes Theorem on \href{https://en.wikipedia.org/wiki/Random_variable}{wikipedia}.
 
+% ================ Law of Large Number ==============
 \subsubsection{Law of Large Numbers}
 
 The Law of Large Numbers links, in some way, the probability to the statistics. It's, again, a very intuitive statment, even if not so easy to proove (as always in mathematic).
@@ -713,7 +712,70 @@ In probability theory, the\textbf{ law of large numbers} (LLN) is a theorem that
 \signed{\href{https://en.wikipedia.org/wiki/Law_of_large_numbers}{Wikipedia}}
 \end{framed}
 
-A common mistake is to deduce that, in the case of playing heads or tails, observing a lot of time \textbf{heads} increase the probability of observing \textbf{tails}. This is absolutely wrong. The variables are perfectly independent and, according with Eq \ref{indep}, the probability stays exactly 50\%.
+A common mistake is to deduce that, in the case of playing heads or tails for example, observing a lot of time \textbf{heads} increase the probability of observing \textbf{tails}. This is absolutely wrong. The variables are perfectly independent and, according with Eq \ref{indep}, the probability stays exactly 50\%. This is the perfect example of confusing probabilities with statistics.
+
+% ================ CLT ==============
+\subsubsection{Central Limit Theorem}
+
+\textbf{Central Limit Theorem} states that the mean of independent and identically-distributed random variables will converge to \textbf{Gaussian Distribution} (Normal Distribution).
+
+% ================ CLT ==============
+\subsubsection{Most common distributions}
+
+\begin{itemize}
+	\item \textbf{Gaussian Distribution} (fig \ref{gauss}) results from independent and identically-distributed variables 
+	$f(x\;|\;\mu ,\sigma ^{2})={\frac {1}{\sqrt {2\sigma ^{2}\pi }}}\;e^{-{\frac {(x-\mu )^{2}}{2\sigma ^{2}}}}$
+	\href{https://en.wikipedia.org/wiki/Gaussian_distribution}{More on wikipedia}
+	
+	\item \textbf{Poisson Distribution} (fig \ref{poisson}) describe the observation of events happening in a delimited time-laps. E.g: an event happen in average 4 times each 10 minutes ($\lambda = 4$). What's probability that it appears after only 3 times in this same interval ($k = 3$)? $p(k) = \frac{\lambda ^k}{k!}e^{-\lambda}$ \href{https://en.wikipedia.org/wiki/Poisson_distribution}{More on wikipedia}
+
+	\item \textbf{Exponential Distribution} (fig \ref{exp}) describes the time between two events in a Poisson process. $P(x) = \lambda e^{- \lambda x}$ \href{https://en.wikipedia.org/wiki/Exponential_distribution}{More on wikipedia}
+	
+	\item \textbf{Binomial Distribution} (fig \ref{binomial}) describes the discret distribution on success in a yes/no experiment. (E.g. coin tossing or any win/lose game). $f(k;n,p)=\Pr(X=k)={\binom {n}{k}}p^{k}(1-p)^{n-k}$ \href{https://en.wikipedia.org/wiki/Binomial_distribution}{More on wikipedia}
+	
+	\item \textbf{Multinomial Distribution} generalizes Binomial law. \href{https://en.wikipedia.org/wiki/Multinomial_distribution}{More on wikipedia}
+	
+	\item \textbf{Zipf Distribution} is an empirical discret description of word frequency in a text. \href{https://en.wikipedia.org/wiki/Zipfs_law}{More on wikipedia}
+	
+	\item \textbf{Pareto Distribution} is equivalent of Zipf in a continuous space. It allows, amongst other things, to give a theoretical base of the "80-20 principle" (20\% of the causes produce 80\% of the effects). \href{https://en.wikipedia.org/wiki/Pareto_distribution}{More on wikipedia}
+	
+	\item \textbf{Yule-Simon distribution} describes discret frequencies of term too. \href{https://en.wikipedia.org/wiki/Yule?Simon_distribution}{More on wikipedia}
+\end{itemize}
+
+\begin{figure} [h] %----------- SubGraph ---------------------
+\centerline{
+\subfigure[Probability density function] {\includegraphics[width=6cm]{pic/gauss_density}}
+\subfigure[Cumulative distribution function] {\includegraphics[width=6cm]{pic/gauss_cumul}} 
+}
+\caption{\label{gauss} 
+Gaussian distribution 
+} 
+\centerline{
+\subfigure[Probability density function] {\includegraphics[width=6cm]{pic/Poisson_pmf}}
+\subfigure[Cumulative distribution function] {\includegraphics[width=6cm]{pic/Poisson_cdf}} 
+}
+\caption{\label{poisson} 
+Poisson distribution 
+}
+\end{figure}
+
+\begin{figure} [h] %----------- SubGraph ---------------------
+\centerline{
+\subfigure[Probability density function] {\includegraphics[width=6cm]{pic/exp_pmf}}
+\subfigure[Cumulative distribution function] {\includegraphics[width=6cm]{pic/exp_cdf}} 
+}
+\caption{\label{exp} 
+Exponential distribution 
+} 
+\centerline{
+\subfigure[Probability density function] {\includegraphics[width=6cm]{pic/binomial_pmf}}
+\subfigure[Cumulative distribution function] {\includegraphics[width=6cm]{pic/binomial_cdf}} 
+}
+\caption{\label{binomial} 
+Binomial distribution 
+} 
+\end{figure}
+
 
 
 % ================ Measurement ==============
