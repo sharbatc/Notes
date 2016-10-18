@@ -742,6 +742,8 @@ A common mistake is to deduce that, in the case of playing heads or tails for ex
 	\item \textbf{Yule-Simon distribution} describes discret frequencies of term too. \href{https://en.wikipedia.org/wiki/Yule?Simon_distribution}{More on wikipedia}
 \end{itemize}
 
+{\bf \color{red}  You should understand the distribution of your data before applying a model!}
+
 \begin{figure} [h] %----------- SubGraph ---------------------
 \centerline{
 \subfigure[Probability density function] {\includegraphics[width=6cm]{pic/gauss_density}}
@@ -781,35 +783,11 @@ Binomial distribution
 % ================ Measurement ==============
 \subsection{Measurement on Samples}
 
-Measurement on Samples: \\
-Many datasets are samples from an infinite population. We have acces only to a {\bf sample} of a whole population. Therefore, measurements are hard because:
-\begin{itemize}
- \item Samples measurements have {\bf variance}: Variation between samples
- \item Samples measurements have {\bf bias}: Systematic variation from the population value. (Thermometer say temp is 10 degrees more than pop)
-\end{itemize}
-Normal Distribution, Mean and Variance: \\
-Mean is the average of all values. Variance measure the width of a distribution. (EQUATION) Standard deviation = sqrt of variance. (IMAGE?) 
-\\\\
-Central Limit Theorem: \\
-Distribution of the sum (or mean) of a set of n identically-distributed random variables Xi {\bf approaches a normal distribution as n  $->\infty$.} \\
-Common parametric statistical test, like t-test and ANOVA, assume normally-distributed data, but {\bf depend on sample mean and variance measures of the data.} \\
-They typically work reasonably well for data that are not normally distributed as long as the samples are not too small!
-\\
-Often the data are not normally distributed. (But the stat tools assume that.) Therefore, check the data!
-\\\\
-Distributions: \\
-\begin{description}
- \item[Poisson] Distrib of counts that occur at a certain rate.
- \begin{itemize}
-  \item Observed frequency of a given term in corpus.
-  \item Number of visits to a web site in a fixed time interval.
-  \item Number of website clicks in an hour.
- \end{itemize}
- \item[Exponential] Interval between two such events.
- \item[Zipf/Pareto/Yule distrib] govern the frequencies of different terms in a document, or web site visits.
- \item[Binomial/Multinomial] govern the number of counts of event (e.g. die tosses = 6) out of $n$ trials.
-\end{description}
-{\bf \color{red}  You should understand the distribution of your data before applying a model!}
+In practice, we (almost) never analyse the entire population. We always work on a subset of it called \textbf{sample}. The \textbf{variance} is the variation between elements of our sample, that we hope to be the same as the population. The \textbf{biais} is the systematic variation between the entire population and the sample we chose.
+
+When randomly select elements of the population to be part of the sample, we have a great chance that the biais is small (i.e. that the distribution of the sample correspond to the distribution of the population). But do not forget that there is a probability (even if a small one) to select elements that \textbf{biased our measures}! This probability can even increase when you clean the data, if you don't do it wisely.
+
+A stupid example could be a study on population education in which, during the cleaning, you remove the answers containing misspelling. Uneducated people are more likely to commit misspelling so, removing them, you artificially biais the sample.
 \\\\
 Rhine Paradox: \\
 Joseph Rhine was a parapsychologist. Experiment: 10 hidden cards are red or blue. Result: 1 personne out of 1000 could guess the color of all 10 cards. Proba to guess everything right: 1/1024. WRONG! Stats can be useful.
