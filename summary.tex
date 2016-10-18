@@ -798,7 +798,7 @@ The probability that this happens by chance is called $pvalue$ and we usually co
 % ================ Test Statistic ==============
 \subsubsection{Example with t-test}
 
-Let's take the example on FIG \ref{pic:ttest}. The \textbf{Null Hypthesis} $H_0$ represents the distribution of observation we can do, assuming there is no correlation between the values we measured. The \textbf{Alternative} is $H_A$, our hypothesis which states that, at the opposite, there is correlations.
+Let's take the example on FIG \ref{pic:ttest}. The \textbf{Null Hypothesis} $H_0$ represents the distribution of observation we can do, assuming there is no correlation between the values we measured. The \textbf{Alternative} is $H_A$, our hypothesis which states that, at the opposite, there is correlations.
 \begin{itemize}
 	\item If the observation we test is $x=3$, there is \textbf{less than 5\% probabilities that it was produced by $H_0$} ($pvalue \leq 0.05$). Our hypothesis $H_A$ is considered true.
 
@@ -808,9 +808,9 @@ Let's take the example on FIG \ref{pic:ttest}. The \textbf{Null Hypthesis} $H_0$
 {\color{red} An important thing to notice is that \textbf{it does not provide the truth on statistic}, it only provides information about how likely is the null hypothesis! Let's look back to the example}
 
 \begin{itemize}
-	\item The $x=3$ observation \textbf{could have been produced by the red area}, meaning that it's part of the small 5\% chance of being produced by the $H_0$. The test will say that our hypothesis is true, which will be a \textbf{false positiv}.
+	\item The $x=3$ observation \textbf{could have been produced by the red area}, meaning that it's part of the small 5\% chance of being produced by the $H_0$. The test will say that our hypothesis is true, which will be a \textbf{false positive}.
 
-	\item The $x=0$ observation \textbf{could have been produced by the blue area}, meaning that even it $H_0$ have great chance to produce it, it was in fact produced by $H_A$.  The test will say that our hypothesis is false, which will be a \textbf{false negativ}.
+	\item The $x=0$ observation \textbf{could have been produced by the blue area}, meaning that even it $H_0$ have great chance to produce it, it was in fact produced by $H_A$.  The test will say that our hypothesis is false, which will be a \textbf{false negative}.
 \end{itemize}
 
 \begin{figure}[h]%---------------FIG--------------
@@ -840,22 +840,42 @@ A lot of tests exist and we must choose wisely which one to use, according to da
 \end{figure}
 
 
+% ============================================
+\subsubsection{Family-wise Error}
+
+Following this simple math equation, we can figure out that the more experiment we do to test the hypothesis, the more likely we are to find that one of them are spuriously right! This is because the reverse point of view of the test. We are testing the fact that $H_0$ is unlikely, not directly that $H_A$ is likely. 
+
+\begin{equation} \label{eq1}
+\begin{split}
+P(false \: positive) &= \alpha = 0.05 \\ 
+P(true \: positive) &= 1 - \alpha = 0-95 \\
+P(true \: positive \: on \: each \: experiment) &= (1 - \alpha)^k \\
+P(at \: least \: on \: false \: positive \: on \: one \: experiment) &= 1 - (1 - \alpha)^k
+\end{split}
+\end{equation}
+
+To counter that, two possible correction exists
+\begin{itemize}
+  \item Bonferroni correction : $\alpha_c = \frac{\alpha}{k}$ 
+  \item Sidak correction: $\alpha_c = 1- (1 - \alpha)^{1/k} $
+\end{itemize}
 
 
-Multiple Hypotheses Testing: \\
-If you perform experiments over and over, you're bound to find something. Significance levels must be adjusted down when performing multiple hypothesis tests. 
-\\\\
-Familywise Error Rate: \\
-Error rate when too many experiments are done.. Je te laisse developer =P. There are some corrections: Bonferroni and Sidak.
-\\\\
-Non-Parametric Tests: \\
+% ============================================
+\subsubsection{Non-Parametric tests}
+
 All the tests so fare assume that the data are {\bf normally distributed} and that the samples are {\bf independent of each other and all have the same distribution.} (IID) They may be inaccurate if those assumptions are not met. Therefore, make sure the data satisfy the assumptions of the test we're using. Watch out for:
 \begin{description}
  \item[Outliers] will corrupt many tests that use variance estimates.
  \item[Correlated values as samples], e.g. if you repeated measurements on the same subjective
  \item[Skewed (bias) distributions] give invalid results.
 \end{description}
-K-S test: \\
+
+Some tests make no assumptions and thus can be used on very general cases: \textbf{K-S test}, \textbf{Permutation test} and \textbf{Bootstrap confidence interval}.
+
+
+%================================================
+\subsubsection{K-S test}
 K-S (Kolmogorov-Smirnov) test is a very useful test for checking whether two (continuous or discrete) distributions are the same. 
 \begin{itemize}
  \item In the {\bf one-sided test}, an observed distribution (e.g. some observed values or a histogram) is compared against a reference distribution (e.g., power-law).
@@ -865,9 +885,7 @@ K-S (Kolmogorov-Smirnov) test is a very useful test for checking whether two (co
  \item Thus it can be used as a sanity check for any common parametric test (which assumes normally distributed data).
  \item It can also be used to compared distributions of data values in large data pipeline: {\bf Most errors will distort the distribution of a data parameter and a K-S test can detect this.}
 \end{itemize}
-This test is expensive! 
-\\
-{\bf WE NEED TO ADD MORE STUFF ON THE K-S TEST. CHECK ON WIKIPEDIA.. =) }
+This test is expensive! Check for more information on the \href{https://en.wikipedia.org/wiki/Kolmogorov?Smirnov_test}{wikipedia page}.
    
 
 
