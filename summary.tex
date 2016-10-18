@@ -865,11 +865,11 @@ To counter that, two possible correction exists
 \subsubsection{Non-Parametric tests}
 
 All the tests so fare assume that the data are {\bf normally distributed} and that the samples are {\bf independent of each other and all have the same distribution.} (IID) They may be inaccurate if those assumptions are not met. Therefore, make sure the data satisfy the assumptions of the test we're using. Watch out for:
-\begin{description}
- \item[Outliers] will corrupt many tests that use variance estimates.
- \item[Correlated values as samples], e.g. if you repeated measurements on the same subjective
- \item[Skewed (bias) distributions] give invalid results.
-\end{description}
+\begin{itemize}
+ \item \textbf{Outliers} will corrupt many tests that use variance estimates.
+ \item \textbf{Correlated values as samples}, e.g. if you repeated measurements on the same subjective
+ \item \textbf{Skewed (bias) distributions} give invalid results.
+\end{itemize}
 
 Some tests make no assumptions and thus can be used on very general cases: \textbf{K-S test}, \textbf{Permutation test} and \textbf{Bootstrap confidence interval}.
 
