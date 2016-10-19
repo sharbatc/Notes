@@ -11,28 +11,32 @@
 
 Before any analysis, data need to be transformed from "dirty" to clean and processable data. 
 
-Data comes from different sources (excel or SQL?), sometime collected through different methods over time, with different conventions (space or NaN?), etc ... Data wrangling goal is to \textbf{extract and standardize these raw data}. The best way to do it is to \textbf{combine automation with visualizations} in order to find outliers. 
+Data come from different sources, sometime collected through different methods over time, with different conventions. Generally, it leads to unwanted anomalies and duplicates. \emph{Data wrangling} goal is to \textbf{extract and standardize these raw data}. The best way to do it is to \textbf{combine} automation with visualizations in order to proceed with the cleaning. 
 
-Data problems can come from (non-exhaustive): 
+Here is a \emph{non-exhaustive} list of where data problems can come from: 
 \begin{itemize}
-  \item Missing data
-  \item Incorrect data
-  \item Inconsistent representations of the same data
-  \item Non-standardized data (centimeter or inches? Fahrenheit or Celsuis ?)
-  \item Duplicated data
+  \item \emph{Missing data}
+  \item \emph{Incorrect data}
+  \item \emph{Inconsistent representations of the same data}
+  \item \emph{Non-standardized data (centimeter or inches? Fahrenheit or Celsuis ?)}
+  \item \emph{Duplicated data}
 \end{itemize}
 
 About 75\% of theses problems will need \textbf{human intervention} to be corrected (by the data-scientist or by crowdsourcing).
 
-Even if it seems really dirty, \textbf{beware not to over-sanitize the data!}. Applying what we can call "defensive programming" is not a good idea because we risk losing any interesting data, keeping only the ones that fit perfectly in our model.
+Even if it seems really dirty, \textbf{beware not to over-sanitize the data!} Applying what we can call "defensive programming" is not a good idea because we risk losing any interesting data, keeping only the ones that fit perfectly in our model.
+
+Anyway, a good \emph{Data wrangling} procedure brings about improvements in the efficiency and scale of data importing.
 
 \subsection{Diagnosis of the data}
 
-One of the most important aspects of Data Wrangling is to {\bf understand} the data and to {\bf find possible problems}. In order to ``diagnose'' the data, two tools can be used:
+One of the most important aspects of Data Wrangling is to {\bf understand} the data and to {\bf find} possible problems. In order to "diagnose'' the data, two tools can be used:
 \begin{itemize}
- \item {\bf Visualization} (A {\it thoughtful} visualization will always help)
- \item {\bf Basic Statistics} 
+ \item {\emph Visualization} (A {\it thoughtful} visualization will always help)
+ \item {\emph Basic Statistics} 
 \end{itemize}
+
+Look out, outliers and missing data can be often identify using a plot. Visualization becomes increasingly difficult when  \href{http://fellinlovewithdata.com/guides/how-do-you-visualize-too-much-data}{data gets larger}.
 
 Matrix visualizations of the facebook graph is shown in Figure \ref{pic:fb}. The Relational visualization, Figure \ref{pic:fb1}, does not show any particular problem in the data. But the Time dependant visualization, Figure \ref{pic:fb2}, shows that the Facebook API reached its limit while collecting data.
 
@@ -52,10 +56,10 @@ Values can often miss from the data we have, because of various events (war, fir
 Whatever the method used, it's good to keep track of these changes to know which are original data and which are modified ones.
 
 \begin{itemize}
-  \item Set values to zero FIG \ref{miss_val}(a)
-  \item Interpolate based on existing data FIG \ref{miss_val}(b)
-  \item Omit missing data FIG \ref{miss_val}(c)
-  \item Interpolation with tracks kept \ref{miss_val}(d)
+  \item Set values to zero Figure \ref{miss_val}(a)
+  \item Interpolate based on existing data Figure \ref{miss_val}(b)
+  \item Omit missing data Figure \ref{miss_val}(c)
+  \item Interpolation with tracks kept Figure \ref{miss_val}(d)
 \end{itemize}
 
 \begin{figure}[H]%---------------FIG--------------
@@ -66,12 +70,16 @@ Whatever the method used, it's good to keep track of these changes to know which
 
 \subsection{General procedure}
 
-Once the data are well wrangled and before trying to analyse them, we must take care of two more steps:
+Once the data are well wrangled and before trying to analyze them, we must take care of two more steps:
 
 \begin{enumerate}
   \item \textbf{Deal with uncertain data} (can arise from measurement errors, wrong sampling strategies, etc.)
   \item \textbf{Parse/transform data} (with aggregation and reduction techniques) to obtain meaningful records
 \end{enumerate}
  
-It's always ideal to have the code and/or the documentation about the dataset you are analyzing (provenance).
+As we say in the Introduction, \emph{Data Science} is a mixture of different fields. It often leads to the necessity of working in team where different people have different skills. Working in a team means sharing code, documentation and data. Hence, taking care of them is essential.
+
+\clearpage
+
+
  
