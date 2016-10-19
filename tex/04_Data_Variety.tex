@@ -3,7 +3,7 @@
 % ================ Data Variety ==============
 \section{Data Variety}
 
-The ``3 Vs'' of Big Data: {\it Volume}, {\it Velocity} and {\it Variety}. In this course, we don't address the {\it Volume} and {\it Velocity} parts (A course on Database does). Since there is a lot of variety in the data, we need to prepare the data. This flow is called {\bf ETL}:
+The \href{http://blog.sqlauthority.com/2013/10/02/big-data-what-is-big-data-3-vs-of-big-data-volume-velocity-and-variety-day-2-of-21/}{``3 Vs'' of Big Data}: {\it Volume}, {\it Velocity} and {\it Variety}. In this course, we don't address the {\it Volume} and {\it Velocity} parts (A course on Database does). Since there is a lot of variety in the data, we need to prepare the data. This flow is called {\bf ETL}:
 \begin{itemize}
  \item {\bf Extract} from the {\it source(s)}.
  \item {\bf Transform} data at the source, sink, or in a {\it staging area}.
@@ -22,7 +22,7 @@ The {\bf Schema}, which specifies the {\it structure} and {\it types} of data re
 
 \subsection{Examples of data}
 
-\subsubsection{XML and DOM}
+\subsubsection{\href{https://en.wikipedia.org/wiki/XML}{XML} and \href{https://en.wikipedia.org/wiki/Document\_Object\_Model}{DOM}}
 
 The XML data are used mostly with HTML and specifies the data structure. An XML schema can be applied to interpret the XML data and specifies the {\bf data types}. Figure \ref{pic:xml} shows the XML data \ref{pic:xml_data} and the schema \ref{pic:xml_schema} used to parse and type the data.
 
@@ -44,7 +44,7 @@ The XML is a text format that encodes {\bf DOM} (Document-Object Models). It's a
 
 THe XML schema allows a database to interpret the data when running queries. It can do arithmetic or range queries on numerical values, for example.
 
-\subsubsection{JSON}
+\subsubsection{\href{https://en.wikipedia.org/wiki/JSON}{JSON}}
 
 {\bf JSON} stands for Javascript Object Notation. It's a schemaless data (schema support was added later). An example of JSON data is shown in Figure \ref{pic:json}
 
@@ -58,7 +58,7 @@ JSON is typically used to represent {\bf hierarchical data structures} directly 
 
 \subsubsection{Tabular data}
 
-A Tabular Data is simply data put into a table such as CSV or TSV. Definition of a table:
+A Tabular Data is simply data put into a table such as CSV (Comma Separated Value) or TSV (Tab Separated Value). Definition of a table:
 \begin{itemize}
  \item A {\bf table} is a collection of {\bf rows} and {\bf columns}.
  \item Each row has an {\bf index}.
@@ -81,7 +81,7 @@ The log files are simple text files giving information about the process. The da
 
 \subsubsection{Binary formats}
 
-They are often the key to performance because we {\bf avoid expensive parsing}. The modern formats even support nested structures, various levels of schema enforcement, {\bf compression}, etc. Some examples: Protocol Buffers (Google), Avro, Parquet, etc.
+They are often the key to performance because we {\bf avoid expensive parsing}. The modern formats even support nested structures, various levels of schema enforcement, {\bf compression}, etc. Some examples: \href{https://developers.google.com/protocol-buffers/docs/overview}{Protocol Buffers (Google)}, \href{https://avro.apache.org/docs/current/}{Avro (Apache)}, \href{https://parquet.apache.org/documentation/latest/}{Parquet (Apache)}, etc.
 
 \subsection{Processing the data (JSON and XML)}
 
@@ -104,7 +104,7 @@ For JSON, most parsers construct the ``DOM'' directly. But there are a few SAX-s
 
 Internet contains an ``enormous'' amount of data. Some crawlers such as Common Crawl datasets contains about 1.82 billion web pages (for 145 TB). We can use different tools to crawl data from the web. Examples for Python: Beautiful Soup, Requests, Scrapy, etc. 
 \\\\
-Most of the time, the Web pages are considered as unstructured data. But you can find some semi-structured data, {\it e.g.} Google WebTables. Some big ``internet'' companies (Google, Yahoo, Yandex and Microsoft) are sponsoring a project called {\bf schema.org} to create structured or semi-structured Web pages. A core vocabulary for the type of fields is given. schema.org is more and more used. It's also used by knowledge bases such as Google Knowledge Graph. {\bf WikiData} is a community project to create an open database of structured data taken from Wikipedia.
+Most of the time, the Web pages are considered as unstructured data. But you can find some semi-structured data, {\it e.g.} Google WebTables. Some big ``internet'' companies (Google, Yahoo, Yandex and Microsoft) are sponsoring a project called \href{http://schema.org/}{schema.org} to create structured or semi-structured Web pages. A core vocabulary for the type of fields is given. schema.org is more and more used. It's also used by knowledge bases such as Google Knowledge Graph. \href{https://www.wikidata.org/wiki/Wikidata:Main\_Page}{WikiData} is a community project to create an open database of structured data taken from Wikipedia.
 
 \subsubsection{Web Services}
 
