@@ -1,0 +1,103 @@
+\ProvidesPackage{mystyle}
+
+%============================
+% ======== Packages ===========
+%============================
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[english]{babel}
+\usepackage[applemac]{inputenc}
+\usepackage[colorlinks,bookmarks=false,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{subfigure}
+\usepackage{here}
+\usepackage{wrapfig}
+
+%header and footer
+\usepackage{fancyhdr}
+
+% quotation
+\usepackage{dirtytalk}
+
+%drow graph
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{capt-of}
+
+% print code
+\usepackage{listings}
+\usepackage{algorithm2e}
+\usepackage{verbatim}
+
+% push at the bottom
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
+% landscape
+\usepackage{pdflscape}
+
+% box for quotes
+\usepackage{framed}
+
+% custom section manager
+% (used for 4th level subsection, see Shortcuts)
+\usepackage{titlesec}
+
+%============================
+%========= Shortcuts ===========
+%============================
+
+
+% source of quotes
+% (to be put at the end of a "framed" box)
+\newcommand*{\signed}[1]{%
+  \unskip\hspace*{1em plus 1fill}%
+  \nolinebreak[3]\hspace*{\fill}\mbox{#1}
+}
+
+% --- equations ---
+\def \be {\begin{equation}}
+\def \ee {\end{equation}}
+
+% --- links ---
+\newcommand{\mail}[1]{{\href{mailto:#1}{#1}}}
+\newcommand{\ftplink}[1]{{\href{ftp://#1}{#1}}}
+
+% 4th level of subsection
+% do not add it in the table of content
+% call with \paragraph{SECTION_NAME}
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%============================
+%====== Env. Configuration =======
+%============================
+
+\paperheight=297mm
+\paperwidth=210mm
+\baselineskip=16pt
+
+\setlength{\textheight}{235mm}
+\setlength{\topmargin}{-1.2cm} 
+
+\setlength{\parindent}{0pt}
+
+\setlength{\textwidth}{15cm}
+\setlength{\oddsidemargin}{0.56cm}
+\setlength{\evensidemargin}{0.56cm}
+
+% --- header ---
+\fancyhead[L]{Applied Data Analysis}
+\fancyhead[R]{Lecture Notes}
+
+%\pagestyle{plain}
+\pagestyle{fancy}
+
+%\parindent=15pt
+%\parskip=5pt
+
+
+
+
+
+

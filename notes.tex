@@ -1,0 +1,32 @@
+%
+% ADA NOTES
+%
+\documentclass[a4paper,11pt,twoside]{article}
+\usepackage{graphicx}
+
+% Add mystyle.sty
+\usepackage{mystyle}
+
+\begin{document}%%%% DOCUMENT %%%%
+
+\input{./tex/00_Title.tex}
+
+\tableofcontents 
+\newpage
+
+\input{./tex/01_Introduction.tex}
+\input{./tex/02_Basics.tex}
+\input{./tex/03_Data_Wrangling.tex}
+\input{./tex/04_Data_Variety.tex}
+\input{./tex/05_Statistics.tex}
+
+
+
+\end{document} %%%% THE END %%%%
+
+
+% Note: 
+% To directly compute the main document when working on a chapter.tex, past the following
+% line at the very beginning of the file
+ 
+% !TEX root = ../notes.tex
