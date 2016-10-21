@@ -1,2 +1,7 @@
-# Applied Data Analysis - Summary
-In this repository, you will find the summary of the course ADA (Applied Data Analysis) given at the EPFL. 
+# Applied Data Analysis - Course Notes
+
+In this repository, you will find the course note. Please, help us improve them by submitting issues and Pull Requests. 
+
+Thanks!
+ 
+** To be updated **
