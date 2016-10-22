@@ -10,11 +10,11 @@
 In this chapter we are going to talk about visualization in general and then about what it is called interact visualization. The first thing we do when we talk about visualization is to split it into two different tracks. 
 
 \begin{itemize}
-\item {The first one is about \emph{analysis}: you want to support reasoning about information. For instance, when you have a \texttt{DataFrame} you can make a plot the distribution of the attribute in order to identify outliers, missing data and \emph{so forth}. In general with this kind of visualization you can do more like discover structures, quantify values and influences and \emph{so forth}.
+\item {The first one is about \emph{analysis}: you want to support reasoning about information. For instance, when you have a \texttt{DataFrame} you can make a plot of the distribution of the attribute in order to identify outliers, missing data and \emph{so forth}. In general with this kind of visualization you can do more like discover structures, quantify values and influences.
 \emph{This way of using visualization is extremely important for debugging purposes}.}
 
-\item{The second  is the \emph{communication} part and it is about informing and persuade people.  The key difference in working in \emph{Data Science} and exclusively in \emph{Machine Learnin} or \emph{Statistics} is the fact that you don't just stop after getting a good model and evaluating your accuracy. You would make a story that you convey to people.
-For this reason we have to use visualization that can capture attention, can engage people and can tell a story visually (tell a story using visual tools takes a lot less time) and at last but not least, you are focused only on certain aspects omitting others. It is a double edge sword. On one hand you have to consider that there is an information overflow that people are suffering in general (we get to many news, we get to many media in which we consume information) so we do not want our visualization conveys more information than  a human being can actually get in a few seconds). On the other hand we have to do it carefully, avoiding to omit some information just because difficult to handle or with, apparently, non sense.}
+\item{The second  is the \emph{communication} part and it is about informing and persuade people.  The key difference in working in \emph{Data Science} and exclusively in \emph{Machine Learning} or \emph{Statistics} is the fact that you don't just stop after getting a good model and evaluating its accuracy. You would make a story that you convey to people.
+For this reason we have to use visualization that can capture attention, can engage people and can tell a story visually (tell a story using visual tools takes a lot less time) and at last but not least, you are focused only on certain aspects omitting others. It is a double edge sword. That is because, on one hand you have to consider that there is an information overflow that people are suffering in general (we get to many media in which we consume information) so we do not want our visualization conveys more information than  a human being can actually get in a few seconds). On the other hand we have to do it carefully, avoiding to omit some information just because difficult to handle or with, apparently, non sense.}
 \end{itemize}
 
 \subsection{Data exploration}
@@ -26,7 +26,7 @@ In order to do a good \emph{Data exploration} analysis by mean of visualization:
 \begin{itemize}
 \item \texttt{Matplotlib} which is widely used in \texttt{Python}
 \item \texttt{Seaborn} and \texttt{Bokeh} that are two additions on top of \texttt{Matplotlib}
-\item \texttt{D3.js} (\texttt{Javascript}) is the most famous framework for interactive graphics, but low-level:
+\item \texttt{D3.js} (\texttt{Javascript}) is the most famous framework for interactive graphics
 \end{itemize}
 \item {Get fluent with plotting:}
 \begin{itemize}
@@ -38,20 +38,24 @@ In order to do a good \emph{Data exploration} analysis by mean of visualization:
 
 \subsubsection{One variable}
 
-Whenever we want to look at the data we can use histograms, they tell us a lot about the single variable. Once you plot them you can try to figure out their distribution, for instance we can identify skewed distributions, multimodal or long tail data. The latter is characterized by a bunch of bins that reveal a lot of occurrences and bars in the tail where we observe a very few occurrences. Many of this long tail data follow a \href{https://en.wikipedia.org/wiki/Power\_law\#Power-law\_probability\_distributions}{\emph{power-law}}. To claim the latter we need to run some test on data that proofs the statistical significance of out hypothesis, otherwise we can just state that it looks like a \emph{power-law}. For a graphical representation:
+Whenever we want to look at the data we can use histograms, they tell us a lot about the single variable. Once you plot them you can try to figure out their distribution, for instance we can identify skewed distributions, multimodal or long tail data. The latter is characterized by a bunch of bins that reveal a lot of occurrences and bars in the tail where we observe a very few occurrences. Many of this long tail data follow a \href{https://en.wikipedia.org/wiki/Power\_law\#Power-law\_probability\_distributions}{\emph{power-law}}. To claim the latter we need to run some test on data that proofs the statistical significance of our hypothesis, otherwise we can just state that it looks like a \emph{power-law}. For a graphical representation:
 
 \begin{enumerate}
 \item Sort the histogram counts by magnitude, descending.
 \item Plot count vs bucket number on a log-log plot.
 \end{enumerate}
 
-%I NSERT FIG For the figure insert the Zipf link and preferential attachment link
+
+INSERT FIG, the Zipf and preferential attachment links
+
 
 Generally this law is characteristic of social-influence processes, to know more look up for \emph{Preferential attachment}.
 
-The \emph{multinomial} data registers more than one peak in the histogram, it suggests that there are two ore more distinct populations of a sample. When you deal with something like this do not guess! Explore further by using, e.g., color and a histogram of multiple populations. 
+The \emph{multinomial} data registers more than one peak in the histogram, it suggests that there are two or more distinct populations of a sample. When you deal with something like this do not guess! Explore further by using, e.g., color and a histogram of multiple populations. 
 
-% INSERT FIG
+
+INSERT FIG
+
 
 Sometimes data is weird and is very hard to explain. Also in this case, do not guess! Trace through the data pipeline to find where the strangeness comes from. Usually it is a processing bug. Hence, check your code!
 
@@ -61,7 +65,10 @@ There is a way for a \emph{proactive Weird data Detection}. If data looks normal
  
 Most of the time we are interested in visualizing more than one variable, here a \emph{non-thorough} list of possibility is listed:
 
-% INSERT FIG FOR EACH OF THEM
+
+ INSERT FIG FOR EACH OF THEM
+
+
 \begin{itemize}
 \item Two variables 
 \begin{itemize}
@@ -75,11 +82,13 @@ Most of the time we are interested in visualizing more than one variable, here a
 \end{itemize}
 \end{itemize}
 
-%add link PCA
 
-When you deal with an high number of variables, a valid idea to visualize in a better way is to reduce the number of variables applying algorithms, this pocess is called \emph{Dimensionality reduction}, one example is the \emph{PCA}. Intuitively, given twenty different variables, many tend to not variate a lot, \emph{PCA} extracts the couple of attributes that really do the difference allowing visualization of high-dimensional continuous data in 2D using principal components. Hence, instead of directly plot multivariate data, try to think whether a dimensionality reduction can be useful.
 
-We argued for analysts to form expectations of what the data should look like. This helps guard against pipeline errors and to identify interesting patterns. But beware of seeing \emph{Martian Canals}, be careful in not seeing things that are not there. Moreover, an observer should also be attuned to patterns that are not part of their theory, in other words to expect the unexpected. 
+
+
+When you deal with an high number of variables, a valid idea to visualize in a better way is to reduce the number of variables applying algorithms, this pocess is called \emph{Dimensionality reduction}, one example is the \emph{PCA} [ADD link PCA]. Intuitively, given twenty different variables, many tend to not variate a lot, \emph{PCA} extracts the couple of attributes that really do the difference allowing visualization of high-dimensional continuous data in 2D using principal components. Hence, instead of directly plot multivariate data, try to think whether a dimensionality reduction can be useful.
+
+We argued for analysts is important to form expectations of what the data should look like. This helps against pipeline errors and to identify interesting patterns. But beware of seeing \emph{Martian Canals}: do not see things that are not there. Moreover, an observer should also be attuned to patterns that are not part of his theory, in other words to expect the unexpected. 
 
 
 \subsection{Moving towards Interactive viz}
