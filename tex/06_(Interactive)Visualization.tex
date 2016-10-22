@@ -95,18 +95,97 @@ We argued for analysts is important to form expectations of what the data should
 
 Interactive visualization is a new field and it's getting more and more common. Our aim is to deliver results and this has been enabled by the new web technologies and in general by few frameworks essential for the current state of the art. \texttt{JavaScript} plays a very important role in the field. The vast majority of the libraries that allow to do visualization are in \href{https://www.codecademy.com/learn/javascript}{\texttt{JavaScript}}, so if you know how to use it or if you want to learn how to use it, it is definitely a good tool to have in your toolbar. 
 
+A visualization is worth a thousand words! Representing in 2D more than two variable has been being a challenge since long time ago. Even without the help of the machines, someone tried to do something in \href{https://en.wikipedia.org/wiki/Charles\_Joseph\_Minard}{this} field. Nowadays the technology allows the \emph{researchers} to go further and to use all their creativity and skills, nevertheless so many efforts should be put in. Lot of concepts have been developed and, for those interested, there are pioneers of the field that should been taken into \href{https://en.wikipedia.org/wiki/Edward\_Tufte}{consideration}.
+
+As we already said the visualization has the characteristic of engaging easily the audience and it often results clear and understandable (be careful, not all the graphs and representations you look at are reliable, fair and proper!!). Hence it can be used to globally describe \href{https://www.ted.com/talks/hans\_rosling\_shows\_the\_best\_stats\_you\_ve\_ever\_seen}{phenomena} not easy to understand otherwise. Today, many are the \href{https://www.gapminder.org/tools/#\_chart-type=bubbles\&state\_time\_end=2015;\&entities\%2F\_minimap\_show\_geo.cat@=main\%2F\_religion\%2F\_2008;;;\&marker_color\_which=geo.main\%2F\_religion\%2F\_2008}{websites} where you can play with data using visualization.
+
+Visualizing data is becoming a new way to spread information. More than ever, we recognize the existence of \emph{Data journalism}, more data are available, many people have programming skills. Thus, it is simple to find persons who combine both writing and programming skills. There are journals that stand out, such the \href{http://www.nytimes.com/interactive/2014/06/05/upshot/how-the-recession-reshaped-the-economy-in-255-charts.html?\_r=0}{\emph{New York Times}}, \emph{Forbes} and \emph{The Economist}. They build up teams of researchers who are the best experts in the field. Hence, they can be considered a great source of best practices in viz.
+
+\subsection{Visualization definitions}
+
+There is not an unique way to define visualization, here some definitions that try to include many few aspects are listed:
+
+\begin{itemize}
+\item \emph{Transformation of the symbolic into the geometric} (McCormick et al. 1987) 
+\item \emph{... finding the artificial memory that best supports our natural means of perception.} (Bertin 1967)
+\item \emph{The use of computer-generated, interactive, visual representations of data to amplify cognition.} (Card, Mackinlay \& Shneiderman 1999) 
+\end{itemize}
+
+\subsection*{The 10 rules}
+
+When you do visualization you have to take care of the following \href{http://www.sealthreinhold.com/school/tuftes-rules/}{things}:
+
+\begin{enumerate}
+\item \emph{Show your data}: be careful of showing what you want to show, do not forget the main information;
+\item \emph{Use graphics}: glue together descriptions and figures;
+\item \emph{Avoid Chartjunk}: display your data in a fancy way, do not add anything that can make the interpretation harder;
+\item \emph{Utilize Data-ink} as much as you can, be careful when choosing what keep and remove;
+\item \emph{Use labels}: let the people understand what you are talking about;
+\item \emph{Utilize Micro/Macro}: an overview does not need so many details as when you zoom in;
+\item \emph{Separate Layers}: make more visible what you want the people focus on;
+\item \emph{Use Multiples}: a thing different from the other captures the attention;
+\item \emph{Utilize Color} in a way such that data is interpreted;
+\item \emph{Understand Narrative}: when you tell a story respect time and space.
+\end{enumerate}
+
+\subsection*{Interactive chart design}
+
+With interactive charts you can keep things very simple by hiding and dynamically revealing important structure.
+On an interactive chart, you reveal the information most useful for navigating the chart. The aforementioned rules hold for the interactive charts as well.
+
+\subsection*{The importance of magnitude}
 
 
-%Visualize is faster than read
+\subsubsection*{Compare areas}
 
-%Future journalism
+Let the reader compare areas is dangerous, avoid it whether possible or try to insert information to be able of making significant comparisons. Related to the capability of distinguish and understand magnitudes, in 1984, Cleveland and McGill wrote the paper
+\href{https://www.cs.ubc.ca/\~tmm/courses/cpsc533c-04-spr/readings/cleveland.pdf}{\emph{Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods}} which identifies and analyzes a set of \emph{elementary perceptual tasks} conducted in the moment the reader extract quantitative information from graphs. 
+
+These tasks are sorted according to how accurately people perform them.
 
 
-%Anti-Examples
+INSERT FIGURE
 
-%Visualization definitions
+\subsubsection*{Compare colors...}
+Use a magnitude that allows people to easily read and interpret your data, noticeable differences are required. In 1846 the physicist Ernst Weber, defining \emph{I} as the intensity of the stimulus and \emph{S} the sensation, said that
 
-%10 rules
+$$\Delta S = k \frac{\Delta I}{I}.$$
 
-%There rules hold for the interactive data as well.
+It is known as the \emph{Weber's law} and reads out that a variation in the sensation is proportional to the magnitude of the original intensity of the stimulus. So as the base \emph{I} increases, we require a larger changes in  $\Delta I$ to notice the change. 
 
+\subsubsection*{...And choose them}
+
+Choose colors based on the information you want to convey:
+
+\begin{itemize}
+\item \emph{Sequential}: colors can be ordered from low to high
+\item \emph{Diverging}: two sequential schemes extended out from a critical midpoint value 
+\item \emph{Categorical}: Lots of contrasts between each adjacent color
+\end{itemize}
+
+The usage of this tools depends on what you what to show. Anyway there are several \href{http://colorbrewer2.org/#type=sequential\&scheme=BuGn&n=3}{online} sources that can help you to choose the color scheme according to your purpose.
+
+\subsection*{Use structure}
+
+In 1912 Gestalt outlined principles that describe how our mind organizes individual visual elements into groups, to make sense of the entire visual. When designing a visual, these principles can be used to highlight patterns that are important to us, and downplay other patterns. The Figure  illustrates the \href{http://www.fusioncharts.com/blog/2014/03/how-to-use-the-gestalt-principles-for-visual-storytelling-podv/}{principles of Gestalt} which are relevant to visualization. Do not concentrate too many information, less is more!
+
+\subsection*{How to select the right chart}
+
+The flowchart below can be helpful to understand the most suitable chart for your purpose.
+
+FIGURE
+
+Instead of using the chart, you can also find sources, like \href{http://www.juiceanalytics.com}{\emph{Juice Analytics}}, that let you choose interactively, means some filters, the best chart according to your necessities.
+
+\subsection{Interactive toolkits}
+
+\begin{itemize}
+\item \href{https://d3js.org}{\texttt{D3}} is, without doubt, the most widely used interactive visualization framework, developed around 2011 by Jeff Heer, Mike Bostock and Vadim Ogievetsky. \emph{Note from the authors}: D3 is intentionally a low-level system. During the early design of D3, we even referred to it as a "visualization kernel" rather than a "toolkit" or "framework";
+
+\item \texttt{Vega} is a \emph{visualization grammar} developed on top of \texttt{d3.js}. It specifies graphics in \texttt{JSON} format;
+
+\item \href{https://vega.github.io/vega/}{\texttt{Vincent}} is a Python-to-Vega translator;
+
+\item \href{http://bokeh.pydata.org/en/latest/}{\texttt{Bokeh}} is an independent Viz library focused more heavily on big data visualization. Has both \texttt{Python} and \texttt{Scala} bindings; 
+
+\end{itemize}
