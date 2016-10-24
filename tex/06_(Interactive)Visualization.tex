@@ -3,8 +3,6 @@
 % ================  (Interactive) Visualization ==============
 
 \section{Data Visualization}
-
-
 \subsection{Two main purposes}
 
 In this chapter we are going to talk about visualization in general and then about what it is called interact visualization. The first thing we do when we talk about visualization is to split it into two different tracks. 
@@ -38,7 +36,15 @@ In order to do a good \emph{Data exploration} analysis by mean of visualization:
 
 \subsubsection{One variable}
 
-Whenever we want to look at the data we can use histograms, they tell us a lot about the single variable. Once you plot them you can try to figure out their distribution, for instance we can identify skewed distributions, multimodal or long tail data. The latter is characterized by a bunch of bins that reveal a lot of occurrences and bars in the tail where we observe a very few occurrences. Many of this long tail data follow a \href{https://en.wikipedia.org/wiki/Power\_law\#Power-law\_probability\_distributions}{\emph{power-law}}. To claim the latter we need to run some test on data that proofs the statistical significance of our hypothesis, otherwise we can just state that it looks like a \emph{power-law}. For a graphical representation:
+Whenever we want to look at the data we can use histograms, they tell us a lot about the single variable. Once you plot them you can try to figure out their distribution, for instance we can identify skewed distributions, multimodal or long tail data. 
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/long_tail}
+ \caption{\label{pic:long_tail} Example of long tail data.}
+\end{figure}
+
+The latter is characterized by a bunch of bins that reveal a lot of occurrences and bars in the tail where we observe a very few occurrences. Many of this long tail data follow a \href{https://en.wikipedia.org/wiki/Power\_law\#Power-law\_probability\_distributions}{\emph{power-law}}. To claim the latter we need to run some test on data that proofs the statistical significance of our hypothesis, otherwise we can just state that it looks like a \emph{power-law}. For a graphical representation:
 
 \begin{enumerate}
 \item Sort the histogram counts by magnitude, descending.
@@ -46,7 +52,11 @@ Whenever we want to look at the data we can use histograms, they tell us a lot a
 \end{enumerate}
 
 
-INSERT FIG, the Zipf and preferential attachment links
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/power_law}
+ \caption{\label{pic:power_law} Example \href{https://en.wikipedia.org/wiki/Zipf\%27s\_law}{power law}.}
+\end{figure}
 
 
 Generally this law is characteristic of social-influence processes, to know more look up for \emph{Preferential attachment}.
@@ -54,7 +64,11 @@ Generally this law is characteristic of social-influence processes, to know more
 The \emph{multinomial} data registers more than one peak in the histogram, it suggests that there are two or more distinct populations of a sample. When you deal with something like this do not guess! Explore further by using, e.g., color and a histogram of multiple populations. 
 
 
-INSERT FIG
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/multimodal}
+ \caption{\label{pic:multimodal} Example of multimodal data.}
+\end{figure}
 
 
 Sometimes data is weird and is very hard to explain. Also in this case, do not guess! Trace through the data pipeline to find where the strangeness comes from. Usually it is a processing bug. Hence, check your code!
@@ -65,10 +79,6 @@ There is a way for a \emph{proactive Weird data Detection}. If data looks normal
  
 Most of the time we are interested in visualizing more than one variable, here a \emph{non-thorough} list of possibility is listed:
 
-
- INSERT FIG FOR EACH OF THEM
-
-
 \begin{itemize}
 \item Two variables 
 \begin{itemize}
@@ -76,19 +86,31 @@ Most of the time we are interested in visualizing more than one variable, here a
 \end{itemize} 
 \item  More than two variables
 \begin{itemize}
-\item \emph{Stacked plot}: stack variable is discrete, useful to explore data
-\item \emph{Parallel coordinate plot}: one discrete variable, an arbitrary number of other variables (when this number increases it risks to become very messy)
-\item \emph{Radar Chart}: one discrete variable (through the radar design), an arbitrary number of other variables
+\item \emph{Stacked plot}: stack variable is discrete, useful to explore data (Figure \ref{pic:stacked})
+\begin{figure}[h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/stacked}
+ \caption{\label{pic:stacked} Example of stacked plot.}
+\end{figure}
+\item \emph{Parallel coordinate plot}: one discrete variable, an arbitrary number of other variables (when this number increases it risks to become very messy), see an example in Figure \ref{pic:parallel}
+\begin{figure}[h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/parallel}
+ \caption{\label{pic:parallel} Example of parallel plot.}
+\end{figure}
+\item \emph{Radar Chart}: one discrete variable (through the radar design), an arbitrary number of other variables (Figure \ref{pic:radar})
+\begin{figure}[h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/radar}
+ \caption{\label{pic:radar} Example of radar plot.}
+\end{figure}
 \end{itemize}
 \end{itemize}
 
 
+When you deal with an high number of variables, a valid idea to visualize in a better way is to reduce the number of variables applying algorithms, this pocess is called \emph{Dimensionality reduction}, one example is the \href{https://en.wikipedia.org/wiki/Principal\_component\_analysis}{ \emph{PCA}}. Intuitively, given twenty different variables, many tend to not variate a lot, \emph{PCA} extracts the couple of attributes that really do the difference allowing visualization of high-dimensional continuous data in 2D using principal components. Hence, instead of directly plot multivariate data, try to think whether a dimensionality reduction can be useful.
 
-
-
-When you deal with an high number of variables, a valid idea to visualize in a better way is to reduce the number of variables applying algorithms, this pocess is called \emph{Dimensionality reduction}, one example is the \emph{PCA} [ADD link PCA]. Intuitively, given twenty different variables, many tend to not variate a lot, \emph{PCA} extracts the couple of attributes that really do the difference allowing visualization of high-dimensional continuous data in 2D using principal components. Hence, instead of directly plot multivariate data, try to think whether a dimensionality reduction can be useful.
-
-We argued for analysts is important to form expectations of what the data should look like. This helps against pipeline errors and to identify interesting patterns. But beware of seeing \emph{Martian Canals}: do not see things that are not there. Moreover, an observer should also be attuned to patterns that are not part of his theory, in other words to expect the unexpected. 
+We argued for analysts is important to form expectations of what the data should look like. This helps against pipeline errors and to identify interesting patterns. But beware of seeing \href{https://en.wikipedia.org/wiki/Martian1_canal}{\emph{Martian Canals}}: do not see things that are not there. Moreover, an observer should also be attuned to patterns that are not part of his theory, in other words to expect the unexpected. 
 
 
 \subsection{Moving towards Interactive viz}
@@ -134,17 +156,25 @@ With interactive charts you can keep things very simple by hiding and dynamicall
 On an interactive chart, you reveal the information most useful for navigating the chart. The aforementioned rules hold for the interactive charts as well.
 
 \subsection*{The importance of magnitude}
-
-
 \subsubsection*{Compare areas}
 
-Let the reader compare areas is dangerous, avoid it whether possible or try to insert information to be able of making significant comparisons. Related to the capability of distinguish and understand magnitudes, in 1984, Cleveland and McGill wrote the paper
-\href{https://www.cs.ubc.ca/\~tmm/courses/cpsc533c-04-spr/readings/cleveland.pdf}{\emph{Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods}} which identifies and analyzes a set of \emph{elementary perceptual tasks} conducted in the moment the reader extract quantitative information from graphs. 
+Let the reader compare areas is dangerous (Figure  \ref{pic:area}), avoid it whether possible or try to insert information to be able of making significant comparisons. Related to the capability of distinguish and understand magnitudes, in 1984, Cleveland and McGill wrote the paper
+\href{https://www.cs.ubc.ca/\~tmm/courses/cpsc533c-04-spr/readings/cleveland.pdf}{\emph{Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods}} which identifies and analyzes a set of \emph{elementary perceptual tasks} conducted in the moment the reader extract quantitative information from graphs (Figure \ref{pic:magnitude}). 
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/magnitude}
+ \caption{\label{pic:magnitude} What works and what does not.}
+\end{figure}
+
 
 These tasks are sorted according to how accurately people perform them.
 
-
-INSERT FIGURE
+\begin{figure}[h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/area}
+ \caption{\label{pic:area} How many times the \emph{little} one is included in the \emph{big} one?}
+\end{figure}
 
 \subsubsection*{Compare colors...}
 Use a magnitude that allows people to easily read and interpret your data, noticeable differences are required. In 1846 the physicist Ernst Weber, defining \emph{I} as the intensity of the stimulus and \emph{S} the sensation, said that
@@ -158,22 +188,68 @@ It is known as the \emph{Weber's law} and reads out that a variation in the sens
 Choose colors based on the information you want to convey:
 
 \begin{itemize}
-\item \emph{Sequential}: colors can be ordered from low to high
-\item \emph{Diverging}: two sequential schemes extended out from a critical midpoint value 
-\item \emph{Categorical}: Lots of contrasts between each adjacent color
+\item \emph{Sequential}: colors can be ordered from low to high (Figure \ref{pic:sequential})
+\item \emph{Diverging}: two sequential schemes extended out from a critical midpoint value (Figure \ref{pic:diverging})
+\item \emph{Categorical}: Lots of contrasts between each adjacent color (Figure \ref{pic:sequential})
 \end{itemize}
 
-The usage of this tools depends on what you what to show. Anyway there are several \href{http://colorbrewer2.org/#type=sequential\&scheme=BuGn&n=3}{online} sources that can help you to choose the color scheme according to your purpose.
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/sequential}
+ \caption{\label{pic:sequential} Example of sequential colors.}
+\end{figure}
+
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/diverging}
+ \caption{\label{pic:diverging} Example of diverging colors.}
+\end{figure}
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/categorical}
+ \caption{\label{pic:categorical} Example of categorical colors.}
+\end{figure}
+
+The usage of this tools depends on what you what to show. Anyway there are several \href{http://colorbrewer2.org/#type=sequential\&scheme=BuGn\&n=3}{online} sources that can help you to choose the color scheme according to your purpose.
 
 \subsection*{Use structure}
 
-In 1912 Gestalt outlined principles that describe how our mind organizes individual visual elements into groups, to make sense of the entire visual. When designing a visual, these principles can be used to highlight patterns that are important to us, and downplay other patterns. The Figure  illustrates the \href{http://www.fusioncharts.com/blog/2014/03/how-to-use-the-gestalt-principles-for-visual-storytelling-podv/}{principles of Gestalt} which are relevant to visualization. Do not concentrate too many information, less is more!
+In 1912 Gestalt outlined principles that describe how our mind organizes individual visual elements into groups, to make sense of the entire visual. When designing a visual, these principles can be used to highlight patterns that are important to us, and downplay other patterns. The Figure  illustrates the \href{http://www.fusioncharts.com/blog/2014/03/how-to-use-the-gestalt-principles-for-visual-storytelling-podv/}{principles of Gestalt} which are relevant to visualization (Figure \ref{pic:gestalt}). Do not concentrate too many information, less is more!
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/gestalt}
+ \caption{\label{pic:gestalt} Gestalt's principles.}
+\end{figure}
+
+Here is what we notice from each of the illustrations [\href{http://www.fusioncharts.com/blog/2014/03/how-to-use-the-gestalt-principles-for-visual-storytelling-podv/}{principles of Gestalt}]:
+
+\begin{itemize}
+
+\item \emph{Proximity}: we see three rows of dots instead of four columns of dots because they are closer horizontally than vertically.
+\item \emph{Similarity}: we see similar looking objects as part of the same group.
+\item \emph{Enclosure}: we group the first four and and last four dots as two rows instead of eight dots.
+\item \emph{Symmetry}:we see three pairs of symmetrical brackets rather than six individual brackets.
+\item \emph{Closure}: we automatically close the square and circle instead of seeing three disconnected paths.
+\item \emph{Continuity}: we see one continuous path instead of three arbitrary ones.
+\item \emph{Connection}: we group the connected dots as belonging to the same group.
+\item \emph{Figure \& ground}: we either notice the two faces, or the vase. Whichever we notice becomes the figure, and the other the ground
+
+\end{itemize}
+
+These principles allow us to perform many tasks such as reduce the noise from charts, choose the ideal aspect ratio, and show relationships between elements more clearly. Let's look at a dashboard, and see these principles in action.
 
 \subsection*{How to select the right chart}
 
 The flowchart below can be helpful to understand the most suitable chart for your purpose.
 
-FIGURE
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/06/flow_chart}
+ \caption{\label{pic:flow_chart} Make your choice.}
+\end{figure}
 
 Instead of using the chart, you can also find sources, like \href{http://www.juiceanalytics.com}{\emph{Juice Analytics}}, that let you choose interactively, means some filters, the best chart according to your necessities.
 
