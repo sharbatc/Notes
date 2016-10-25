@@ -92,7 +92,7 @@ Most of the time we are interested in visualizing more than one variable, here a
  \includegraphics[width=13cm]{./img/06/stacked}
  \caption{\label{pic:stacked} Example of stacked plot.}
 \end{figure}
-\item \emph{Parallel coordinate plot}: one discrete variable, an arbitrary number of other variables (when this number increases it risks to become very messy), see an example in Figure \ref{pic:parallel}
+\item \emph{Parallel coordinate plot}: one discrete variable, an arbitrary number of other variables (when this number increases it risks becoming very messy), see an example in Figure \ref{pic:parallel}
 \begin{figure}[h]%---------------FIG--------------
  \centering
  \includegraphics[width=13cm]{./img/06/parallel}
@@ -108,24 +108,24 @@ Most of the time we are interested in visualizing more than one variable, here a
 \end{itemize}
 
 
-When you deal with an high number of variables, a valid idea to visualize in a better way is to reduce the number of variables applying algorithms, this pocess is called \emph{Dimensionality reduction}, one example is the \href{https://en.wikipedia.org/wiki/Principal\_component\_analysis}{ \emph{PCA}}. Intuitively, given twenty different variables, many tend to not variate a lot, \emph{PCA} extracts the couple of attributes that really do the difference allowing visualization of high-dimensional continuous data in 2D using principal components. Hence, instead of directly plot multivariate data, try to think whether a dimensionality reduction can be useful.
+When you deal with a high number of variables, a valid idea to visualize in a better way is to reduce the number of variables applying algorithms, this pocess is called \emph{Dimensionality reduction}, one example is the \href{https://en.wikipedia.org/wiki/Principal\_component\_analysis}{ \emph{PCA}}. Intuitively, given twenty different variables, many tend to not variate a lot, \emph{PCA} extracts the couple of attributes that really make the difference allow visualization of high-dimensional continuous data in 2D using principal components. Hence, instead of directly plot multivariate data, try to think whether a dimensionality reduction can be useful.
 
-We argued for analysts is important to form expectations of what the data should look like. This helps against pipeline errors and to identify interesting patterns. But beware of seeing \href{https://en.wikipedia.org/wiki/Martian1_canal}{\emph{Martian Canals}}: do not see things that are not there. Moreover, an observer should also be attuned to patterns that are not part of his theory, in other words to expect the unexpected. 
+We argued for analysts is important to form expectations of what the data should look like. This helps against pipeline errors and to identify interesting patterns. But beware of seeing \href{https://en.wikipedia.org/wiki/Martian1_canal}{\emph{Martian Canals}}: do not see things that are not there. Moreover, an observer should also be attuned to patterns that are not part of his theory, in other words, to expect the unexpected. 
 
 
-\subsection{Moving towards Interactive viz}
+\subsection{Moving Towards Interactive Viz}
 
 Interactive visualization is a new field and it's getting more and more common. Our aim is to deliver results and this has been enabled by the new web technologies and in general by few frameworks essential for the current state of the art. \texttt{JavaScript} plays a very important role in the field. The vast majority of the libraries that allow to do visualization are in \href{https://www.codecademy.com/learn/javascript}{\texttt{JavaScript}}, so if you know how to use it or if you want to learn how to use it, it is definitely a good tool to have in your toolbar. 
 
-A visualization is worth a thousand words! Representing in 2D more than two variable has been being a challenge since long time ago. Even without the help of the machines, someone tried to do something in \href{https://en.wikipedia.org/wiki/Charles\_Joseph\_Minard}{this} field. Nowadays the technology allows the \emph{researchers} to go further and to use all their creativity and skills, nevertheless so many efforts should be put in. Lot of concepts have been developed and, for those interested, there are pioneers of the field that should been taken into \href{https://en.wikipedia.org/wiki/Edward\_Tufte}{consideration}.
+A visualization is worth a thousand words! Representing in 2D more than two variables has been being a challenge since a long time ago. Even without the help of the machines, someone tried to do something in \href{https://en.wikipedia.org/wiki/Charles\_Joseph\_Minard}{this} field. Nowadays the technology allows the \emph{researchers} to go further and to use all their creativity and skills, nevertheless so many efforts should be put in. Lots of concepts have been developed and, for those interested, there are pioneers of the field that should be taken into \href{https://en.wikipedia.org/wiki/Edward\_Tufte}{consideration}.
 
-As we already said the visualization has the characteristic of engaging easily the audience and it often results clear and understandable (be careful, not all the graphs and representations you look at are reliable, fair and proper!!). Hence it can be used to globally describe \href{https://www.ted.com/talks/hans\_rosling\_shows\_the\_best\_stats\_you\_ve\_ever\_seen}{phenomena} not easy to understand otherwise. Today, many are the \href{https://www.gapminder.org/tools/#\_chart-type=bubbles\&state\_time\_end=2015;\&entities\%2F\_minimap\_show\_geo.cat@=main\%2F\_religion\%2F\_2008;;;\&marker_color\_which=geo.main\%2F\_religion\%2F\_2008}{websites} where you can play with data using visualization.
+As we already said the visualization has the characteristic of engaging the audience easily and it often results clear and understandable (be careful, not all the graphs and representations you look at are reliable, fair and proper!!). Hence it can be used to globally describe \href{https://www.ted.com/talks/hans\_rosling\_shows\_the\_best\_stats\_you\_ve\_ever\_seen}{phenomena} not easy to understand otherwise. Today, many are the \href{https://www.gapminder.org/tools/#\_chart-type=bubbles\&state\_time\_end=2015;\&entities\%2F\_minimap\_show\_geo.cat@=main\%2F\_religion\%2F\_2008;;;\&marker_color\_which=geo.main\%2F\_religion\%2F\_2008}{websites} where you can play with data using visualization.
 
 Visualizing data is becoming a new way to spread information. More than ever, we recognize the existence of \emph{Data journalism}, more data are available, many people have programming skills. Thus, it is simple to find persons who combine both writing and programming skills. There are journals that stand out, such the \href{http://www.nytimes.com/interactive/2014/06/05/upshot/how-the-recession-reshaped-the-economy-in-255-charts.html?\_r=0}{\emph{New York Times}}, \emph{Forbes} and \emph{The Economist}. They build up teams of researchers who are the best experts in the field. Hence, they can be considered a great source of best practices in viz.
 
 \subsection{Visualization definitions}
 
-There is not an unique way to define visualization, here some definitions that try to include many few aspects are listed:
+There is not a unique way to define visualization, here some definitions that try to include many few aspects are listed:
 
 \begin{itemize}
 \item \emph{Transformation of the symbolic into the geometric} (McCormick et al. 1987) 
@@ -144,7 +144,7 @@ When you do visualization you have to take care of the following \href{http://ww
 \item \emph{Utilize Data-ink} as much as you can, be careful when choosing what keep and remove;
 \item \emph{Use labels}: let the people understand what you are talking about;
 \item \emph{Utilize Micro/Macro}: an overview does not need so many details as when you zoom in;
-\item \emph{Separate Layers}: make more visible what you want the people focus on;
+\item \emph{Separate Layers}: make more visible what you want the people to focus on;
 \item \emph{Use Multiples}: a thing different from the other captures the attention;
 \item \emph{Utilize Color} in a way such that data is interpreted;
 \item \emph{Understand Narrative}: when you tell a story respect time and space.
@@ -158,7 +158,7 @@ On an interactive chart, you reveal the information most useful for navigating t
 \subsection*{The importance of magnitude}
 \subsubsection*{Compare areas}
 
-Let the reader compare areas is dangerous (Figure  \ref{pic:area}), avoid it whether possible or try to insert information to be able of making significant comparisons. Related to the capability of distinguish and understand magnitudes, in 1984, Cleveland and McGill wrote the paper
+Let the reader compare areas is dangerous (Figure  \ref{pic:area}), avoid it whether possible or try to insert information to be able of making significant comparisons. Related to the capability of distinguishing and understanding magnitudes, in 1984, Cleveland and McGill wrote the paper
 \href{https://www.cs.ubc.ca/\~tmm/courses/cpsc533c-04-spr/readings/cleveland.pdf}{\emph{Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods}} which identifies and analyzes a set of \emph{elementary perceptual tasks} conducted in the moment the reader extract quantitative information from graphs (Figure \ref{pic:magnitude}). 
 
 \begin{figure}[H]%---------------FIG--------------
@@ -181,7 +181,7 @@ Use a magnitude that allows people to easily read and interpret your data, notic
 
 $$\Delta S = k \frac{\Delta I}{I}.$$
 
-It is known as the \emph{Weber's law} and reads out that a variation in the sensation is proportional to the magnitude of the original intensity of the stimulus. So as the base \emph{I} increases, we require a larger changes in  $\Delta I$ to notice the change. 
+It is known as the \emph{Weber's law} and reads out that a variation in the sensation is proportional to the magnitude of the original intensity of the stimulus. So as the base \emph{I} increase, we require a larger changes in  $\Delta I$ to notice the change. 
 
 \subsubsection*{...And choose them}
 
@@ -212,11 +212,11 @@ Choose colors based on the information you want to convey:
  \caption{\label{pic:categorical} Example of categorical colors.}
 \end{figure}
 
-The usage of this tools depends on what you what to show. Anyway there are several \href{http://colorbrewer2.org/#type=sequential\&scheme=BuGn\&n=3}{online} sources that can help you to choose the color scheme according to your purpose.
+The usage of these tools depends on what you what to show. Anyway there are several \href{http://colorbrewer2.org/#type=sequential\&scheme=BuGn\&n=3}{online} sources that can help you to choose the color scheme according to your purpose.
 
-\subsection*{Use structure}
+\subsection*{Use Structure}
 
-In 1912 Gestalt outlined principles that describe how our mind organizes individual visual elements into groups, to make sense of the entire visual. When designing a visual, these principles can be used to highlight patterns that are important to us, and downplay other patterns. The Figure  illustrates the \href{http://www.fusioncharts.com/blog/2014/03/how-to-use-the-gestalt-principles-for-visual-storytelling-podv/}{principles of Gestalt} which are relevant to visualization (Figure \ref{pic:gestalt}). Do not concentrate too many information, less is more!
+In 1912 Gestalt outlined principles that describe how our mind organizes individual visual elements into groups, to make sense of the entire visual. When designing a visual, these principles can be used to highlight patterns that are important to us, and downplay other patterns. The Figure  illustrates the \href{http://www.fusioncharts.com/blog/2014/03/how-to-use-the-gestalt-principles-for-visual-storytelling-podv/}{principles of Gestalt} which is relevant to visualization (Figure \ref{pic:gestalt}). Do not concentrate too much information, less is more!
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -229,8 +229,8 @@ Here is what we notice from each of the illustrations [\href{http://www.fusionch
 \begin{itemize}
 
 \item \emph{Proximity}: we see three rows of dots instead of four columns of dots because they are closer horizontally than vertically.
-\item \emph{Similarity}: we see similar looking objects as part of the same group.
-\item \emph{Enclosure}: we group the first four and and last four dots as two rows instead of eight dots.
+\item \emph{Similarity}: we see similar-looking objects as part of the same group.
+\item \emph{Enclosure}: we group the first four and last four dots as two rows instead of eight dots.
 \item \emph{Symmetry}:we see three pairs of symmetrical brackets rather than six individual brackets.
 \item \emph{Closure}: we automatically close the square and circle instead of seeing three disconnected paths.
 \item \emph{Continuity}: we see one continuous path instead of three arbitrary ones.
@@ -256,7 +256,7 @@ Instead of using the chart, you can also find sources, like \href{http://www.jui
 \subsection{Interactive toolkits}
 
 \begin{itemize}
-\item \href{https://d3js.org}{\texttt{D3}} is, without doubt, the most widely used interactive visualization framework, developed around 2011 by Jeff Heer, Mike Bostock and Vadim Ogievetsky. \emph{Note from the authors}: D3 is intentionally a low-level system. During the early design of D3, we even referred to it as a "visualization kernel" rather than a "toolkit" or "framework";
+\item \href{https://d3js.org}{\texttt{D3}} is, without doubt, the most widely used interactive visualization framework, developed around 2011 by Jeff Heer, Mike Bostock and Vadim Ogievetsky. \emph{Notes from the authors}: D3 is intentionally a low-level system. During the early design of D3, we even referred to it as a "visualization kernel" rather than a "toolkit" or "framework";
 
 \item \texttt{Vega} is a \emph{visualization grammar} developed on top of \texttt{d3.js}. It specifies graphics in \texttt{JSON} format;
 
