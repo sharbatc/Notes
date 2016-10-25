@@ -5,14 +5,14 @@
 \section{Data Visualization}
 \subsection{Two main purposes}
 
-In this chapter we are going to talk about visualization in general and then about what it is called interact visualization. The first thing we do when we talk about visualization is to split it into two different tracks. 
+In this chapter we are going to talk about visualization in general and then about what it is called interactive visualization. The first thing we do when we talk about visualization is to split it into two different tracks. 
 
 \begin{itemize}
 \item {The first one is about \emph{analysis}: you want to support reasoning about information. For instance, when you have a \texttt{DataFrame} you can make a plot of the distribution of the attribute in order to identify outliers, missing data and \emph{so forth}. In general with this kind of visualization you can do more like discover structures, quantify values and influences.
-\emph{This way of using visualization is extremely important for debugging purposes}.}
+\textbf{This way of using visualization is extremely important for debugging purposes}.}
 
 \item{The second  is the \emph{communication} part and it is about informing and persuade people.  The key difference in working in \emph{Data Science} and exclusively in \emph{Machine Learning} or \emph{Statistics} is the fact that you don't just stop after getting a good model and evaluating its accuracy. You would make a story that you convey to people.
-For this reason we have to use visualization that can capture attention, can engage people and can tell a story visually (tell a story using visual tools takes a lot less time) and last but not least, you are focused only on certain aspects omitting others. It is a double edge sword. That is because, on one hand you have to consider that there is an information overflow that people are suffering in general (we get too many media in which we consume information) so we do not want our visualization conveys more information than  a human being can actually get in a few seconds). On the other hand, we have to do it carefully, avoiding omitting some information just because difficult to handle or with, apparently, nonsense.}
+For this reason we have to use visualization that can capture attention, can engage people and can tell a story visually (tell a story using visual tools takes a lot less time) and last but not least, you are focused only on certain aspects omitting others. It is a double-edged sword. That is because, on one hand you have to consider that there is an information overflow that people are suffering in general (we get too many media in which we consume information) so we do not want our visualization conveys more information than  a human being can actually get in a few seconds). On the other hand, we have to do it carefully, avoiding omitting some information just because difficult to handle or with, apparently, nonsense.}
 \end{itemize}
 
 \subsection{Data exploration}
@@ -36,7 +36,7 @@ In order to do a good \emph{Data exploration} analysis by means of visualization
 
 \subsubsection{One variable}
 
-Whenever we want to look at the data we can use histograms, they tell us a lot about the single variable. Once you plot them, you can try to figure out their distribution, for instance we can identify skewed distributions, multimodal or long tail data. 
+Whenever we want to look at the data we can use histograms, they tell us a lot about the single variable. Once you plot them, you can try to figure out their distribution, for instance we can identify skewed distributions, multimodal or long tail data (Figure \ref{pic:long_tail}). 
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -54,7 +54,7 @@ The latter is characterized by a bunch of bins that reveal a lot of occurrences 
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
- \includegraphics[width=13cm]{./img/06/power_law}
+ \includegraphics[width=10cm]{./img/06/power_law}
  \caption{\label{pic:power_law} Example \href{https://en.wikipedia.org/wiki/Zipf\%27s\_law}{power law}.}
 \end{figure}
 
@@ -110,7 +110,9 @@ Most of the time we are interested in visualizing more than one variable, here a
 
 When you deal with a high number of variables, a valid idea to visualize in a better way is to reduce the number of variables applying algorithms, this pocess is called \emph{Dimensionality reduction}, one example is the \href{https://en.wikipedia.org/wiki/Principal\_component\_analysis}{ \emph{PCA}}. Intuitively, given twenty different variables, many tend to not variate a lot, \emph{PCA} extracts the couple of attributes that really make the difference allow visualization of high-dimensional continuous data in 2D using principal components. Hence, instead of directly plot multivariate data, try to think whether a dimensionality reduction can be useful.
 
-We argued for analysts is important to form expectations of what the data should look like. This helps against pipeline errors and to identify interesting patterns. But beware of seeing \href{https://en.wikipedia.org/wiki/Martian1_canal}{\emph{Martian Canals}}: do not see things that are not there. Moreover, an observer should also be attuned to patterns that are not part of his theory, in other words, to expect the unexpected. 
+We argued for analysts is important to form expectations of what the data should look like. This helps against pipeline errors and to identify interesting patterns. 
+\\
+But beware of seeing \href{https://en.wikipedia.org/wiki/Martian_canal}{\emph{Martian Canals}}: do not see things that are not there. Moreover, an observer should also be attuned to patterns that are not part of his theory, in other words, to expect the unexpected. 
 
 
 \subsection{Moving Towards Interactive Viz}
@@ -135,19 +137,19 @@ There is not a unique way to define visualization, here some definitions that tr
 
 \subsection*{The 10 rules}
 
-When you do visualization you have to take care of the following \href{http://www.sealthreinhold.com/school/tuftes-rules/}{things}:
+When you do visualization you have to take care of the following \href{http://www.sealthreinhold.com/school/tuftes-rules/}{rules}:
 
 \begin{enumerate}
-\item \emph{Show your data}: be careful of showing what you want to show, do not forget the main information;
-\item \emph{Use graphics}: glue together descriptions and figures;
-\item \emph{Avoid Chartjunk}: display your data in a fancy way, do not add anything that can make the interpretation harder;
-\item \emph{Utilize Data-ink} as much as you can, be careful when choosing what keep and remove;
-\item \emph{Use labels}: let the people understand what you are talking about;
-\item \emph{Utilize Micro/Macro}: an overview does not need so many details as when you zoom in;
-\item \emph{Separate Layers}: make more visible what you want the people to focus on;
-\item \emph{Use Multiples}: a thing different from the other captures the attention;
-\item \emph{Utilize Color} in a way such that data is interpreted;
-\item \emph{Understand Narrative}: when you tell a story respect time and space.
+\item \textbf{Show your data}: be careful of showing what you want to show, do not forget the main information;
+\item \textbf{Use graphics}: glue together descriptions and figures;
+\item \textbf{Avoid Chartjunk}: display your data in a fancy way, do not add anything that can make the interpretation harder;
+\item \textbf{Utilize Data-ink} as much as you can, be careful when choosing what keep and remove;
+\item \textbf{Use labels}: let the people understand what you are talking about;
+\item \textbf{Utilize Micro/Macro}: an overview does not need so many details as when you zoom in;
+\item \textbf{Separate Layers}: make more visible what you want the people to focus on;
+\item \textbf{Use Multiples}: a thing different from the other captures the attention;
+\item \textbf{Utilize Color} in a way such that data is interpreted;
+\item \textbf{Understand Narrative}: when you tell a story respect time and space.
 \end{enumerate}
 
 \subsection*{Interactive chart design}
@@ -167,13 +169,13 @@ Let the reader compare areas is dangerous (Figure  \ref{pic:area}), avoid it whe
  \caption{\label{pic:magnitude} What works and what does not.}
 \end{figure}
 
-
+\newpage
 These tasks are sorted according to how accurately people perform them.
 
 \begin{figure}[h]%---------------FIG--------------
  \centering
- \includegraphics[width=13cm]{./img/06/area}
- \caption{\label{pic:area} How many times the \emph{little} one is included in the \emph{big} one?}
+ \includegraphics[width=12cm]{./img/06/area}
+ \caption{\label{pic:area} How many times the \emph{little} one is included in the \emph{big} one? (Answer: 16)}
 \end{figure}
 
 \subsubsection*{Compare colors...}
@@ -228,14 +230,14 @@ Here is what we notice from each of the illustrations [\href{http://www.fusionch
 
 \begin{itemize}
 
-\item \emph{Proximity}: we see three rows of dots instead of four columns of dots because they are closer horizontally than vertically.
-\item \emph{Similarity}: we see similar-looking objects as part of the same group.
-\item \emph{Enclosure}: we group the first four and last four dots as two rows instead of eight dots.
-\item \emph{Symmetry}:we see three pairs of symmetrical brackets rather than six individual brackets.
-\item \emph{Closure}: we automatically close the square and circle instead of seeing three disconnected paths.
-\item \emph{Continuity}: we see one continuous path instead of three arbitrary ones.
-\item \emph{Connection}: we group the connected dots as belonging to the same group.
-\item \emph{Figure \& ground}: we either notice the two faces, or the vase. Whichever we notice becomes the figure, and the other the ground
+\item \textbf{Proximity}: we see three rows of dots instead of four columns of dots because they are closer horizontally than vertically.
+\item \textbf{Similarity}: we see similar-looking objects as part of the same group.
+\item \textbf{Enclosure}: we group the first four and last four dots as two rows instead of eight dots.
+\item \textbf{Symmetry}:we see three pairs of symmetrical brackets rather than six individual brackets.
+\item \textbf{Closure}: we automatically close the square and circle instead of seeing three disconnected paths.
+\item \textbf{Continuity}: we see one continuous path instead of three arbitrary ones.
+\item \textbf{Connection}: we group the connected dots as belonging to the same group.
+\item \textbf{Figure \& ground}: we either notice the two faces, or the vase. Whichever we notice becomes the figure, and the other the ground
 
 \end{itemize}
 
@@ -247,7 +249,7 @@ The flowchart below can be helpful to understand the most suitable chart for you
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
- \includegraphics[width=13cm]{./img/06/flow_chart}
+ \includegraphics[width=16cm]{./img/06/flow_chart}
  \caption{\label{pic:flow_chart} Make your choice.}
 \end{figure}
 
@@ -258,7 +260,7 @@ Instead of using the chart, you can also find sources, like \href{http://www.jui
 \begin{itemize}
 \item \href{https://d3js.org}{\texttt{D3}} is, without doubt, the most widely used interactive visualization framework, developed around 2011 by Jeff Heer, Mike Bostock and Vadim Ogievetsky. \emph{Notes from the authors}: D3 is intentionally a low-level system. During the early design of D3, we even referred to it as a "visualization kernel" rather than a "toolkit" or "framework";
 
-\item \texttt{Vega} is a \emph{visualization grammar} developed on top of \texttt{d3.js}. It specifies graphics in \texttt{JSON} format;
+\item \href{https://vega.github.io/}{\texttt{Vega}} is a \emph{visualization grammar} developed on top of \texttt{d3.js}. It specifies graphics in \texttt{JSON} format;
 
 \item \href{https://vega.github.io/vega/}{\texttt{Vincent}} is a Python-to-Vega translator;
 
