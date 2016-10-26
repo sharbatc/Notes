@@ -1,0 +1,110 @@
+% !TEX root = ../notes.tex
+
+% ================  (Interactive) Visualization ==============
+
+\section{Supervised Learning}
+ 
+\subsection{Machine Learning}
+We give the difference between Supervised and Unsupervised Learning before going deeper into the Supervised Learning.
+\href{http://www.r2d3.us/visual-intro-to-machine-learning-part-1/}{Beautiful Introduction to Machine Learning!} -> Introduce main concepts used in this course.
+\\
+Machine LEarning is born because we are \textbf{lazy}! So, we let the machine ``work'' for us.
+
+
+\textbf{Supervised} 
+\\\\
+Input and output samples $(X,y)$ are given. They are linked together with a functions $f$ such that $f(X) = y$. The idea is \emph{learn} $f$ and evaluate it on new data. We can find two different types:
+\begin{itemize}
+ \item \textbf{Classification}: y is a discrete value.
+ \item \textbf{Regression}: y is continuous (e.g. linear regression)
+\end{itemize}
+Examples:
+\begin{itemize}
+ \item Is this image a cat, dog, car, house?
+ \item How would this user score that restaurant?
+ \item is this email spam?
+ \item Is this blob a supernova?
+\end{itemize}
+Techniques:
+\begin{itemize}
+ \item kNN (k Nearest Neighbors)
+ \item Na\"ive Bayes
+ \item Linear + Logistic Regression
+ \item SVM (Support Vector Machines)
+ \item RF (Random Forests) + GRD (Greedy Random Forests)
+ \item Neural Networks
+ \item etc.
+\end{itemize}
+
+\textbf{Unsupervised}
+\\\\
+We only get samles $X$ of the data and we want to compute a function $f$ to create a \emph{simple representation} given by $y = f(X)$. We can also differenciate between discrete and continus:
+\begin{itemize}
+ \item y is \textbf{discrete} corresponds to clustering.
+ \item y is \textbf{continuous} corresponds to Matrix factorization, Kalman filtering, unsupervised neural networks. 
+\end{itemize}
+Examples:
+\begin{itemize}
+ \item Cluster some hand-written digit data into 10 classes
+ \item What are the top 20 ropics in Twitter right now?
+ \item Find and cluster distinct accents of people in Lausanne. 
+\end{itemize}
+Techniques:
+\begin{itemize}
+ \item Clustering
+ \item Topic Models
+ \item HMMs (Hidden Markov Models)
+ \item etc.
+\end{itemize}
+
+\subsection{More details on Supervised Learning}
+
+\subsubsection{Predicting from Samples}
+
+Most of the datasets are \textbf{samples} from an infinite population, \emph{i.e.} a subset of an \textbf{infinite} dataset. We would like to model the \textbf{whole population}, but only have access to a sample of it. So, we train on a training sample called $D$ and we denote the model as $f_D(X)$ where $X$ are the features and $y=f_D(X)$ the predictions.
+
+\subsubsection{Bias and Variance}
+
+The data-generated model $f_D(X)$ is a \textbf{statistical estimate} of the true function $f(X)$ (function working for the whole population). Therefire, the model is subject ot bias and variance. 
+\\
+The \textbf{Bias} is defined as the \emph{expected difference} between the prediction of a model $f_D(X)$ and the true labels $y$:
+\[
+ \textrm{Bias} = \mathbb{E}\left[ f_D(X)-y\right]
+\]
+\\
+The \textbf{Variance} is defined as:
+\[
+ \textrm{Variance} = \mathbb{E}\left[\left(f_D(X) - \overline{f}(X)\right)^2\right]
+\]
+where $\overline{f}(X) = \mathbb{E}\left[f_D(X)\right]$ being the average prediction on X.
+
+Bias and Variance are very useful to understand if you're doing something wrong. So, try to understand what you're doing and not just applying ``black-boxed'' algorithms.
+\\\\
+\textbf{Tradeoff between Bias and Variance}
+\\
+Tradeoff between bias and variance due to model complexity:
+\begin{itemize}
+ \item \textbf{Complex models}: Many parameters, usually lower bias but higher variance
+ \item \textbf{Simple models}: Few parameters, higher bias but lower variance.
+\end{itemize}
+
+For example, a linear model can only fit a straight line. A high degree polynomial can fit complex curves => this one will work very well with the sample but not that well with the population => high variance!
+\\\\
+The total expected error is 
+\[
+ \textrm{Bias}^2 + \textrm{Variance}
+\]
+Because of the bias-variance tradeoff, we want to \textbf{balance} their contributions. \emph{Variance} dominates => \textbf{over-fitting}. \emph{Bias} dominates => \textbf{under-fitting}.
+
+\subsubsection{k-Nearest Neighbors}
+Issues: \\
+Data \textbf{is} the model. => no training needed, accuracy improves with more data. Matching is simple and fairly fast if data fits in memory. It usually needs data in memory, but can be run off disk. 
+\\\\
+Min config: \\
+There's only one parameter: $k$, the number of neighbors. But two other choices are important:
+\begin{itemize}
+ \item Weighting of neighbors (inverse distance)
+ \item Similarity metric.
+\end{itemize}
+
+{\huge \color{red} TO FINISH WITH THE SLIDES OF THE COURSE}
