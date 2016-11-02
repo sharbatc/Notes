@@ -107,4 +107,103 @@ There's only one parameter: $k$, the number of neighbors. But two other choices 
  \item Similarity metric.
 \end{itemize}
 
+\textbf{k-NN Flavors}
+\\\\
+TO PUT IN A TABLE \\
+Classification:
+\begin{itemize}
+ \item Model is $y=f(x)$, y the labels (discrete set)
+ \item Given X, compute y (= majority vote of the k nearest neighbors.
+ \item Can also use a weighted vote* of the neighbors
+\end{itemize}
+Regression:
+\begin{itemize}
+ \item Model is $y=f(x)$, y is a real value
+ \item Given X, compute y = average value of the k nearest neighbors
+ \item Can also use a weighted average* of the neighbors.
+\end{itemize}
+\textbf{k-NN distance measures}
+\\\\
+\begin{itemize}
+ \item Euclidean distance
+ \item Cosine Distance
+ \item Jaccard Distance
+ \item Hamming Distance
+\end{itemize}
+\textbf{k-NN metrics}
+\\\\
+\begin{itemize}
+ \item Manhattan distance
+ \item edit distance
+ \item Mahalanobis distance
+\end{itemize}
+\textbf{Choosing k}
+\\\\
+Small k -> low bias, high variance \\
+Large k -> high bias, low variance \\
+\\\\
+\textbf{In practice}
+\\
+Use cross-valid! (Training for 80\% and testing for 20\%) \\
+Predict: For each point in the validation set, predict using the kNN from the training set. Measure the error rate(classification) or the squared error(reg). \\
+Tune: try different values of k and use the one that gives min error. \\
+Evaluate: Test on the test set to measure performance. \\\\
+\textbf{kNN and the curse of dimensionality} 
+\\\\
+\textbf{curse of dimensionality} refers to phenomena that occur in high dimensions (100 to millions) that do not occur in low dimensional-space. In particular, data in high dimensions are much sparser than data in low dimensions. For kNN, that means there are less points that are very close in feature space (similar) to the point we want to predict. [EXAMPLE] => surprising that kNN in high dimension. Luckily real data are not like random points in a high dimensional cube. => live in \textbf{dense clustes} and near \textbf{much lower-dimensional surfaces}. Finally, points can be very ``similar'' even if their euc distance is large.
+
+\subsection{Decision tree}
+
+Classification <-> training. We can try 1 classifier per each section. \\
+Training : Categorical attributes, numerical attributes and class label. The we use a classification algorithm and create the model (classifier). \\\\
+\textbf{Characteristics of classification methodes} 
+\\\\
+Predictive accuracy \\
+Speed and scalability (time to build the model, time to use it, in memory vs disk processing) \\
+Robustness: (Handling noise, outliers and missing values) \\
+Interpretability: (Understanding the model and its decisions [black vs white box], compactness of the model) \\
+\textbf{Decision tree induction} 
+\\\\
+Model: flow-chart like tree structure:
+\begin{itemize}
+ \item Nodes are test on a single attribute
+ \item Branches are attribute values
+ \item Leaves are marked with class labels
+\end{itemize}
+Score function: classification accuracy \\
+Optimisation: top-down tree construction \\
+Tree construction:
+\begin{itemize}
+ \item at the beginning, All training samples belong to the root
+ \item Examples are partitioned recursively based on selected ``most discriminative'' attributes
+ \item discriminative power based on information gained
+\end{itemize}
+Partitioning stops if 
+\begin{itemize}
+ \item All samples belong to the same class -> assign the class label to the leaf
+ \item There are not attributes left -> majority voting to assign the class label to leaf
+ \item THere are no samples left
+\end{itemize}
+\textbf{Attribute selection}
+\\\\
+At a given branch in the tree, the set of samples $S$ to be classified has $P$ positive and $N$ negative samples. The amount of entropy in the set $S$ is:
+\[
+ H(P,N)=-\frac{P}{P+N}\log_2\frac{P}{P+N}-\frac{N}{P+N}\log_2\frac{N}{P+N}
+\]
+Note that:
+\begin{itemize}
+ \item If $P=0$ (or $N=0$), $H(P,N)=0$ => no uncertainty
+ \item If $P=N$, $H(P,N)=1$ => max uncertainty
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
 {\huge \color{red} TO FINISH WITH THE SLIDES OF THE COURSE}
