@@ -195,15 +195,109 @@ Note that:
  \item If $P=0$ (or $N=0$), $H(P,N)=0$ => no uncertainty
  \item If $P=N$, $H(P,N)=1$ => max uncertainty
 \end{itemize}
-
-
-
-
-
-
-
-
-
-
-
 {\huge \color{red} TO FINISH WITH THE SLIDES OF THE COURSE}
+
+
+
+
+%========================================
+\subsubsection{Random Forest}
+
+A common problem when trying to build a model is to select significant features between all the available one. We tend to think that \textit{the more we have, the better it is}, even knowing the existence of the curse of dimensionality. 
+
+Random Forest takes this idea and try to automatize this feature selection by randomly selecting subset of features.
+
+The main idea of Random Forest algorithm is to grow an arbitrary number of \textbf{Decision Trees}, each one grown based on a subset of m features, randomly chosen between the total $p$ of them. It's an example of a \textbf{weak learner} saw in the Ensemble method. This weak learner has a lower bias (because of lower number of feature).
+
+Following the \textbf{Ensemble method}, the predictions of all these weak learners are then merged together to produce a final prediction (by majority voting for example).
+
+
+
+\begin{center} %---------------TAB--------------
+\begin{tabular} {| l | l |}
+\hline
+\bf Pros & \bf Cons \\ \hline
++ Popular & - Not state-of-the-art  \\
++ Easy to implement & - Needs many passes over the data \\
++ Easy to parallelize & - Tend to overfit \\ 
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Boosted Decision Trees}
+Variante of Random Forest. Instead of training all DT independently on weak subset, the DT are trained sequentially and emphase incorrectly-labeled instances of the previous tree. This is called \textbf{Boosting}. 
+\begin{itemize}
+\item Low variance, because of the small trees handling small numbers of features
+\item Low bias, reduces by the boosting
+\end{itemize}
+
+Opposed to RF that usually trained tens of medium-sized trees, BDT works on smaller trees in greater numbers.
+
+Even if they show good results, their big drayback is their slow execution compared with the parallelized RF.
+
+
+\subsubsection{About model transparency}
+
+A recurrent argument of using Decision Tree (DT) or Random Forest (RF) in industry is their transparency compared to state-of-the-art Deep-Neural-Network (DNN). This argument must be carefully taken. Even if by their very nature DT are more understandable by a human than DNN, the more features and Trees we had, the more complicated it becomes. Figure \ref{pic:RF_BT} shows the size of a common industry implementation of RF and BT where there are no more possibilities of human understanding.
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./img/07/RF_BT.png}
+ \caption{\label{pic:RF_BT.} Standard size of RF and BDT implementations.
+ In red: RF with big parallel DT. In green: BDT pipeline with lot of small DT}
+\end{figure}
+
+
+\subsection{Linear Regression}
+
+Linear regression model produces a prediction equation:
+
+$$
+\hat{y} = \hat{\beta_0} + \sum\limits_{j=1}^p  X_j + \hat{ \beta_j}
+$$
+
+or in matrix notaction
+
+$$
+\hat{y} =X \hat{ \beta}
+$$
+
+Where $X_j$ are the data and $\hat{\beta_j}$ the characteristic of the model. 
+
+\subsubsection{Statistic validation}
+
+As a linear model can be calculated for every possible existing dataset, it is not enough to calculate it, but the existing of linear relationship between the data must be prooved.
+
+\paragraph{$R^2$-value}
+
+$R^2$-value describes how much of the total variance is reduced when we include the line as an offset. It computes the distances between the real $y$ and the predicted $\hat{y}$, and compares them with the distance between real $y$ and the mean $\bar{y}$.
+
+\begin{itemize}
+\item if $R^2 = 0$, then there is no difference between the linear model and the trivial mean $\bar{y}$. Then we conclude that there is not any evidence of linear relationship in our dataset and \textbf{we cannot use the model}.
+\item if $R^2 = 1$, then the data perfectly alligned on the linear regression line and \textbf{the model is perfect}.
+\end{itemize}
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./img/07/r_2.png}
+ \caption{\label{pic:r_2} Graphical meaning of $R^2$-value.}
+\end{figure}
+
+
+\paragraph{p-value}
+
+From the Distribution of Fisher (F-Distribution) we can derive a p-value which is, as usual, the probability that the observed data are produced by the null hypothesis which is, in our case, the hypothesis \textit{no linear relationship}. For $p < 0.05$ we conclude, as usual, that it is very unlikely that the data were produced by the null hypothesis and we then accept the hypothesis \textit{the data are produced by linear relationship}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
