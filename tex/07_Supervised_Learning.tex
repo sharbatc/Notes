@@ -96,7 +96,19 @@ The total expected error is
 \]
 Because of the bias-variance tradeoff, we want to \textbf{balance} their contributions. \emph{Variance} dominates => \textbf{over-fitting}. \emph{Bias} dominates => \textbf{under-fitting}.
 
-\subsubsection{k-Nearest Neighbors}
+
+%=============================================
+\subsubsection{Characteristics of classification methodes} 
+
+\begin{itemize}
+\item \textbf{Predictive accuracy}
+\item \textbf{Speed and scalability} (time to build the model, time to use it, in memory vs disk processing)
+\item \textbf{Robustness}: (Handling noise, outliers and missing values) 
+\item \textbf{Interpretability}: (Understanding the model and its decisions (black vs white box), compactness of the model)
+\end{itemize}
+
+%=============================================
+\subsection{k-Nearest Neighbors}
 Issues: \\
 Data \textbf{is} the model. => no training needed, accuracy improves with more data. Matching is simple and fairly fast if data fits in memory. It usually needs data in memory, but can be run off disk. 
 \\\\
@@ -152,50 +164,95 @@ Evaluate: Test on the test set to measure performance. \\\\
 \\\\
 \textbf{curse of dimensionality} refers to phenomena that occur in high dimensions (100 to millions) that do not occur in low dimensional-space. In particular, data in high dimensions are much sparser than data in low dimensions. For kNN, that means there are less points that are very close in feature space (similar) to the point we want to predict. [EXAMPLE] => surprising that kNN in high dimension. Luckily real data are not like random points in a high dimensional cube. => live in \textbf{dense clustes} and near \textbf{much lower-dimensional surfaces}. Finally, points can be very ``similar'' even if their euc distance is large.
 
-\subsection{Decision tree}
 
-Classification <-> training. We can try 1 classifier per each section. \\
-Training : Categorical attributes, numerical attributes and class label. The we use a classification algorithm and create the model (classifier). \\\\
-\textbf{Characteristics of classification methodes} 
+\subsection{Decision Tree}
+
+Decision Tree (DT) is a basic classifier acting like a \textbf{flow-chart having a tree structure}. It's constructed following a top-down approach in which, at each node, the data are split on one of their attribute. The prediction are obtained by following the "if-else" statement of each node and is given by the leaves, once the whole tree is traversed.
 \\\\
-Predictive accuracy \\
-Speed and scalability (time to build the model, time to use it, in memory vs disk processing) \\
-Robustness: (Handling noise, outliers and missing values) \\
-Interpretability: (Understanding the model and its decisions [black vs white box], compactness of the model) \\
-\textbf{Decision tree induction} 
-\\\\
-Model: flow-chart like tree structure:
-\begin{itemize}
- \item Nodes are test on a single attribute
- \item Branches are attribute values
- \item Leaves are marked with class labels
-\end{itemize}
-Score function: classification accuracy \\
-Optimisation: top-down tree construction \\
-Tree construction:
-\begin{itemize}
- \item at the beginning, All training samples belong to the root
- \item Examples are partitioned recursively based on selected ``most discriminative'' attributes
- \item discriminative power based on information gained
-\end{itemize}
-Partitioning stops if 
-\begin{itemize}
- \item All samples belong to the same class -> assign the class label to the leaf
- \item There are not attributes left -> majority voting to assign the class label to leaf
- \item THere are no samples left
-\end{itemize}
-\textbf{Attribute selection}
-\\\\
-At a given branch in the tree, the set of samples $S$ to be classified has $P$ positive and $N$ negative samples. The amount of entropy in the set $S$ is:
-\[
+The only way to score a DT is by counting the number of right elements it predicts on the test set, since the prediction are not "weighted" by a probability of correctness.
+
+\begin{figure}[H] %----------- SubGraph ---------------------
+\centerline{
+\subfigure{\includegraphics[width=5.5cm]{img/07/DT1}}
+\subfigure{\includegraphics[width=5.5cm]{img/07/DT2}} 
+}
+\caption{\label{DT} 
+Dataset and the Decision Tree related to it.
+}
+\end{figure}
+
+\textbf{Construction} (Top-down, divide-and-conquer strategy.)
+\begin{enumerate}
+  \item At the beginning, all the data belong to the node
+  \item Recursively, the (sub)sets are partitioned on their most discriminative attribute (see section \ref{sec:selection})
+  \item Stop when:
+  \begin{itemize}
+  	\item A node only contains same labeled data, stop and make it a leaf labeled the same.
+  	\item No more attributes left, assigne the most present
+  	\item No more data left.
+  	\item (A thershold has been defined and is reached)
+  \end{itemize}
+\end{enumerate}
+
+The DT will continue to add attributes to its decision process until no ones left. As it increases its precision (and then its depth), it starts overfiting the model. A threshold can be defined to stop the construction process earlier and limit this effect. 
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./img/07/bias_variance_DT.png}
+ \caption{\label{pic:bias_variance_DT.} Bias and variance evolution with DT depth}
+\end{figure}
+
+\begin{center} %---------------TAB--------------
+\begin{tabular} {| l | l |}
+\hline
+\bf Pros & \bf Cons \\ \hline
++ A first ML approach ;) & - Sensitive to small perturbation  \\
++ Can be enhenced in RF or BDT  & - Retrained from scratch when new data are coming \\
+ & - Tend to overfit \\ 
+\hline
+\end{tabular}
+\end{center}
+
+
+
+%=============================
+\subsubsection{Attribute selection}
+\label{sec:selection}
+
+A big part of the DT model creation relies on choosing the good attribute on which to split the data in each node. This decision relies on the concept of entropy, which describe the disorder a system.
+
+For a set $S$ with $P$ positive predictions and $N$ negative ones, its entropy is:
+$$
  H(P,N)=-\frac{P}{P+N}\log_2\frac{P}{P+N}-\frac{N}{P+N}\log_2\frac{N}{P+N}
-\]
+$$
 Note that:
 \begin{itemize}
- \item If $P=0$ (or $N=0$), $H(P,N)=0$ => no uncertainty
- \item If $P=N$, $H(P,N)=1$ => max uncertainty
+ \item If $P \text{ or } N=0 \rightarrow H(P,N)=0$, meaning \textbf{no uncertainty at all}
+ \item If $P=N \rightarrow H(P,N)=1$, meaning \textbf{maximum of uncertainty}
 \end{itemize}
-{\huge \color{red} TO FINISH WITH THE SLIDES OF THE COURSE}
+
+Entropy of the attribute $A$:
+$$
+H(A) = \sum \frac{P_i + N_i}{P + N} * H(P_i, N_i)
+$$
+
+Gain obtained by splitting the dataset $S$ by attribute $A$.
+$$
+Gain(A) = H(P, N) - H(A)
+$$
+
+The gain indicate how a split on a certain attribute will influence our data set. The lower the entropy becomes, the greater is the gain, the more \textit{organised} and \textit{certain} become the data set.
+
+These equations can seem obscure at a first look, the figure \ref{pic:entropy} illustrates how the entropy of an attribute is calculated and make it easyier to understand what represent the equations.
+
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./img/07/entropy.png}
+ \caption{\label{pic:entropy} Example of entropy calculation.}
+\end{figure}
+
+
 
 
 
@@ -224,6 +281,7 @@ Following the \textbf{Ensemble method}, the predictions of all these weak learne
 \end{tabular}
 \end{center}
 
+%===============================
 \subsubsection{Boosted Decision Trees}
 Variante of Random Forest. Instead of training all DT independently on weak subset, the DT are trained sequentially and emphase incorrectly-labeled instances of the previous tree. This is called \textbf{Boosting}. 
 \begin{itemize}
@@ -235,7 +293,7 @@ Opposed to RF that usually trained tens of medium-sized trees, BDT works on smal
 
 Even if they show good results, their big drayback is their slow execution compared with the parallelized RF.
 
-
+%===============================
 \subsubsection{About model transparency}
 
 A recurrent argument of using Decision Tree (DT) or Random Forest (RF) in industry is their transparency compared to state-of-the-art Deep-Neural-Network (DNN). This argument must be carefully taken. Even if by their very nature DT are more understandable by a human than DNN, the more features and Trees we had, the more complicated it becomes. Figure \ref{pic:RF_BT} shows the size of a common industry implementation of RF and BT where there are no more possibilities of human understanding.
