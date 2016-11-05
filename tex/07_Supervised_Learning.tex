@@ -7,24 +7,32 @@
 %=============================================
 \subsection{Introduction to Machine Learning}
 
-The term {\bf Machine Learning} cannot be defined better than \href{https://en.wikipedia.org/wiki/Arthur\_Samuel}{Arthur Samuel}'s definition: ``{\it Field of study that gives computers the ability to learn without being explicitly programmed.}''. The idea behind Machine Learning is to use the computers to apply statistical and optimization algorithms to \emph{automatically} identify pattern in data and/or classify them. A \href{http://www.r2d3.us/visual-intro-to-machine-learning-part-1/}{beautiful introduction to Machine Learning} will speak more than thousand words. At the end we can simply say that Machine Learning is born because we are \textbf{lazy} and we let the machine do the ``work'' for us. 
+{\bf Machine Learning} is an extended field characterized by many facets. The  \href{https://en.wikipedia.org/wiki/Arthur\_Samuel}{Arthur Samuel}'s definition can be considered the most meaningful one: ``{\it Field of study that gives computers the ability to learn without being explicitly programmed.}''. The aim of \emph{Machine Learning} is to model into a computer the learning and adapting procedures that characterize the human way of thinking and processing information. Merely, the idea behind is to use computers to apply statistical and optimization algorithms to \emph{automatically} identify pattern in data and/or classify them. 
+
+To get an idea of what \emph{Machine Learning} does and consists of, take a look at a \href{http://www.r2d3.us/visual-intro-to-machine-learning-part-1/}{beautiful introduction to Machine Learning}. In order to capture the essence of this subject, it speaks more than thousand words . 
+
+In the end, according to a reductive point of view, we may simply say that Machine Learning is born because we are \textbf{lazy} and we let the machine do the ``work'' for us. 
 \\\\
-In Machine Learning, we can separate the algorithms either by the \emph{learning style} (Supervised vs Unsupervised vs Semi-Supervised learning) or by their \emph{similarity}. In the next part of this chapter, we first give an introduction to Supervised and Unsupervised learning and then we go deeper into the Supervised Learning. If you want to become a Machine Learning Master, you should have a look \href{http://machinelearningmastery.com/}{here}.
+\emph{Machine Learning} is based on the definition of algorithms that allows the aforementioned procedures. Those algorithms can be distinguished either by the \emph{learning style} (Supervised vs Unsupervised vs Semi-Supervised learning) or by their \emph{similarity}. 
+
+In the next part of this chapter, we first give an introduction to \emph{Supervised} and \emph{Unsupervised} learning and then we go deeper into the \emph{Supervised Learning}. If you want to become a Machine Learning Master, you should have a look \href{http://machinelearningmastery.com/}{here}.
 
 %=============================================
-\subsubsection{Characteristics of Classification Methods} 
+\subsubsection{Different aspects of Machine Learning} 
 
-When we use Machine Learning methods we are expecting good predictions. But it is not the only important aspect of the Machine Learning methods. The following list gives some very important aspects for these methods:
+When we apply a \emph{Machine Learning} method, one on the thing that we are mostly interested in is getting good predictions. This is not the only important aspect of the Machine Learning methods though. 
+
+The following list rough out some very important aspects for these methods:
 
 \begin{itemize}
-\item \textbf{Predictive accuracy}
-\item \textbf{Speed and scalability} 
+\item \textbf{Predictive accuracy}: we want our model to return correct result;
+\item \textbf{Speed and scalability}: the model should be efficient in order to be easily applied
   \begin{itemize}
    \item Time to build the model
    \item Time to use the model
    \item In memory vs Disk processing
   \end{itemize}
-\item \textbf{Robustness}
+\item \textbf{Robustness}: the method should not be too sensitive
   \begin{itemize}
    \item Handling noise
    \item Handling outliers
@@ -32,7 +40,7 @@ When we use Machine Learning methods we are expecting good predictions. But it i
   \end{itemize}
 \item \textbf{Interpretability}
   \begin{itemize}
-   \item Understand the model and its decisions (black box vs white box)
+   \item Understand the model and its decisions (\emph{black box} vs {white box})
    \item Compactness of the model
   \end{itemize}
 \end{itemize}
@@ -40,17 +48,19 @@ When we use Machine Learning methods we are expecting good predictions. But it i
 %=============================================
 \subsubsection{Supervised vs Unsupervised Learning}
 
-In Table \ref{tab:sup-unsup} we give some differences/similarities between Supervised and Unsupervised Learning. The main difference to remember is that for Supervised learning, we use a training data with known labels and we test it on a test data without labels. For Unsupervised learning we do not have any labels. We are just trying to simplify/cluster the samples.
+In Table \ref{tab:sup-unsup} we outline some differences/similarities between \emph{Supervised} and \emph{Unsupervised} learning. 
+
+The main difference to remark is that for \emph{Supervised} learning, we use a \emph{training} data with \textbf{known} labels and we test it on a\emph{test} data \textbf{without} labels. For \emph{Unsupervised} learning we do not have any labels. We are just trying to simplify/cluster the samples.
 
 \begin{table}[h!]
   \centering
   \begin{tabular}{m{2cm}||m{5.5cm}|m{5.5cm}}
-    & Supervised & Unsupervised \\ \hline\hline
-    Variables & Samples $X$ and labels $y$ & Samples $X$ \\ \hline
-    Learning & Function $y = f(X)$ relate samples and labels. We would like to ``learn'' $f$ and evaluate it on new data. & We want to compute a function $y = f(X)$ to give a \emph{simpler} representation of the samples X. \\ \hline
-    Discrete \newline labels & {\bf Classification} & {\bf Clustering} \\ \hline
-    Continuous labels & Regression & Matrix factorization, Kalman filtering, Unsupervised neural networks \\ \hline 
-    Examples & 
+    & \textbf{Supervised} & \textbf{Unsupervised} \\ \hline\hline
+    \textbf{Variables} & Samples $X$ and labels $y$ & Samples $X$ \\ \hline
+    \textbf{Learning} & Function $y = f(X)$ relate samples and labels. We would like to ``learn'' $f$ and evaluate it on new data. & We want to compute a function $y = f(X)$ to give a \emph{simpler} representation of the samples X. \\ \hline
+    \textbf{Discrete \newline labels} & {\bf Classification} & {\bf Clustering} \\ \hline
+    \textbf{Continuous labels} & Regression & Matrix factorization, Kalman filtering, Unsupervised neural networks \\ \hline 
+    \text{Examples} & 
 	      $\bullet$ Is this image a cat, dog, car, house? \newline
 	      $\bullet$ How would this user score that restaurant? \newline
 	      $\bullet$ Is this email spam? \newline
@@ -60,7 +70,7 @@ In Table \ref{tab:sup-unsup} we give some differences/similarities between Super
 	      $\bullet$ What are the top 20 topics in Twitter right now? \newline
 	      $\bullet$ Find and cluster distinct accents of people in Lausanne
             \\ \hline
-    Techniques & 
+    \textbf{Techniques} & 
 	      $\bullet$ k Nearest Neighbors \newline
 	      $\bullet$ Na\"ive Bayes \newline
 	      $\bullet$ Linear + Logistic Regression \newline
@@ -83,7 +93,7 @@ In Table \ref{tab:sup-unsup} we give some differences/similarities between Super
 %=============================================
 \subsubsection{Predicting from Samples}
 
-The \textbf{samples} are most of the time a subset of an infinite population. We are most interested in a model that can {\bf describe the whole population} but since we only have access to a \emph{sample} of it, it is not possible. Therefore we train on a training sample $D$ and we denote the model found by $f_D(X)$, $X$ being the features.
+The \textbf{samples} are, most of the time, subsets of an infinite population. We are interested in a model that can {\bf describe the whole population}, but since we only have access to a \emph{sample} of it, it is not possible. Therefore we train on a training sample $D$ and we denote the model found by $f_D(X)$, $X$ being the features.
 Most of the datasets are \textbf{samples} from an infinite population, \emph{i.e.} a subset of an \textbf{infinite} dataset. We would like to model the \textbf{whole population}, but only have access to a sample of it. So, we train on a training sample called $D$ and we denote the model as $f_D(X)$ where $X$ are the features and $y=f_D(X)$ the predictions.
 
 %=============================================
@@ -102,14 +112,14 @@ The \textbf{Variance} is defined as:
 \]
 where $\overline{f}(X) = \mathbb{E}\left[f_D(X)\right]$ being the average prediction on X.
 
-Bias and Variance are very useful to understand if you're doing something wrong. Thus it is important to understand what you are doing and not just applying ``black-boxed'' algorithms.
+Bias and Variance are very useful to understand if you are doing something wrong. Thus, it is important to understand what you are doing and not just applying ``black-boxed'' algorithms.
 
-\textbf{Tradeoff between Bias and Variance}
-\\\\
+\subsubsection*{ Trade-off between Bias and Variance}
+
 The \href{http://scott.fortmann-roe.com/docs/BiasVariance.html}{tradeoff between bias and variance} is due to model complexity, see Figure \ref{fig:simple_complex}.
 \begin{itemize}
- \item \textbf{Complex models}: Many parameters, usually lower bias but higher variance
- \item \textbf{Simple models}: Few parameters, higher bias but lower variance.
+ \item \textbf{Complex models}: Many parameters, usually lower bias (the model is close to the model that generates the data) but higher variance (the predictions have high variability). It leads to the risk of overfitting. Merely, this kind of models describe well the sample population, likely they do not represent well the entire population though.
+ \item \textbf{Simple models}: Few parameters, higher bias (far from the true model) but lower variance (less variability among predictions), It may ends up with the underfitting.
 \end{itemize}
 \begin{figure}[H] %----------- Graph ---------------------
 \centerline{
@@ -123,7 +133,7 @@ Illustrations of a simple model and a complex model on the same data.
 
 For example, a linear model can only fit a straight line. A high degree polynomial can fit complex curves. Therefore this polynomial will work very well with the samples but not that well with the whole population. Thus a high variance is expected.
 \\\\
-In order to take into account this tradeoff, we introduce the total expected error is 
+In order to take into account this trade-off, we introduce the total expected error is 
 \[
  \textrm{Bias}^2 + \textrm{Variance}
 \]
@@ -139,15 +149,15 @@ Illustration of the model complexity and the Bias Variance tradeoff. The optimum
 \end{figure}
 When the Bias and the Variance are unbalanced, we use the terms:
 \begin{itemize}
- \item {\bf overt-fitting} when the \emph{Variance} strongly dominates. (Too much variation between models)
- \item {\bf under-fitting} when the \emph{Bias} strongly dominates. (The models are not fitting the data well enough)
+ \item {\bf overfitting} when the \emph{Variance} strongly dominates. (Too much variation between models. Hence, the model does not work well on new data)
+ \item {\bf underfitting} when the \emph{Bias} strongly dominates. (The models do not fitting the data well enough)
 \end{itemize}
 
 
 %=============================================
 \subsection{k-Nearest Neighbors}
 
-The kNN algorithm is a well known method used for classification and regression. The input consists simply of the k closest training examples. The idea of the kNN algorithm is to find the k nearest neighbors of an input using a specific metric. Once we found them, we can give the label of the new input such that it corresponds to the most used label in the neighbors. Figure \ref{fig:knn} shows an example with cats and other animals.
+The kNN algorithm is a well known method used for classification and regression. Given a  query item, the idea of the kNN algorithm is to find the \emph{k} nearest neighbors (\emph{k} closest matches) using a specific metric. Once we found them, we label the item such that it corresponds to the most frequent label in the neighbors. Figure \ref{fig:knn} shows an example with cats and other animals.
 
 \begin{figure}[H] %----------- Graph ---------------------
 \centerline{
@@ -157,8 +167,8 @@ The kNN algorithm is a well known method used for classification and regression.
 Illustration of the kNN algorithm.
 }
 \end{figure}
-\newpage
-However this very simple algorithm has one issue: the Data {\bf is} the Model. This implies:
+
+However, this very simple algorithm has one issue: the Data {\bf is} the Model. This implies:
 \begin{itemize}
  \item No training needed.
  \item The accuracy generally improves with more data.
@@ -176,7 +186,7 @@ The kNN algorithm can be used both for regression and classification. Table \ref
 \begin{table}[h!]
  \centering
  \begin{tabular}{p{7cm}|p{7cm}}
-  Classification & Regression \\ \hline \hline
+  \textbf{Classification} & \textbf{Regression} \\ \hline \hline
   The model is $y=f(X)$ where $y$ is from a discrete set (labels). & The model is $y=f(X)$ where $y$ is a real value. \\ \hline
   Given $X$, we compute $y$ being the majority vote of the k nearest neighbors. & Given $X$, we compute $y$ being the average value of the k nearest neighbors. \\ \hline
   We can also use a weighted vote of the neighbors. & We can also use a weighted average of the neighbors.
@@ -190,26 +200,26 @@ The kNN algorithm can be used both for regression and classification. Table \ref
 \subsubsection{kNN distance measures}
 For the kNN algorithm, we need to use a distance between the neighbors. The choice of the distance function can be very different depending on what you are looking for. We give here some examples:
 \begin{description}
- \item[Euclidean distance] Simple, fast to compute.
+ \item[Euclidean distance]: Simple and fast to compute.
  \[
   d(x,y) = ||x-y||
  \]
 
- \item[Cosine Distance] Good for documents, images, etc.
+ \item[Cosine Distance]: Good for documents, images, etc.
  \[
   d(x,y) = 1- \frac{x\cdot y}{||x||||y||}
  \]
 
- \item[Jaccard Distance] For set data
+ \item[Jaccard Distance]: For set data
  \[
   d(X,Y) = 1 - \frac{|X \cap Y|}{|X \cup Y|}
  \]
 
- \item[Hamming Distance] For string data
+ \item[Hamming Distance]: For string data
  \[
   d(x,y) = \sum_{i=1}^{n} \left( x_i \neq y_i \right)
  \]
- \item[Manhattan Distance] Coordinate-wise distance
+ \item[Manhattan Distance]: Coordinate-wise distance
  \[
   d)x,y) = \sum_{i=1}^n |x_i - y_i|
  \]
@@ -248,8 +258,8 @@ Test on two different samples of the kNN algorithm with k=8.
 }
 \end{figure}
 
-\textbf{In practice}
-\\
+\subsubsection*{In practice}
+
 \begin{description}
  \item[Use cross-validation!] Break data into train, validation and test subsets. For example, you can choose a 60-20-20 \% random split.
  \item[Predict] For each point in the validation set, predict using the k-Nearest neighbors from the training set. Measure the error rate (classification) or the squared error (regression)
