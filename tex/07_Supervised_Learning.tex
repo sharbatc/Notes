@@ -170,6 +170,7 @@ Normally, the only parameter is $k$, the number of neighbors. But two other choi
  \item Similarity metric.
 \end{itemize}
 
+%=============================================
 \subsubsection{kNN Flavors}
 The kNN algorithm can be used both for regression and classification. Table \ref{tab:knn} gives the similarities/differences of the kNN algorithm for regression and classification.
 \begin{table}[h!]
@@ -185,6 +186,7 @@ The kNN algorithm can be used both for regression and classification. Table \ref
 }
 \end{table}
 
+%=============================================
 \subsubsection{kNN distance measures}
 For the kNN algorithm, we need to use a distance between the neighbors. The choice of the distance function can be very different depending on what you are looking for. We give here some examples:
 \begin{description}
@@ -207,31 +209,64 @@ For the kNN algorithm, we need to use a distance between the neighbors. The choi
  \[
   d(x,y) = \sum_{i=1}^{n} \left( x_i \neq y_i \right)
  \]
-
+ \item[Manhattan Distance] Coordinate-wise distance
+ \[
+  d)x,y) = \sum_{i=1}^n |x_i - y_i|
+ \]
+ \item[Edit Distance] For strings, especially genetic data. See on \href{https://en.wikipedia.org/wiki/Edit\_distance}{Wikipedia} for more information.
+ \item[Mahalanobis Distance] Normalized by the sample covariance matrix -- unaffected by coordinate transformations. 
+ \[
+  d(x,y) = \sqrt{\left(x-y\right)^TS^{-1}\left(x-y\right)}
+ \]
+ where $S$ is the covariance matrix.
 \end{description}
-\textbf{k-NN metrics}
-\\\\
-\begin{itemize}
- \item Manhattan distance
- \item edit distance
- \item Mahalanobis distance
-\end{itemize}
-\textbf{Choosing k}
-\\\\
-Small k -> low bias, high variance \\
-Large k -> high bias, low variance \\
-\\\\
+
+%=============================================
+\subsubsection{Choosing k}
+
+If we choose a {\bf small k}, we will see a low bias but high variance. Firgure \ref{fig:knn_k1} shows whats happens with two different samples if we choose a small k.
+
+\begin{figure}[H] %----------- SubGraph ---------------------
+\centerline{
+\subfigure{\includegraphics[width=7cm]{img/07/k1_original}}\quad
+\subfigure{\includegraphics[width=7cm]{img/07/k1_diff}} 
+}
+\caption{\label{fig:knn_k1} 
+Test on two different samples of the kNN algorithm with k=1.
+}
+\end{figure}
+
+On the other hand if we choose a {\bf large k}, we will see a high bias but low variance. Firgure \ref{fig:knn_k8} shows whats happens with two different samples if we choose a large k.
+
+\begin{figure}[H] %----------- SubGraph ---------------------
+\centerline{
+\subfigure{\includegraphics[width=7cm]{img/07/k8_original}}\quad
+\subfigure{\includegraphics[width=7cm]{img/07/k8_diff}} 
+}
+\caption{\label{fig:knn_k8} 
+Test on two different samples of the kNN algorithm with k=8.
+}
+\end{figure}
+
 \textbf{In practice}
 \\
-Use cross-valid! (Training for 80\% and testing for 20\%) \\
-Predict: For each point in the validation set, predict using the kNN from the training set. Measure the error rate(classification) or the squared error(reg). \\
-Tune: try different values of k and use the one that gives min error. \\
-Evaluate: Test on the test set to measure performance. \\\\
-\textbf{kNN and the curse of dimensionality} 
-\\\\
-\textbf{curse of dimensionality} refers to phenomena that occur in high dimensions (100 to millions) that do not occur in low dimensional-space. In particular, data in high dimensions are much sparser than data in low dimensions. For kNN, that means there are less points that are very close in feature space (similar) to the point we want to predict. [EXAMPLE] => surprising that kNN in high dimension. Luckily real data are not like random points in a high dimensional cube. => live in \textbf{dense clustes} and near \textbf{much lower-dimensional surfaces}. Finally, points can be very ``similar'' even if their euc distance is large.
+\begin{description}
+ \item[Use cross-validation!] Break data into train, validation and test subsets. For example, you can choose a 60-20-20 \% random split.
+ \item[Predict] For each point in the validation set, predict using the k-Nearest neighbors from the training set. Measure the error rate (classification) or the squared error (regression)
+ \item[Tune] Try different values of k, and use the one that gives minimum error on the validation set.
+ \item[Evaluate] test on the test set to measure performance.
+\end{description}
 
+%=============================
+\subsubsection{kNN and the curse of dimensionality}
 
+The curse of dimensionality refers to phenomena that occur in high dimensions, from hundreds to millions, that do not occur in low-dimensional space. Data in high dimensions are much sparser than data in low dimensions. That means there are less points that are very close in the feature space. For example, the Euclidean distance scales as $\sqrt{N}$ with $N$ being the dimension. Thus it is quite surprising that kNN works even in high dimensions. 
+
+Luckily data are not random points in a high-dimensional cube. They live in {\bf dense clusters} and near {\bf much lower-dimensional surfaces}. Therefore, we can reduce the feature space in many different way to see the clusters appear.
+
+Even if the Euclidean distance between two point is large they can be very \emph{similar}. For example documents with the same few dominant words (with \href{https://en.wikipedia.org/wiki/Tf-idf}{tf-idf} weighting) are likely to be on the same topic.
+
+%=============================
 \subsection{Decision Tree}
 
 Decision Tree (DT) is a basic classifier acting like a \textbf{flow-chart having a tree structure}. It's constructed following a top-down approach in which, at each node, the data are split on one of their attribute. The prediction are obtained by following the "if-else" statement of each node and is given by the leaves, once the whole tree is traversed.
