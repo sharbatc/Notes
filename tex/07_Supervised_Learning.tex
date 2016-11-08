@@ -15,7 +15,7 @@ In the end, according to a reductive point of view, we may simply say that Machi
 \\\\
 \emph{Machine Learning} is based on the definition of algorithms that allows the aforementioned procedures. Those algorithms can be distinguished either by the \emph{learning style} (Supervised vs Unsupervised vs Semi-Supervised learning) or by their \emph{similarity}. 
 
-In the next part of this chapter, we first give an introduction to \emph{Supervised} and \emph{Unsupervised} learning and then we go deeper into the \emph{Supervised Learning}. If you want to become a Machine Learning Master, you should have a look \href{http://machinelearningmastery.com/}{here}.
+In the next part of this chapter, we first give an introduction to \emph{Supervised} and \emph{Unsupervised} learning and then we go deeper into \emph{Supervised Learning}. If you want to become a Machine Learning Master, you should have a look \href{http://machinelearningmastery.com/}{here}.
 
 %=============================================
 \subsubsection{Different aspects of Machine Learning} 
@@ -280,9 +280,20 @@ Even if the Euclidean distance between two point is large they can be very \emph
 %=============================
 \subsection{Decision Tree}
 
-Decision Tree (DT) is a basic classifier acting like a \textbf{flow-chart having a tree structure}. It's constructed following a top-down approach in which, at each node, the data are split on one of their attribute. The prediction are obtained by following the "if-else" statement of each node and is given by the leaves, once the whole tree is traversed.
+Decision Tree (DT) is a basic classifier acting like a \textbf{flow-chart having the following tree structure}  :
+\begin{itemize}
+	\item \textbf{Decision node}: specifies a test on a single attribute
+	\item \textbf{Leaf node}: indicates the value of the target attribute
+	\item \textbf{Edge}: split on one attribute
+	\item \textbf{Path}: a disjunction of tests to make the final decision
+\end{itemize} 
+
+It's constructed following a top-down approach in which, at each node, the data is split on one of their attribute. The prediction are obtained by following the "if-else" statement of each node and is given by the leaves , once the whole tree is traversed (Path). 
 \\\\
-The only way to score a DT is by counting the number of right elements it predicts on the test set, since the prediction are not "weighted" by a probability of correctness.
+
+\textbf{Accuracy} \\
+Training accuracy : How many training instances can be correctly classified based on the available data? It is high when the tree is deep/large, or when there is less conflictual instances in the training instances. Never forget that higher training accuracy does not mean good generalization.
+Testing accuracy: Given a number of new instances, how many of them can we correctly classify. The only way to score a DT is by counting the number of right elements it predicts on the test set, since the prediction are not "weighted" by a probability of correctness.
 
 \begin{figure}[H] %----------- SubGraph ---------------------
 \centerline{
@@ -296,18 +307,18 @@ Dataset and the Decision Tree related to it.
 
 \textbf{Construction} (Top-down, divide-and-conquer strategy.)
 \begin{enumerate}
-  \item At the beginning, all the data belong to the node
-  \item Recursively, the (sub)sets are partitioned on their most discriminative attribute (see section \ref{sec:selection})
+  \item At the beginning, all the samples are attached to the root.
+  \item Recursively, the (sub)sets are partitioned according to their most discriminative attribute (see section \ref{sec:selection} for the ways of selecting of the attributes).
   \item Stop when:
   \begin{itemize}
-  	\item A node only contains same labeled data, stop and make it a leaf labeled the same.
-  	\item No more attributes left, assigne the most present
-  	\item No more data left.
-  	\item (A thershold has been defined and is reached)
+  	\item A node only contains identically labelled samples, this node becomes a leaf .
+  	\item No more attributes are left for splitting, assign the most dominant label to the leaf.
+  	\item No more samples left.
+  	\item A depth threshold has been defined and has been reached.
   \end{itemize}
 \end{enumerate}
 
-The DT will continue to add attributes to its decision process until no ones left. As it increases its precision (and then its depth), it starts overfiting the model. A threshold can be defined to stop the construction process earlier and limit this effect. 
+The DT will continue to add attributes to its decision process until none are left. As it increases its precision (and then its depth), it starts over fitting the model. A threshold can be defined to stop the construction process earlier and limit this effect. 
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -320,8 +331,9 @@ The DT will continue to add attributes to its decision process until no ones lef
 \hline
 \bf Pros & \bf Cons \\ \hline
 + A first ML approach ;) & - Sensitive to small perturbation  \\
-+ Can be enhenced in RF or BDT  & - Retrained from scratch when new data are coming \\
- & - Tend to overfit \\ 
++ Can be enhanced in RF or BDT  & - Retrained from scratch when new data are coming \\
++ Simple to understand and interpret & - Tend to overfit \\
++ Requires little data preparation \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -332,7 +344,7 @@ The DT will continue to add attributes to its decision process until no ones lef
 \subsubsection{Attribute selection}
 \label{sec:selection}
 
-A big part of the DT model creation relies on choosing the good attribute on which to split the data in each node. This decision relies on the concept of entropy, which describe the disorder a system.
+A big part of the DT model creation relies on choosing the good attribute on which to split the data in each node. One way to achieve this splitting relies on the concept of entropy, which describes the disorder a system and how impactful a feature can be.
 
 For a set $S$ with $P$ positive predictions and $N$ negative ones, its entropy is:
 $$
@@ -346,7 +358,7 @@ Note that:
 
 Entropy of the attribute $A$:
 $$
-H(A) = \sum \frac{P_i + N_i}{P + N} * H(P_i, N_i)
+H(A) = \sum_{i} \frac{P_i + N_i}{P + N} * H(P_i, N_i)
 $$
 
 Gain obtained by splitting the dataset $S$ by attribute $A$.
@@ -354,9 +366,13 @@ $$
 Gain(A) = H(P, N) - H(A)
 $$
 
-The gain indicate how a split on a certain attribute will influence our data set. The lower the entropy becomes, the greater is the gain, the more \textit{organised} and \textit{certain} become the data set.
+The gain indicates how a split on a certain attribute will influence our data set. The lower the entropy becomes, the greater is the gain, the more \textit{organised} and \textit{certain} become the data set.
 
-These equations can seem obscure at a first look, the figure \ref{pic:entropy} illustrates how the entropy of an attribute is calculated and make it easyier to understand what represent the equations.
+The figure \ref{pic:entropy} illustrates how the entropy of an attribute is calculated.
+
+In order to choose how to next split $S$, we compute the gain of each attribute $A$ regarding $S$ and choose the best.
+
+\textbf{Pruning} The construction algorithm aforementioned 	doesn't filter out noise which may lead to over fitting. In order to circumvent this disagreement the Decision tree can be \href{https://en.wikipedia.org/wiki/Pruning_(decision_trees)}{pruned}.
 
 
 \begin{figure}[H]%---------------FIG--------------
@@ -373,15 +389,13 @@ These equations can seem obscure at a first look, the figure \ref{pic:entropy} i
 %========================================
 \subsubsection{Random Forest}
 
-A common problem when trying to build a model is to select significant features between all the available one. We tend to think that \textit{the more we have, the better it is}, even knowing the existence of the curse of dimensionality. 
+A common problem when trying to build a model is to select significant features between all the available ones. We tend to think that \textit{the more we have, the better it is}, even knowing the existence of the curse of dimensionality. 
 
-Random Forest takes this idea and try to automatize this feature selection by randomly selecting subset of features.
+Random Forest exploits this previous idea and tries to automatize the feature selection process by randomly selecting subsets of features.
 
-The main idea of Random Forest algorithm is to grow an arbitrary number of \textbf{Decision Trees}, each one grown based on a subset of m features, randomly chosen between the total $p$ of them. It's an example of a \textbf{weak learner} saw in the Ensemble method. This weak learner has a lower bias (because of lower number of feature).
+The main idea of Random Forest algorithm is to grow an arbitrary number of \textbf{Decision Trees}, each one based on a subset of m features, randomly chosen between the total $p$. It's an example of \textbf{weak learners} seen in the Ensemble method. These weak learners have a lower bias (because of lower number of feature).
 
-Following the \textbf{Ensemble method}, the predictions of all these weak learners are then merged together to produce a final prediction (by majority voting for example).
-
-
+Ensemble methods can be compared to crowd-sourced machine learning algorithms in the sense that we use a collection of weak learners and combine their results to make a better prediction.
 
 \begin{center} %---------------TAB--------------
 \begin{tabular} {| l | l |}

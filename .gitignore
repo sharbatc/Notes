@@ -1,5 +1,5 @@
 # Remove the additional files created when compiling with Latex
-
+*.dvi
 *.aux
 *.log
 *.toc
