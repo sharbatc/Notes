@@ -395,7 +395,12 @@ Random Forest exploits this previous idea and tries to automatize the feature se
 
 The main idea of Random Forest algorithm is to grow an arbitrary number of \textbf{Decision Trees}, each one based on a subset of m features, randomly chosen between the total $p$. It's an example of \textbf{weak learners} seen in the Ensemble method. These weak learners have a lower bias (because of lower number of feature).
 
-Ensemble methods can be compared to crowd-sourced machine learning algorithms in the sense that we use a collection of weak learners and combine their results to make a better prediction.
+\textbf{Ensemble methods} can be compared to crowd-sourced machine learning algorithms in the sense that we use a collection of weak learners and combine their results to make a better prediction. There are several different types of ensemble methods : 
+\begin{itemize}
+	\item \textbf{Bagging :} Train learners in parallel on different samples of the data and then combine the results by voting/averaging for discrete/continuous outputs.
+	\item \textbf{Stacking :} A first series of learners is trained on the samples, then a combiner algorithm is trained to make a final prediction using the outputs of the first series of learners.
+	\item \textbf{Boosting :} (see next section)  
+\end{itemize}
 
 \begin{center} %---------------TAB--------------
 \begin{tabular} {| l | l |}
@@ -410,20 +415,21 @@ Ensemble methods can be compared to crowd-sourced machine learning algorithms in
 
 %===============================
 \subsubsection{Boosted Decision Trees}
-Variante of Random Forest. Instead of training all DT independently on weak subset, the DT are trained sequentially and emphase incorrectly-labeled instances of the previous tree. This is called \textbf{Boosting}. 
+Variant of Random Forests. Instead of performing the training of all DTs independently on a weak subset, train learners on the filtered outputs of other learners. The building of the ensemble is incremental where each new model instance is made to emphasize instances that previous models mis-classified. The accuracy yielded by boosting can be better than bagging but it also tends to overfit the training data. 
+This is called \textbf{Boosting}. 
 \begin{itemize}
 \item Low variance, because of the small trees handling small numbers of features
 \item Low bias, reduces by the boosting
 \end{itemize}
 
-Opposed to RF that usually trained tens of medium-sized trees, BDT works on smaller trees in greater numbers.
+Opposed to Random Forests that usually trains tens of medium-sized trees, Boosted Decision Trees works on smaller trees in greater numbers.
 
-Even if they show good results, their big drayback is their slow execution compared with the parallelized RF.
+On the side of performances, even if they show good results, the big drawback of Boosted Decision Trees is their slow execution compared with the parallelized Random Forest.
 
 %===============================
 \subsubsection{About model transparency}
 
-A recurrent argument of using Decision Tree (DT) or Random Forest (RF) in industry is their transparency compared to state-of-the-art Deep-Neural-Network (DNN). This argument must be carefully taken. Even if by their very nature DT are more understandable by a human than DNN, the more features and Trees we had, the more complicated it becomes. Figure \ref{pic:RF_BT} shows the size of a common industry implementation of RF and BT where there are no more possibilities of human understanding.
+A recurrent argument of using Decision Tree (DT) or Random Forest (RF) in industry is their transparency compared to state-of-the-art Deep-Neural-Network (DNN) that are often "black-boxed". This argument must be carefully taken. Even if by their very nature DT are more understandable by a human than DNN, the more features and Trees we had, the more complicated it becomes and the less transparency we have even for DTs. Figure \ref{pic:RF_BT} shows the size of a common industry implementation of RF and BT where there are no more possibilities of human understanding.
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -438,28 +444,36 @@ A recurrent argument of using Decision Tree (DT) or Random Forest (RF) in indust
 Linear regression model produces a prediction equation:
 
 $$
-\hat{y} = \hat{\beta_0} + \sum\limits_{j=1}^p  X_j + \hat{ \beta_j}
+\hat{y} = \hat{\beta_0} + \sum\limits_{j=1}^p  X_j \hat{ \beta_j}
 $$
 
-or in matrix notaction
+or in matrix notation
 
 $$
 \hat{y} =X \hat{ \beta}
 $$
 
-Where $X_j$ are the data and $\hat{\beta_j}$ the characteristic of the model. 
+Where $X = \begin{pmatrix} X_{11} & \cdots & X_{1N} \\ \vdots & \ddots &  \vdots \\ X_{M1} & \cdots & X_{MN} \end{pmatrix}$ is the input data, more precisely, rows of $X$ are distinct observations and columns of $X$ are input features.The $\hat{\beta_j}$ are the coefficients of the model. 
+
+\paragraph{Least Squares Solution}
+
+The most common measure of fit between the line and the data is the \href{https://en.wikipedia.org/wiki/Least_squares}{least-squares} fit because if we start from the hypothesis that the points are the addition of a line with Gaussian noise, the least squares corresponds to the maximum likelihood solution.
+
+\paragraph{Overfitting}
+
+A common mistake that leads to overfitting is to ignore feature selection, in fact having more features doesn't mean getting better results. Therefore it's always a good idea to carefully select features to improve model accuracy. More advanced models of regression include forms of feature control such as \href{https://en.wikipedia.org/wiki/Tikhonov_regularization}{ridge regression} or \href{https://en.wikipedia.org/wiki/Lasso_(statistics)}{Lasso regression} that include embedded regularizers.
 
 \subsubsection{Statistic validation}
 
-As a linear model can be calculated for every possible existing dataset, it is not enough to calculate it, but the existing of linear relationship between the data must be prooved.
+As a linear model can be evaluated for every possible existing dataset, it is not enough to compute it, but the existing of a meaningful linear relationship in the data must be determined beforehand.
 
 \paragraph{$R^2$-value}
 
-$R^2$-value describes how much of the total variance is reduced when we include the line as an offset. It computes the distances between the real $y$ and the predicted $\hat{y}$, and compares them with the distance between real $y$ and the mean $\bar{y}$.
+$R^2$-value describes how much of the total variance is reduced when we include the line as an offset. It computes the distances between the real $y$ and the predicted $\hat{y}$, and compares them with the distance between real $y$ and the mean $\bar{y}$. It's therefore a good indicator on how a line fits our data.
 
 \begin{itemize}
 \item if $R^2 = 0$, then there is no difference between the linear model and the trivial mean $\bar{y}$. Then we conclude that there is not any evidence of linear relationship in our dataset and \textbf{we cannot use the model}.
-\item if $R^2 = 1$, then the data perfectly alligned on the linear regression line and \textbf{the model is perfect}.
+\item if $R^2 = 1$, then the data perfectly aligned on the linear regression line and \textbf{the model is perfect}.
 \end{itemize}
 
 \begin{figure}[H]%---------------FIG--------------
@@ -471,7 +485,7 @@ $R^2$-value describes how much of the total variance is reduced when we include 
 
 \paragraph{p-value}
 
-From the Distribution of Fisher (F-Distribution) we can derive a p-value which is, as usual, the probability that the observed data are produced by the null hypothesis which is, in our case, the hypothesis \textit{no linear relationship}. For $p < 0.05$ we conclude, as usual, that it is very unlikely that the data were produced by the null hypothesis and we then accept the hypothesis \textit{the data are produced by linear relationship}.
+From the Distribution of Fisher (F-Distribution) we can derive a p-value which is, as usual, the probability that the observed data validates the null hypothesis which is, in our case, the hypothesis \textit{that there is no linear relationship in the data}. For $p < 0.05$ we conclude, as usual, that it is very unlikely that the data were produced by the null hypothesis and we then accept the hypothesis \textit{the data follows a linear relationship}.
 
 
 
