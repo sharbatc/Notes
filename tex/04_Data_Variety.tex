@@ -24,22 +24,39 @@ The {\bf Schema}, which specifies the {\it structure} and {\it types} of data re
 
 \subsubsection{\href{https://en.wikipedia.org/wiki/XML}{XML} and \href{https://en.wikipedia.org/wiki/Document\_Object\_Model}{DOM}}
 
-The XML data are used mostly with HTML and specifies the data structure. An XML schema can be applied to interpret the XML data and specifies the {\bf data types}. Figure \ref{pic:xml} shows the XML data \ref{pic:xml_data} and the schema \ref{pic:xml_schema} used to parse and type the data.
+The XML data are used mostly with HTML and specifies the data structure. An XML schema can be applied to interpret the XML data and specifies the {\bf data types}. Figure \ref{fig:xml_data} shows the XML data and Figure \ref{fig:xml_schema} shows the schema used to parse and type the data.
 
-\begin{figure} [h] %----------- SubGraph ---------------------
-\centerline{
-\subfigure[XML data \label{pic:xml_data}] {\includegraphics[width=5cm]{img/04/xml_data} }
-\subfigure[XML schema\label{pic:xml_schema}] {\includegraphics[width=7cm]{img/04/xml_schema} } 
-}
-\caption{\label{pic:xml} Example of XML.} 
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+  \begin{lstlisting}[language=XML]
+    <location>
+      <latitude>37.78333</latitude>
+      <longitude>122.4167</longitude>
+    </location>
+  \end{lstlisting}
+ \caption{\label{fig:xml_data} XML data defined by the schema in Figure \ref{fig:xml_schema}.}
+\end{figure}
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+  \begin{lstlisting}[language=XML]
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+    <xsd:complexType name="location">
+      <xsd:sequence>
+	<xsd:element name="latitude" type="xsd:decimal"/>
+	<xsd:element name="longitude" type="xsd:decimal"/>
+      </xsd:sequence>
+    </xsd:complexType name="location">
+  \end{lstlisting}
+ \caption{\label{fig:xml_schema} XML schema for the XML data in Figure \ref{fig:xml_data}.}
 \end{figure}
 
 The XML is a text format that encodes {\bf DOM} (Document-Object Models). It's a data structure often used by Web pages. The DOM is tree-structured. An example of a DOM is given in Figure \ref{pic:dom}.
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
- \includegraphics[width=10cm]{./img/04/dom}
- \caption{\label{pic:dom} Example of a DOM tree for an HTML Web page.}
+ \includegraphics[width=15cm]{./img/04/dom}
+ \caption{\label{pic:dom} Example of a DOM tree for an HTML Web page. See example on \href{http://www.w3schools.com/xml/dom_intro.asp}{W3Schools}.}
 \end{figure}
 
 THe XML schema allows a database to interpret the data when running queries. It can do arithmetic or range queries on numerical values, for example.
@@ -48,11 +65,36 @@ THe XML schema allows a database to interpret the data when running queries. It 
 
 {\bf JSON} stands for Javascript Object Notation. It's a schemaless data (schema support was added later). An example of JSON data is shown in Figure \ref{pic:json}
 
-\begin{figure}[H]%---------------FIG--------------
- \centering
- \includegraphics[width=8cm]{./img/04/json}
+\begin{figure}[t]%---------------FIG--------------
+  \begin{lstlisting}[language=json]
+  {
+    "firstName": "John",
+    "lastName": "smith",
+    "age": 25,
+    "address": {
+      "streetAddress": "21 2nd Street",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10021-3100"
+    },
+    "phoneNumbers": [
+      {
+	"type": "home",
+	"number": "212 555-1234"
+      },
+      {
+	"type": "office",
+	"number": "646 555-4567"
+      }
+    ],
+    "children": [],
+    "spouse": null
+  }
+  \end{lstlisting}
  \caption{\label{pic:json} Example of a JSON data.}
 \end{figure}
+
+
 
 JSON is typically used to represent {\bf hierarchical data structures} directly in the target language (Javascript or Java at the beginning). The transformation on the data is procedural in the target languages. It is often easier for some tasks, but it can be painful for some of them: for example schema changes.
 
