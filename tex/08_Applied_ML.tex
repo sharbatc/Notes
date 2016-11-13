@@ -1,0 +1,89 @@
+% !TEX root = ../notes.tex
+
+% ================  Applied ML ==============
+
+\section{Applied Machine Learning}
+
+In this Chapter, the pipeline of a \emph{Machine Learning} process is explained. Before discovering in-depth the ways which \emph{Machine Learning} can be applied, we summarize briefly, in Figure, the time usage of the \emph{ML} pipeline according to different approaches.
+
+% INSERT FIG OF ML USAGE
+
+\subsection{Classification pipeline}
+
+The showed pipeline refers to the \emph{Classification} problem, it can generalized for regression though. The Figure, clearly describes the main steps of the process.
+
+% INSERT pipeline 
+
+\subsubsection{Data Collection}
+
+The fist step is the collection of data for a \emph{Classification} task. In particular, it consists in defining the \emph{attributes} that describe the data item of interest and the class label. In order to do that, a deep knowledge of the data domain is required. Furthermore, one of the most challenging aspects of the classification's \emph{data collection} is to get the class label for the items. In fact, most of the time the labels are missing. Trying to avoid and reduce this problem, many solutions have been proposed and most of them involve the interaction with humans. At this point be creative can be an extra-point, in fact you can use your imagination to try to figure out systems that allowed you to get the data.
+
+In Figure we see more in-depth the pipeline of the \emph{Data Collection} step. 
+
+% INSERT data collection pipeline 
+
+\subsubsection*{Identification of features}
+
+Since the feature describe the item we need to classify, their identification is a fundamental step in our pipeline. In particular we can distinguish between different types of features:
+\begin{itemize}
+\item \emph{Numerical} (e.g., age, temperature ...)
+\item \emph{Ordinal} (e.g., phone code ...)
+\item \emph{Categorical} (e.g., student, weather ...)
+\end{itemize}
+
+Moreover, new features can be generated from simple \emph{stats}, this process is known as \emph{Feature engineering} and  is considered a form of \emph{art}. It means that there are not specific rules to follow,  therefore the best suggestion is to look for people who have already attacked the same problem so that you can come up with new useful and powerful ideas.
+
+Some classifiers, often, require categorical features. It implies that that the features should undergo a \emph{pre-processing} known as \emph{discretisation}. This procedure could be divided into two:
+\begin{itemize}
+\item \textbf{Unsupervised}: does not take class information into account
+\begin{itemize}
+\item \emph{Equal width}: divides the range into a predefined number of bins. The obvious weakness of the equal-width method is that in cases where the outcome observations are not distributed evenly, a large amount of important information can be lost after the discretisation process. 
+
+\item \emph{Equal frequency}: divides the range into a predefined number of bins so that every interval contains the same number of values. For equal-frequency, many occurrences of a continuous value could cause the occurrences to be assigned into different bins. One improvement can be after continuous values are assigned into bins, boundaries of every pair of neighbouring bins are adjusted so that duplicate values should belong to one bin only.
+
+\item \emph{Clustering}: The advantage of using clustering as discretisation is that it can be performed on all the features at the same time, capturing in this way possible interdependencies of the features. Sometimes discretisation can even improve the performance of algorithms that, theoretically, do not need it.
+\end{itemize}
+
+\item \textbf{Supervised}: takes class information into account, measuring the dependency of a discrete interval of values w.r.t. the class label as described below
+
+\begin{itemize}
+\item Test the hypothesis that two adjacent intervals of a feature are independent of the class 
+\item If they are independent, they should be merged
+\item Otherwise they should remain separate
+\item Independence test: $\chi^2$ statistics
+\end{itemize}
+\end{itemize}
+
+The feature \emph{pre-processing} and selection have changed over the year. Before 2012- but still very common today- a clever design of the feature was considered the optimal recipe to make the model successful. After 2012, %INSERT REFERENCE TO THE PAPER,
+the features and the model are learned together, in what is called mutually reinforcing.
+
+\subsubsection*{Data labeling}
+
+Collecting lot of data is easy whereas labeling data is time consuming, difficult and sometimes even impossible. It is considered an extreme hard problem moreover based on subjective parameters. Nonetheless, there are ways to go beyond the limits of labeling, like the \emph{crowsourcing}. The latter is, generally, represented by a platform where data is passed and the human label the interested item. There are many platforms for doing it (POINTERS: \emph{CrowdFlower}, \emph{ClickWorker}, \emph{MechanicalTurk}).  Here an example, that shows the standard procedure of these platforms, follows . Consider we want to know whether a web page is or not reliable.  You, the \emph{requester}, pass the data to the platform, once the task has been accepted the \emph{Crowd} (workers) return the answer. Before explaining how the answer are aggregated to finally label the item, it is important to consider the vast kinds of workers than can be faced.
+\begin{itemize}
+\item \textbf{Truthful}
+\begin{itemize}
+\item \emph{Expert}
+\item \emph{Normal}
+\end{itemize}
+\item \textbf{Untruthful}
+\begin{itemize}
+\item \emph{Sloppy}: gives many wrong answers due to their knowledge limitations or misunderstanding
+\item \emph{Uniform spammer}: gives random answers for any question
+\item \emph{Random spammer}: keeps the same answer for every question
+\end{itemize}
+\end{itemize}
+
+The Figure, shows how each type of worker tends to contribute to the \emph{true positive} and \emph{true negative}  rates.
+%INSERT FIGURE
+
+When the \emph{crowd} has labeled the item, so all the answers are collected, we proceed aggregating them. In particular, the label assigned to the item is the one that registers the highest number of occurrences.
+
+
+
+
+ 
+
+
+
+
