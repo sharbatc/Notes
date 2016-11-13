@@ -4,7 +4,9 @@
 
 \section{Applied Machine Learning}
 
-In this Chapter, the pipeline of a \emph{Machine Learning} process is explained. Before discovering in-depth the ways which \emph{Machine Learning} can be applied, we summarize briefly, in Figure, the time usage of the \emph{ML} pipeline according to different approaches.
+In this Chapter, the pipeline of a \emph{Machine Learning} process is explained. Before discovering in-depth the ways which \emph{Machine Learning} can be applied, we summarize briefly, in Figure, the time usage of the \emph{ML} pipeline according to different approaches. 
+
+LINK OF IMPORTANT READS 
 
 % INSERT FIG OF ML USAGE
 
@@ -154,12 +156,132 @@ where $X_i$ is a feature, $\mu_i$ its mean and $\sigma_i$ its standard deviation
 
 $$X_i' = \frac{(X_i - m_i)}{(M_i - m_i)}$$
 
-where $X_i$ is a feature, $\m_i$ its minimum and $\M_i$ its maximum. The scaled belongs to the interval $[0,1]$.
+where $X_i$ is a feature, $m_i$ its minimum and $M_i$ its maximum. The scaled belongs to the interval [0,1].
 
 \end{itemize}
 
- 
+Before choosing the kind of normalization ti apply, we should understand what data we are using.
+
+\subsubsection{Model selection}
+
+INSERT PIPELINE IMAGE
+
+When we refer to the choice of a model, we do not only refer to the right classifier to pick but we have also to tune the parameters that characterize the model. These parameters can be:
+\begin{itemize}
+\item \emph{Regularisation factor}: how complicated the model can grow (i.e. Ridge regression)
+\item \emph{Threshold} 
+\item \emph{Distance function} (i.e. KNN)
+\item \emph{Number of neighbours} (i.e. KNN)
+\end{itemize}
+
+Moreover, it is necessary to define a metric that measures the performances of our model. We call the metric as \emph{Loss function}, and we distinguish between:
+\begin{itemize}
+\item \emph{Categorical output}
+\begin{itemize}
+\item \textbf{0-1 loss function}: counts how many labels are predicted correctly
+
+$$J = \sum_{i=1}^{N} \#(y_i \neq f(x_i))$$
+\end{itemize}
+\item \emph{Real value output}: 
+
+\begin{itemize}
+\item \textbf{Mean Squared Error (MSE)}
+$$J = \frac{1}{n}\sum_{i=1}^{n} (y_i -  f(x_i))^2$$
+\item \textbf{Mean Absolute Error (MAE)}
+$$J = \frac{1}{n}\sum_{i=1}^{n} |y_i -  f(x_i)|$$
+\end{itemize}
+
+\end{itemize}
+
+POINTERS TO OTHER KINDS OF LOSS FUNCTIONS
+INSERT IMAGE
+
+\subsubsection*{More performance metrics for the binary classification}
+
+For categorical binary classification, the usual metrics consider four types of errors:
+
+\begin{itemize}
+\item \emph{True Positive}: positive examples classified as positive
+\item \emph{True Negative}: negative examples classified as negative
+\item \emph{False Positive}: negative examples classified as positive
+\item \emph{False Negative}: positive examples classified as negative
+\end{itemize}
+
+IMAGE OF THE CONFUSION MATRIX
+
+According to what we want to control with our model we want to chose the most appropriate metric:
+\begin{itemize}
+\item \textbf{Accuracy}: generally used when the classes are not skewed
+and the errors have the same importance
+
+$$A = \frac{TP+TN}{TP+TN+FP+FN} =  \frac{TP+TN}{N}$$
+
+\item \textbf{Precision}: 
+$$P = \frac{TP}{TP+FP}$$
+
+High precision means that few irrelevant examples treated as important 
+\item \textbf{Recall}: 
+$$	R = \frac{TP}{TP+FN}$$
+High recall means that that the classifier is good at getting the positive class right
+\end{itemize}
+
+PRECISION AND RECALL EXAMPLE
+
+We see that the classifier 2 is more precise at hitting the cancer, in fact few patients erroneously diagnosed with cancer. Classifier 1 has a better recall, few patients with cancer are not diagnosed correctly. 
+The classifier "Everybody Has Cancer" detects all the patients with cancer, but also causes that 50\% of the patients with no cancer go home worried about their health status.
+
+Due to the fact that to compare different classifiers we need a unique metric, we introduce
+
+\begin{itemize}
+\item \textbf{F-Score}: 
+
+$$F = 2 \frac{P \times R}{P + R}$$
+\end{itemize}
+
+That is the harmonic average of the \emph{Precision} and the \emph{Recall}. Whether one is more important than the other  they can be differently weighted.
 
 
+For a graphical vision we introduce the ROC \emph{Area Under the Curve} (INSERT POINTER), a single number that captures the overall quality of the classifier. It should be between 0.5 (random classifier) and 1.0 (perfect classifier). 
 
+INSERT IMAGE
 
+Since we have presented some usable metrics to verify the power of the model, we proceed describing the pipeline used for the model selection.
+
+\subsubsection*{Split data into Training and test set}
+
+Out inter set of data is split into two parts, generally, 60\% training set and 40\% test set. The former is used to learn the model, once it has been found it is evaluated, according to the chosen metric, on the test set. 
+
+\subsubsection*{Tune parameters through the Cross-Validation and Bias Variance trade-off}
+
+We present two different type of \emph{Cross-Validation}:
+\begin{itemize}
+\item \emph{Leave-One-Out Cross-Validation (LOO)}: which train the model on all the data except except one sample which the model is tested on. This operation is repeated for each sample. This form of \emph{CV}  is almost unbiased (=not optimistic) estimate of the true accuracy, however is time consuming because it performs a number of iterations equal to the number of samples in the data set. The evaluation of the model is the average of the errors obtained after each iteration.
+
+INSERT IMAGE
+
+\item \emph{K-Fold Cross-Validation}: which splits the data into K folds of equal size. In turn, $K-1$ folders are used as train set and the remaining as test. Also in this case, the evaluation of the model is defined as the average of the errors obtained after the all iterations. This kind of \emph{CV} is a good compromise between having an unbiased estimate of the true accuracy and computation time. The most widely used $K$ number is 10.
+
+\end{itemize}
+
+The bias and the variance of the model are other to important factors to take into account to select the model. In particular, they can be assessed by comparing the error metric on the training set and the test set, hence plotting the learning curves. In the ideal case, we want low bias (small training error) and low variance (small test error).
+
+The other cases:
+\begin{itemize}
+\item \emph{High bias - High variance}: is the worst case and having more data does not help
+
+\item \emph{High variance - Low Bias} it turns out in overfitting, the training error is low, the test error high though. We can opt for reducing the complexity of the model, adding regularization parameter and more data may help
+
+\item \emph{High bias - Low Variance}: in this case we have high training error and high test error, we fall in underfitting. A solution could be increasing the complexity of the model (adding more features), reducing the regularization parameter.
+\end{itemize}
+
+\subsubsection{Model assessment}
+
+Model assessment is the goal of estimating the classification accuracy of a fixed model (i.e., the best model found during model selection).
+
+At this point, to evaluate the model we use all the data set and we repeat the following steps:
+\begin{enumerate}
+\item \emph{Training and test}
+\item \emph{Leave-one-out} or {K-fold cross-validation}
+\end{enumerate}
+
+This is a different goal than model selection. The performance obtained during model selection is a biased estimate of the true performance.
