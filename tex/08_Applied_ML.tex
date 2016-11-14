@@ -4,7 +4,7 @@
 
 \section{Applied Machine Learning}
 
-In this chapter, the pipeline of a \href{https://github.com/papers-we-love/seattle/tree/master/useful-things-to-know-about-ml}{\emph{Machine Learning}} process is explained. Before discovering in-depth the ways which \emph{Machine Learning} can be applied, we summarize briefly, in Figure \ref{pic:time_usage}, the time usage of the \emph{ML} pipeline according to different approaches. 
+In this chapter, the pipeline of a {\emph{Machine Learning}} process is explained \footnote{A few interesting things can be read on GitHub repository of \href{https://github.com/papers-we-love/seattle/tree/master/useful-things-to-know-about-ml}{Paper-we-Love}}. Before discovering in-depth the ways which \emph{Machine Learning} can be applied, we summarize briefly, in Figure \ref{pic:time_usage}, the time usage of the \emph{ML} pipeline according to different approaches. 
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -14,7 +14,7 @@ In this chapter, the pipeline of a \href{https://github.com/papers-we-love/seatt
 
 \subsection{Classification pipeline}
 
-The showed pipeline refers to the \emph{Classification} problem, it can generalized for regression though. The Figure \ref{pic:classification_pipeline}, clearly describes the main steps of the process.
+The showed pipeline refers to the \emph{Classification} problem, it can be generalized for regression though. The Figure \ref{pic:classification_pipeline}, clearly describes the main steps of the process.
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -24,7 +24,7 @@ The showed pipeline refers to the \emph{Classification} problem, it can generali
 
 \subsubsection{Data Collection}
 
-The fist step is the collection of data for a \emph{Classification} task. In particular, it consists in defining the \emph{attributes} that describe the data item of interest and the class label. In order to do that, a deep knowledge of the data domain is required. Furthermore, one of the most challenging aspects of the classification's \emph{data collection} is to get the class label for the items. In fact, most of the time the labels are missing. Trying to avoid and reduce this problem, many solutions have been proposed and most of them involve the interaction with humans. At this point be creative can be an extra-point, in fact you can use your imagination to try to figure out systems that allowed you to get the data.
+The first step is the collection of data for a \emph{Classification} task. In particular, it consists in defining the \emph{attributes} that describe the data item of interest and the class label. In order to do that, a deep knowledge of the data domain is required. Furthermore, one of the most challenging aspects of the classification's \emph{data collection} is to get the class label for the items. In fact, most of the time the labels are missing. Trying to avoid and reduce this problem, many solutions have been proposed and most of them involve the interaction with humans. At this point be creative can be an extra-point, in fact you can use your imagination to try to figure out systems that allowed you to get the data.
 
 In Figure \ref{pic:data_collection_pipeline}, we see more in-depth the pipeline of the \emph{Data Collection} step. 
 
@@ -36,7 +36,7 @@ In Figure \ref{pic:data_collection_pipeline}, we see more in-depth the pipeline 
 
 \subsubsection*{Identification of features}
 
-Since the feature describe the item we need to classify, their identification is a fundamental step in our pipeline. In particular we can distinguish between different types of features:
+Since the feature describes the item we need to classify, their identification is a fundamental step in our pipeline. In particular we can distinguish between different types of features:
 \begin{itemize}
 \item \emph{Numerical} (e.g., age, temperature ...)
 \item \emph{Ordinal} (e.g., phone code ...)
@@ -71,7 +71,7 @@ the features and the model are learned together, in what is called mutually rein
 
 \subsubsection*{Data labeling}
 
-Collecting lot of data is easy whereas labeling data is time consuming, difficult and sometimes even impossible. It is considered an extreme hard problem moreover based on subjective parameters. Nonetheless, there are ways to go beyond the limits of labeling, like the \emph{crowsourcing}. The latter is, generally, represented by a platform where data is passed and the human label the interested item. There are many platforms for doing it (\href{https://en.wikipedia.org/wiki/CrowdFlower}{\emph{CrowdFlower}}, \href{https://www.clickworker.com}{\emph{ClickWorker}}, \href{https://en.wikipedia.org/wiki/Amazon_Mechanical_Turk}{\emph{MechanicalTurk}}).  Here, Figure \ref{pic:crowdsourcing}, an example, that shows the standard procedure of these platforms, follows . Consider we want to know whether a web page is or not reliable.  
+Collecting lot of data is easy whereas labeling data is time consuming, difficult and sometimes even impossible. It is considered an extreme hard problem, moreover, based on subjective parameters. Nonetheless, there are ways to go beyond the limits of labeling, like the \emph{crowdsourcing}. The latter is, generally, represented by a platform where data is passed and the human label the interested item. There are many platforms for doing it (\href{https://en.wikipedia.org/wiki/CrowdFlower}{\emph{CrowdFlower}}, \href{https://www.clickworker.com}{\emph{ClickWorker}}, \href{https://en.wikipedia.org/wiki/Amazon_Mechanical_Turk}{\emph{MechanicalTurk}}).  Here, Figure \ref{pic:crowdsourcing}, an example, that shows the standard procedure of these platforms, follows . Consider we want to know whether a web page is or not reliable.  
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -79,7 +79,7 @@ Collecting lot of data is easy whereas labeling data is time consuming, difficul
  \caption{\label{pic:crowdsourcing} \emph{Crowdsourcing} process.}
 \end{figure}
 
-You, the \emph{requester}, pass the data to the platform, once the task has been accepted the \emph{Crowd} (workers) return the answer. Before explaining how the answer are aggregated to finally label the item, it is important to consider the vast kinds of workers than can be faced.
+You, the \emph{requester}, pass the data to the platform, once the task has been accepted the \emph{Crowd} (workers) return the answer. Before explaining how the answers are aggregated to finally label the item, it is important to consider the vast kinds of workers than can be faced.
 
 \clearpage 
 
@@ -92,8 +92,8 @@ You, the \emph{requester}, pass the data to the platform, once the task has been
 \item \textbf{Untruthful}
 \begin{itemize}
 \item \emph{Sloppy}: gives many wrong answers due to their knowledge limitations or misunderstanding
-\item \emph{Uniform spammer}: gives random answers for any question
-\item \emph{Random spammer}: keeps the same answer for every question
+\item \emph{Uniform spammer}: gives random answers to any question
+\item \emph{Random spammer}: keeps the same answer to every question
 \end{itemize}
 \end{itemize}
 
@@ -125,7 +125,7 @@ The aim of the \emph{Feature Selection} procedure is to reduce the number of \em
 \item (\textbf{-}) Assume features are independent
 \end{itemize}
 
-Defining $X$ as a feature and $Y$ as the class label. The ranking of the features is determined in different way according to the kind of attribute:
+Defining $X$ as a feature and $Y$ as the class label. The ranking of the features is determined in different ways according to the kind of attribute:
 \begin{itemize}
 \item \textbf{Numerical}:
 \begin{itemize}
@@ -203,7 +203,7 @@ Before choosing the kind of normalization ti apply, we should understand what da
  \caption{\label{pic:model_selection} Model selection \emph{pipeline}.}
 \end{figure}
 
-When we refer to the choice of a model, we do not only refer to the right classifier to pick but we have also to tune the parameters that characterize it. These parameters can be:
+When we refer to the choice of a model, we do not only refer to the right classifier to pick but we also have to tune the parameters that characterize it. These parameters can be:
 \begin{itemize}
 \item \emph{Regularisation factor}: how complicated the model can grow (i.e. Ridge regression)
 \item \emph{Threshold} 
@@ -236,7 +236,7 @@ $$J = \frac{1}{n}\sum_{i=1}^{n} |y_i -  f(x_i)|$$
  \caption{\label{pic:loss_parameter} Loss function as function of the parameter.}
 \end{figure}
 
-There are many other kind of loss functions, \href{https://en.wikipedia.org/wiki/Loss_function}{look up} for them!
+There are many other kinds of loss functions, \href{https://en.wikipedia.org/wiki/Loss_function}{look up} for them!
 
 \subsubsection*{More performance metrics for the binary classification}
 
@@ -255,7 +255,7 @@ For categorical binary classification, the usual metrics consider four types of 
  \caption{\label{pic:confusion_matrix} Confusion matrix.}
 \end{figure}
 
-According to what we want to control with our model we want to chose the most appropriate metric:
+According to what we want to control with our model we want to choose the most appropriate metric:
 \begin{itemize}
 \item \textbf{Accuracy}: generally used when the classes are not skewed
 and the errors have the same importance
@@ -301,7 +301,7 @@ For a graphical vision we introduce the \href{https://en.wikipedia.org/wiki/Rece
  \caption{\label{pic:roc} ROC AUC. \emph{Y-axis}: true positive rate = $\frac{TP}{(TP + FN)}$, same as recall, \emph{X-axis}: false positive rate =$\frac{FP}{(FP + TN)} =$ 1 - specificity.}
 \end{figure}
 
-Since we have presented some usable metrics to verify the power of the model, we proceed describing the pipeline used for the model selection.
+Since we have presented some usable metrics to verify the power of the model, we proceed to describe the pipeline used for the model selection.
 
 \subsubsection*{Split data into Training and test set}
 
@@ -315,9 +315,9 @@ Out inter set of data is split into two parts, generally, 60\% training set and 
 
 \subsubsection*{Tune parameters through the Cross-Validation and Bias Variance trade-off}
 
-We present two different type of \emph{Cross-Validation}:
+We present two different types of \emph{Cross-Validation}:
 \begin{itemize}
-\item \emph{Leave-One-Out Cross-Validation (LOO)}: which train the model on all the data except except one sample which the model is tested on. This operation is repeated for each sample, Figure \ref{pic:loo}. This form of \emph{CV}  is almost unbiased (=not optimistic) estimate of the true accuracy, however is time consuming because it performs a number of iterations equal to the number of samples in the data set. The evaluation of the model is the average of the errors obtained after each iteration.
+\item \emph{Leave-One-Out Cross-Validation (LOO)}: which train the model on all the data except one sample which the model is tested on. This operation is repeated for each sample, Figure \ref{pic:loo}. This form of \emph{CV}  is almost unbiased (=not optimistic) estimate of the true accuracy, however, is time consuming because it performs a number of iterations equal to the number of samples in the data set. The evaluation of the model is the average of the errors obtained after each iteration.
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -325,7 +325,7 @@ We present two different type of \emph{Cross-Validation}:
  \caption{\label{pic:loo} \emph{LOO} cross validation.}
 \end{figure}
 
-\item \emph{K-Fold Cross-Validation}: which splits the data into K folds of equal size, Figure \ref{pic:kfold}. In turn, $K-1$ folders are used as train set and the remaining as test. Also in this case, the evaluation of the model is defined as the average of the errors obtained after the all iterations. This kind of \emph{CV} is a good compromise between having an unbiased estimate of the true accuracy and computation time. The most widely used $K$ number is 10.
+\item \emph{K-Fold Cross-Validation}: which splits the data into K folds of equal size, Figure \ref{pic:kfold}. In turn, $K-1$ folders are used as train set and the remaining as test. Also in this case, the evaluation of the model is defined as the average of the errors obtained after all the iterations. This kind of \emph{CV} is a good compromise between having an unbiased estimate of the true accuracy and computation time. The most widely used $K$ number is 10.
 
 \begin{figure}[H]%---------------FIG--------------
  \centering
@@ -343,7 +343,7 @@ The other cases:
 
 \item \emph{High variance - Low Bias} it turns out in overfitting, the training error is low, the test error high though. We can opt for reducing the complexity of the model, adding regularization parameter and more data may help
 
-\item \emph{High bias - Low Variance}: in this case we have high training error and high test error, we fall in underfitting. A solution could be increasing the complexity of the model (adding more features), reducing the regularization parameter.
+\item \emph{High bias - Low Variance}: in this case we have a high-training error and high test error, we fall in underfitting. A solution could be increasing the complexity of the model (adding more features), reducing the regularization parameter.
 \end{itemize}
 
 \begin{figure}[H]%---------------FIG--------------
