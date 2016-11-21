@@ -113,60 +113,56 @@ When the \emph{crowd} has labeled the item, so all the answers are collected, we
 The aim of the \emph{Feature Selection} procedure is to reduce the number of \emph{N} features to a subset with the best $M < N$. The number of all the possible combination is $2^N$, when \emph{N} gets larger the required time to validate all the possible subsets of features sharply increases. Hence, there are two different available solution:
 \begin{itemize}
 \item \textbf{Filtering}: ranks features according to their predictive power and select the best ones
-\begin{itemize}
-\item (\textbf{+}) Independent of the classifier (performed only once)
-\item (\textbf{-}) Independent of the classifier (ignore interaction with the classifier)
-\item (\textbf{-}) Assume features are independent
+  \begin{itemize}
+    \item[{\bf +}] Independent of the classifier (performed only once)
+    \item[{\bf --}] Independent of the classifier (ignore interaction with the classifier)
+    \item[{\bf --}] Assume features are independent
+  \end{itemize}
+
+  Defining $X$ as a feature and $Y$ as the class label. The ranking of the features is determined in different ways according to the kind of attribute:
+  \begin{itemize}
+    \item \textbf{Numerical}:
+    \begin{itemize}
+      \item \href{https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient}{\emph{Pearson Correlation Coefficient}}
+      $$\rho = \frac{\sum_{i=1}^{n}(X_i - \bar{X})(Y_i - \bar{Y})}{\sqrt{\sum_{i=1}^{n}(X_i - \bar{X})^2}\sqrt{\sum_{i=1}^{n}(Y_i - \bar{Y})^2}}$$
+
+      \emph{Remark}: This metric only captures the linear relations! Furthermore, defining the correlation threshold is subjective (which is a good correlation value? 0.7 is enough?).
+
+      \item \emph{Mutual information}: measures the information that $X$ and $Y$ share. In particular, it measures how much knowing one of these variables reduces uncertainty about the other. 
+
+      $$ I(X,Y) = H(Y) - H(Y|X) = H(X) + H(Y) + H(X,Y)$$
+      $$ H(X) = - \sum_{i}P(x_i)\log_2 P(x_i)$$
+      $$ H(X,Y) = - \sum_{i}\sum_{j}P(x_i, y_j)\log_2 P(x_i, y_j)$$
+
+      In particular,
+
+      $$\left\{\begin{matrix}
+      If \quad $I(X,Y) = 0$ & \quad X \quad does \quad not \quad tell \quad anything \quad about \quad Y\\ 
+      Elif \quad $I(X,Y) = max$ & \quad X \quad tells \quad everything \quad about \quad Y
+      \end{matrix}\right.$$
+    \end{itemize}
+    \item \textbf{Categorical}: 
+    \begin{itemize}
+      \item \href{https://en.wikipedia.org/wiki/Chi-squared_test}{$\chi^2$ method}: Different to correlation, the chi-square test checks the independence of the class and the feature, without indicating the strength or direction of any existing relationship. It is very powerful
+    \end{itemize}
+    A very important thing to keep in mind is that \textbf{collectively relevant features may look individually irrelevant!}. Hence, it is important to try to figure it out.
+  \end{itemize}
+  \item \textbf{Wrapper}: iteratively \textbf{adds} features, using cross-validation to guide feature inclusion and stopping when there is no improvement
+  \begin{itemize}
+    \item[{\bf +}] Interact with the classifier
+    \item[{\bf +}] No independence assumption
+    \item[{\bf --}] Computationally intensive
+  \end{itemize}
+
+  \item \textbf{Ablation}: iteratively \textbf{remove} features, using \emph{cross-validation} to guide feature inclusion and stopping when there is no improvement
+
+  \begin{itemize}
+    \item[{\bf +}] Interact with the classifier
+    \item[{\bf +}] No independence assumption
+    \item[{\bf --}] Computationally intensive
+  \end{itemize}
 \end{itemize}
-
-Defining $X$ as a feature and $Y$ as the class label. The ranking of the features is determined in different ways according to the kind of attribute:
-\begin{itemize}
-\item \textbf{Numerical}:
-\begin{itemize}
-\item \href{https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient}{\emph{Pearson Correlation Coefficient}}
-$$\rho = \frac{\sum_{i=1}^{n}(X_i - \bar{X})(Y_i - \bar{Y})}{\sqrt{\sum_{i=1}^{n}(X_i - \bar{X})^2}\sqrt{\sum_{i=1}^{n}(Y_i - \bar{Y})^2}}$$
-
-\emph{Remark}: This metric only captures the linear relations! Furthermore, defining the correlation threshold is subjective (which is a good correlation value? 0.7 is enough?).
-
-\item \emph{Mutual information}: measures the information that $X$ and $Y$ share. In particular, it measures how much knowing one of these variables reduces uncertainty about the other. 
-
-$$ I(X,Y) = H(Y) - H(Y|X) = H(X) + H(Y) + H(X,Y)$$
-$$ H(X) = - \sum_{i}P(x_i)\log_2 P(x_i)$$
-$$ H(X,Y) = - \sum_{i}\sum_{j}P(x_i, y_j)\log_2 P(x_i, y_j)$$
-
-In particular,
-
-$$\left\{\begin{matrix}
-If \quad $I(X,Y) = 0$ & \quad X \quad does \quad not \quad tell \quad anything \quad about \quad Y\\ 
-Elif \quad $I(X,Y) = max$ & \quad X \quad tells \quad everything \quad about \quad Y
-\end{matrix}\right.$$
-\end{itemize}
-
-\item \textbf{Categorical}: 
-\begin{itemize}
-\item \href{https://en.wikipedia.org/wiki/Chi-squared_test}{$\chi^2$ method}: Different to correlation, the chi-square test checks the independence of the class and the feature, without indicating the strength or direction of any existing relationship. It is very powerful
-\end{itemize}
-
-A very important thing to keep in mind is that \textbf{collectively relevant features may look individually irrelevant!}. Hence, it is important to try to figure it out.
-\end{itemize}
-
-\item \textbf{Wrapper}: iteratively \textbf{adds} features, using cross-validation to guide feature inclusion and stopping when there is no improvement
-
-\begin{itemize}
-\item (\textbf{+}) Interact with the classifier
-\item (\textbf{+}) No independence assumption
-\item (\textbf{-}) Computationally intensive
-\end{itemize}
-
-\item \textbf{Ablation}: iteratively \textbf{remove} features, using \emph{cross-validation} to guide feature inclusion and stopping when there is no improvement
-
-\begin{itemize}
-\item (\textbf{+}) Interact with the classifier
-\item (\textbf{+}) No independence assumption
-\item (\textbf{-}) Computationally intensive
-\end{itemize}
-
-\end{itemize}
+  
 
 \emph{Remark}: \href{http://www.tylervigen.com/spurious-correlations}{Beware of trusting} correlations in a blind way!! \emph{Correlation} is not \emph{causation}.
 

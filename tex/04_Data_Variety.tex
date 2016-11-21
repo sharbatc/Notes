@@ -130,12 +130,10 @@ They are often the key to performance because we {\bf avoid expensive parsing}. 
 In order to process XML, we can use the DOM. It can also be used to process JSON data. The DOM is very easy to work with: all the data are directly accessible by links. The problem is that we {\bf might not care about most of the data} and if the data are big, they {\bf might not fit into the RAM}. In order to deal with these two problems, we can use a {\bf SAX} parser which is an event-driven parser. It will find all the {\bf open-close-tag events} in an XML document and will {bf do callbacks to user code}.
 
 \begin{itemize}
-\renewcommand{\labelitemi}{{\bf +}}
- \item User code can respond to only a subset of events corresponding to the tag it is interested in.
- \item User code can correctly compute aggregates from the data rather than create a record for each tag.
- \item User code can implement flexible error recovery strategies for ill-formed XML.
-\renewcommand{\labelitemi}{{\bf --}}
- \item User code must implement a state machine to keep track of ``where it is'' in the DOM tree.
+ \item[{\bf +}] User code can respond to only a subset of events corresponding to the tag it is interested in.
+ \item[{\bf +}] User code can correctly compute aggregates from the data rather than create a record for each tag.
+ \item[{\bf +}] User code can implement flexible error recovery strategies for ill-formed XML.
+ \item[{\bf --}] User code must implement a state machine to keep track of ``where it is'' in the DOM tree.
 \end{itemize}
 
 For JSON, most parsers construct the ``DOM'' directly. But there are a few SAX-style parsers: Jackson, JSON-simple, etc. Sometimes {\bf SAX-style is the way to handle ill-formed datasets}, an endless array of objects, for example.
