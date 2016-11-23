@@ -79,7 +79,7 @@ Map-Reduce is noe used by Google anymore (even if they invented it). Something m
 
 Because Memory is really cheap! RAM 1 cent/Mb. 
 
-\paragraph{Spark Computing Framework}
+\subsection{Spark Computing Framework}
 
 Spark provides a programming abstraction and parallel runtime to hide this complexity. Spark does all the complex cluster computing stuff! How are Spark and MapReduce Different?
 
@@ -110,6 +110,120 @@ Practical Advantages of Spark:
  \item High-level model ({\bf Scala Actors}) for distributed programming
  \item {\bf Scala generics} instead of reflection: Spark code is generic over [Key, Value] types.
 \end{itemize}
+
+Fault Tolerance
+
+Hadoop: Once computed, don't lose it (data replication on HDFS)
+
+Spark: Remember {\bf how} to recompute
+
+\subsubsection{Older Spark programming model}
+
+We use RDD (Resilient Distributed Dataset)
+\begin{itemize}
+ \item Distributed array, n partitions
+ \item Elements are lines of input
+ \item Computed {\bf on demand}
+ \item Computer = (re)read from input
+\end{itemize}
+
+You can do multiple cool things (ADD CODE + PICTURES):
+\begin{itemize}
+ \item Count the lines
+ \item Count the lines and comments
+ \item Cache stuff
+ \item filter
+ \item map 
+ \item flatMap
+ \item Shuffle transformations
+ \begin{itemize}
+  \item groupByKey
+  \item sortByKey
+ \end{itemize}
+ \item Getting data out of RDDs
+ \begin{itemize}
+  \item reduce
+  \item take
+  \item collect
+  \item saveAsTextFile
+ \end{itemize}
+\end{itemize}
+
+\subsubsection{Spark DataFrames}
+
+Bringing the gap between your experience with Pandas and the need for distributed computing. 
+
+Important to understand what RDDs are and what they offer, but today most of the tasks can be accomplished with DataFrames ({\bf higher lever of abstraction $=>$ less code})
+
+\subsubsection{Spark's Machine Learning Toolkit}
+
+MLLib:
+\begin{itemize}
+ \item Classification
+ \begin{itemize}
+  \item Logistic Regression
+  \item Decision Trees
+  \item Random Forests
+ \end{itemize}
+ \item Regression
+ \begin{itemize}
+  \item Linear (with L1 or L2 regularization)
+ \end{itemize}
+ \item Unsupervised
+ \begin{itemize}
+  \item Alternating Least Squares
+  \item K-Means
+  \item SVD
+ \end{itemize}
+ \item Optimizers
+ \begin{itemize}
+  \item Optimization primitives (SGD, L-BGFS)
+ \end{itemize}
+\end{itemize}
+
+\subsubsection{Spark Driver and Executors}
+
+\begin{itemize}
+ \item Driver runs user interaction, acts as master for batch jobs
+ \item Driver hosts machine learning models
+ \item Executors hold data aprtitions
+ \item Tasks process data blocks
+ \item Typically tasks/executors = number of hardware threads
+\end{itemize}
+
+Architectural Consequences
+\begin{itemize}
+ \item {\bf Simple programming}: Centralized model on driver, broadcast to other nodes
+ \item Models must fit in single-machine memory, \emph{i.e.} Spark supports {\bf data parallelisme} but not {\bf model parallelism}
+ \item Heavy load on the driver. Model {\bf update time grows} with number of nodes.
+\end{itemize}
+
+Other uses for MapReduce/Spark:
+
+Non-ML applications
+
+Data processing:
+\begin{itemize}
+ \item Select columns
+ \item Map functions over datasets
+ \item Joins
+ \item GroupBy and Aggregates
+ \item ETL jobs
+\end{itemize}
+
+Other notable Spark tools:
+\begin{itemize}
+ \item BlinkDB (approximate statistical queries)
+ \item Graph operations (GraphX)
+ \item Stream processing (Spark streaming)
+ \item KeystoneML (Data Pipelines)
+\end{itemize}
+
+
+
+
+
+
 
 
 
