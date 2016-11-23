@@ -1,0 +1,119 @@
+\section{Scaling Up}
+
+Assumptions since now:
+\begin{itemize}
+ \item All data fits on a single server
+ \item All data fits in memory (pandas KAWAI!!)
+\end{itemize}
+It's a realistic assumption for {\bf prototyping}, but not when moving to production.
+
+\subsection{Big Data Problem}
+Data is growing faster than computation speeds. CPU speed is stalling and there is a bottleneck in Storage. Therefore a single machine can not longer process or even store all the data. The only solution is to {\bf ditribute} data over large clusters.
+
+CONTINUE INTRO
+
+\subsubsection{How much data do you need?}
+THe answer depends on the question. But for many applications the answer is: {\bf as much as we can get}. Big Data about people (text, web, social media, etc.) follow power law statistics. Most of the features occur only once or twice. Long tail is really important. Google knows that you're looking for something even if you checked on the web once or twice. 
+
+The number of features grows in proportion to the amount of data, {\it i.e.} doubling the dataset size roughly doubles the number of users we observe. Even one or two observations of a user improves predictions for them, so:
+\begin{center}
+ {\bf More data and bigger models $=>$ More revenue!}
+\end{center}
+
+\subsubsection{Hardware for Big Data}
+At the beginning, Google (and other Internet companies) used many low-end servers instead of expensive high-end servers. It is easier to add capacity and it is cheaper per CPU/disk. But there are problems:
+\begin{itemize}
+ \item {\bf Failures} (e.g. Google numbers)
+ \begin{itemize}
+  \item 1-5\% hard drives/year
+  \item 0.2\% DIMMs/year (RAM)
+ \end{itemize}
+ \item {\bf Commodity Network} (1-20 Gb/s) speed vs RAM
+ \begin{itemize}
+  \item Much more latency (100x -- 100000x)
+  \item Lower throughput (100x-1000x)
+ \end{itemize}
+ \item {\bf Uneven Performance}
+ \begin{itemize}
+  \item Inconsistent hardware skew
+  \item Variable network latency
+  \item External loads
+ \end{itemize}
+\end{itemize}
+
+\begin{center}
+{\bf These numbers are constantly changing thanks to new technology!}
+\end{center}
+
+\subsubsection{How do we split work across machines?}
+
+First example: \emph{How do you count the number of occurences of each word in a document?} We use a hash table!
+
+And if the document is really big? For example, the web. We can simply chunk the document in multiple documents and create a hash table on each machines. At the end, we aggregate all the hash tables. {\bf But} the machine that aggregates is the bottleneck in term of performance. And if it crashes, it is even worse. Therefore, we can use {\bf Divide-and-Conquer}. Each node is responsible of summing up a subset of the whole hash table. This is call {\bf Map Reduce}. This works well when using a lot of different nodes.
+
+ADD ALL THE IMAGES!!! 
+
+Each task is idem-potent. $=>$ The order of word count doesn't matter. Therefore, really easy to use without waiting the other nodes to finish.
+
+\paragraph{What's hard about cluster computing?}
+
+How to divide work across machines?
+\begin{itemize}
+ \item Must copnsider network, data locality (Always better on its own machine)
+ \item Moving data may be {\bf very} expensive
+\end{itemize}
+
+How to deal with failures?
+\begin{itemize}
+ \item 1 server fails every 3 years $=>$ 10K nodes see 10 faults/day
+ \item Even worse: stragglers. Node has not failed but is slow.
+\end{itemize}
+
+How to deal with failures? {\bf Just launch another task!}
+
+Large Parallel Database did not support fault tolerance. Therefore, if the query fails, you have to redo it since the beginning. If the query takes longer than 3 hours $=>$ we will experience one failure on a server during the query $=>$ query is useles. =(
+
+How to deal with slow tasks? {\bf Just launch another task!}
+
+Map-Reduce is noe used by Google anymore (even if they invented it). Something more advanced exists. Why? 
+
+Because Memory is really cheap! RAM 1 cent/Mb. 
+
+\paragraph{Spark Computing Framework}
+
+Spark provides a programming abstraction and parallel runtime to hide this complexity. Spark does all the complex cluster computing stuff! How are Spark and MapReduce Different?
+
+{\bf TABLE!!}
+
+Spark tries to do as much as possible in RAM. If it can't, it will use memory on disk. Therefore, it's way more faster than simple Map Reduce! 
+
+Persist data {\bf in-memory}:
+\begin{itemize}
+ \item Optimized for batch, data-parallel ML algorithms
+ \item An efficient, general-purpose language for cluster processing of big data
+ \item In-memory query processing (Spark SQL)
+\end{itemize}
+
+Practical Challenges with Hadoop:
+\begin{itemize}
+ \item Very {\bf low-level} programming model
+ \item Very {\bf little re-use} of Map-Reduce code between applications
+ \item {\bf Laborious} programming: design code, build jar, deploy on cluster
+ \item {\bf Relies heavily on Java reflection} to communicate with to-be-defined application code.
+\end{itemize}
+
+Practical Advantages of Spark:
+\begin{itemize}
+ \item {\bf High-level programming model}: can be used like SQL (Dataframe) or like a tuple store.
+ \item {\bf Interactivity}
+ \item {\bf Integrated UDFs} (User-Defined Functions)
+ \item High-level model ({\bf Scala Actors}) for distributed programming
+ \item {\bf Scala generics} instead of reflection: Spark code is generic over [Key, Value] types.
+\end{itemize}
+
+
+
+
+
+
+
