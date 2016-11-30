@@ -204,12 +204,103 @@ Every time an algorithm has good properties, it will have drawbacks. Here are so
  \item Clusters {\bf only} have {\bf convex shapes}.
 \end{itemize}
 
-\subsubsection{How to choose K?}
+\subsubsection{How to choose K? Elbow Method}
 
 In order to choose K, we can use the same techniques as when we have to stop the clustering in the hierarchical clustering. The idea would be:
 \begin{itemize}
  \item We execute the clustering for $K=1,2,3,...$
  \item We define $J$ as the ``average within cluster sum of squares''
  \item We plot $J$ against K.
- \item We pick K suchat that $J(K) \simeq J(K+1)$
+ \item We pick K such that that $J(K) \simeq J(K+1)$
 \end{itemize}
+%Add graph of elbow method
+
+
+\subsection{DBSCAN}
+
+The usual Centroid-based clustering methods, including k-Means, favor \textbf{spherical} clusters, but in the real world, the need to be able to cluster more intricate structures and complex shapes often arises. Therefore we need other clustering methods to avoid painful and difficult clustering with complex data such as the ones we can see below.
+
+\subsubsection{The algorithm}
+\textbf{DBSCAN} performs density-based clustering and concentrates on the shape of dense neighbourhoods of points. In order to define a neighbourhood density we need to introduce the notion of \textbf{Core points}. They are point that have at least $minPts$ contained in a sphere of diameter $\epsilon$ around them. Core points are said to define \emph{dense spheres} and can directly reach all neighbours in their $\epsilon - sphere$. All other points cannot directly reach other points. We also have to define several notions in order to understand DBSCAN properly: 
+\begin{itemize}
+\item \textbf{Density reachability}: A point $q$ is \textbf{density reachable} from point $p$ if there exists a series of points $p_{1}, p_{2},..., p_{n}$ such that $p_{1}=p$, $p_{n}=q$ and $p_{i+1}$ is \emph{directly reachable} from $p_{i}$. Meaning that all the points except $p_{n}$ need to be \emph{core points}. 
+\item \textbf{Outliers} : all points that are not \emph{density reachable} from any other. Be careful here as nothing is done to prevent the creation of clusters from a set of outliers, this outlier definition doesn't ensure safety and good clustering, even if the data is well shaped. A good data analyst will look manually at the outliers in order to avoid creating clusters from outliers.
+\item \textbf{Density-connection} : We say that $p$ and $q$ are \textbf{density-connected} if there exists a point $o$ such that both $p$ and $q$ are \emph{density-reachable} from $o$.
+\end{itemize}
+We can now define a \textbf{cluster} as a set of points that are \textbf{mutually density-connected}, note that if a point is \emph{density-reachable} from a cluster point, it is also part of the cluster.
+%Insert figure about DBSCAN
+Here is a pseudocode version of the algorithm:
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwData{C}{C}\SetKwData{P}{P}\SetKwData{D}{D}\SetKwData{NeighborPts}{NeighborPts}\SetKwData{eps}{eps}\SetKwData{MinPts}{MinPts}\SetKwData{Visited}{visited}\SetKwData{Noise}{noise}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{Dataset \D, Sphere diameter \eps, Minimum number of points for dense sphere \MinPts.}
+\Output{Clustering of the DataSet \D.}
+\Begin{
+	\C $\leftarrow$ $0$ \;
+	\For{each point \P in \D}{
+		\If{\P is \Visited}{
+			continue to next point \;
+		}
+		mark \P as \Visited \;
+		\NeighborPts = $regionQuery$(\P, \eps) \;
+		\eIf{sizeof(\NeighborPts) $\leq$ \MinPts}{
+			mark \P as \Noise \;
+		}{
+			\C $\leftarrow$ next cluster \;
+			$expandCluster$(\P, \NeighborPts, \C, \eps, \MinPts) \;
+		}
+	}
+}
+\caption{DBSCAN}
+\end{algorithm}
+
+
+
+\subsubsection{Performance}
+DBSCAN has to compute all pair point distances but it is using efficient indexing structures and assumes that the neighbourhood size is not too big in terms of points, therefore each neighbourhood query takes $O(n log n)$ time. Ultimately the whole algorithm can be made to run in $O(n log n)$ time. Nevertheless, note that fast neighbour search becomes progressively harder in higher dimensions and that fast implementations require that the data can be held in memory (therefore implying a $O(n^{2})$ out-of-memory implementation). The silver lining here is that DBSCAN can catch different shapes for clustering, other than plain spheres.
+
+\subsection{Matrix Factorization}
+For problems with linear relationships between a response $Y$ and feature data $X$ we use the linear regression formula:
+
+$$ \hat{Y} = \hat{\beta_{0}} + \sum_{i=1}^{p} X_{j}  \hat{\beta_{j}} $$
+
+Another appearance of the \textbf{"curse of dimensionality"} is that the quicker the dimension of $Y$ grows, the quicker we \emph{"run out of data"}, meaning that the model has more degrees of freedom than we have data. We encounter this kind of problem in recommendations or information retrieval for example, where features and responses are the same (e.g ratings of products, relevance of a term to a document) and where we have to deal simultaneously with thousands or millions of responses in coordination with thousands or millions of features.
+The way out of this kind of problem is that High-dimensional data will often have a simpler underlying structure in regard with the interests of the data analyst, for example :
+\begin{itemize}
+\item \textbf{Information retrieval:} Topics in documents, Themes in discussions, "Voices", styles in documents.
+\item \textbf{Recommendations:} User preferences, personality and demographics. General and principal product characteristics (reliability, cost ...).
+\end{itemize}
+All of the aforementioned can be approximated using a lower-dimensional linear model. The idea is that a subset of features can be used to predict the values of the others, practically \textbf{d} coordinates defines a unique point on a \textbf{d} dimensional plane and from these measurements, we can determinate the other coordinates. Such methods are used in systems such as User product preferences, \href{https://en.wikipedia.org/wiki/Click-through_rate}{CTR} prediction, search engine optimization.
+Another aspect of the problem is that data may vary more depending on dimensions. Therefore, fitting a linear model to the top $k$ \emph{varying} or \emph{strongest} direction gives the best approximation of the data, in a least-squares sense. So we want to isolate the \emph{best} features.
+%Insert image plane
+
+\subsection{Matrix Factorization}
+%insert image matrix factorization
+In an Algebraic point of view, we want to approximate a high-dimensional and typically sparse matrix $S$ by a product of two dense matrices $A$ and $B$ with low \emph{inner} dimension. In the figure example, columns of $B$ represent the topics of the $n^{th}$ sample and rows of $A$ represent the distribution of topics in the $m^{th}$ feature. For further readings and information about matrix factorization : \href{http://www.quuxlabs.com/blog/2010/09/matrix-factorization-a-simple-tutorial-and-implementation-in-python/}{Matrix Factorization: A Simple Tutorial and Implementation in Python} or the article : \href{https://datajobs.com/data-science-repo/Recommender-Systems-[Netflix].pdf}{Matrix Factorization Techniques for Recommender Systems}.
+
+\subsection{Performance}
+Performance is needed for several reasons, namely :
+\begin{itemize}
+\item \textbf{Dataset size:} assuming model quality improves with size.
+\item \textbf{Model size:} bigger models generally perform better.
+\end{itemize}
+These above reasons are also true for power-law datasets.
+
+\subsubsection{Offline/Online Performance}
+There are two different dimensions of performance:
+\begin{itemize}
+\item \textbf{Offline: Model training:} Uses extensive amount of resources, we're typically talking about 1 to a few days of training time in order to yield the best possible model accuracy.
+\item \textbf{Online: Model prediction: }Uses a limited amount of resources (only memory and machines). The goal is usually to minimize latency and also online model size.
+\end{itemize}
+Usually \emph{Model prediction} influences \emph{Model Training} because models trained offline must fit and be fast in their deployment environment.
+
+\subsubsection{Algorithm improvements}
+In order to optimize performance one can algorithmically improve the construction of the models for example with \emph{adaptive SGD methods}. This kind of improvement usually comes for free (it is only a matter of implementation) and allows to gains orders of magnitude time.
+
+\subsubsection{Computational improvements}
+A common way to improve running time in computer science is by optimizing the code (memory accesses, data structures, etc...) or leverage hardware (e.g using GPU's). Again you can better your performance by orders of magnitude. This kind of improvement is easily combined with algorithmic improvements. It's again a matter of implementation time and being able to make the right decisions in the scope of the problem to solve.
+
+\subsubsection{Cluster scale-up}
+Distribute model or data across machines over a network and parallelize computations. This requires knowledge of the algorithms and data in order to know which are the steps that can be distributed and to be able to reduce network load by several orders of magnitude. 
