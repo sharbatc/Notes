@@ -1,21 +1,16 @@
 \section{Scaling Up}
 
-Assumptions since now:
-\begin{itemize}
- \item All data fits on a single server
- \item All data fits in memory (pandas KAWAI!!)
-\end{itemize}
-It's a realistic assumption for {\bf prototyping}, but not when moving to production.
+For the moment, we always made one big assumption: {\bf All data fits on a single server}. Even more, all data fits in the memory. It's a realistic assumption for \emph{prototyping}. But it becomes totally obsolete when moving to production. In this chapter, we will introduce the Big Data Problem as well as Spark.
 
 \subsection{Big Data Problem}
-Data is growing faster than computation speeds. CPU speed is stalling and there is a bottleneck in Storage. Therefore a single machine can not longer process or even store all the data. The only solution is to {\bf ditribute} data over large clusters.
+Nowadays, Internet is the biggest source of data. And it is growing faster and faster. Even if computers are really powerful, Data Scientist encounters one problem: The Big Data Problem. Indeed, {\bf Data is growing faster than computation speeds}. 
 
-CONTINUE INTRO
+We can see, for example, that CPU speed is stalling and that there is a bottleneck in storage. Therefore a single machine can no longer process or even store all the data. The only solution is to {\bf ditribute} data over large clusters.
 
 \subsubsection{How much data do you need?}
-THe answer depends on the question. But for many applications the answer is: {\bf as much as we can get}. Big Data about people (text, web, social media, etc.) follow power law statistics. Most of the features occur only once or twice. Long tail is really important. Google knows that you're looking for something even if you checked on the web once or twice. 
+The answer depends on the question. But for many applications the answer is: {\bf as much as we can get}. Big Data about people (text, web, social media, etc.) follow the power law statistics. Indeed, most of the features occur only once or twice. Therefore the distribution is a long tail distribution. And the long tail is really important. For example, Google knows that you're looking for something even if you checked on the web once or twice.
 
-The number of features grows in proportion to the amount of data, {\it i.e.} doubling the dataset size roughly doubles the number of users we observe. Even one or two observations of a user improves predictions for them, so:
+The number of features grows in proportion to the amount of data, {\it i.e.} doubling the dataset size roughly doubles the number of users we observe. Therefore, even one or two observations of a user improves predictions for them, so:
 \begin{center}
  {\bf More data and bigger models $=>$ More revenue!}
 \end{center}
@@ -45,56 +40,94 @@ At the beginning, Google (and other Internet companies) used many low-end server
 {\bf These numbers are constantly changing thanks to new technology!}
 \end{center}
 
-\subsubsection{How do we split work across machines?}
+\subsubsection{How do we split work across machines? (Map-Reduce)}
 
-First example: \emph{How do you count the number of occurences of each word in a document?} We use a hash table!
+\begin{center}
+\emph{How do you count the number of occurences of each word in a document?}
+\end{center}
 
-And if the document is really big? For example, the web. We can simply chunk the document in multiple documents and create a hash table on each machines. At the end, we aggregate all the hash tables. {\bf But} the machine that aggregates is the bottleneck in term of performance. And if it crashes, it is even worse. Therefore, we can use {\bf Divide-and-Conquer}. Each node is responsible of summing up a subset of the whole hash table. This is call {\bf Map Reduce}. This works well when using a lot of different nodes.
+We can use a {\bf hash table}. It's an easy tool to use for these kind of task. But what happens if the document is really big? (For example, the web) We can simple {\bf chunk} the document into multiple documents and create a hash table on each machines. At the end, we aggregate all the hash tables. {\bf But} the machine that aggregates is the {\bf bottleneck} in term of performance. And if this machine crashes, it's a disaster!
 
-ADD ALL THE IMAGES!!! 
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/10/hash-table}
+ \caption{\label{pic:hash-table} Usage of hash tables on multiple machines. We see that the bottleneck machine is the machine that aggregates the hash tables into one.}
+\end{figure}
 
-Each task is idem-potent. $=>$ The order of word count doesn't matter. Therefore, really easy to use without waiting the other nodes to finish.
+Therefore, we can use a more clever algorithm: {\bf Divide-and-Conquer}. Each node is responsible os summing up a subset of the whole hash table. 
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/10/divide-and-conquer}
+ \caption{\label{pic:divide-and-conquer} Usage of hash tables on multiple machines with Divide-and-Conquer technique. We don't have any bottleneck this time.}
+\end{figure}
+
+This technique is called {\bf Map Reduce}. The first part is called map because we create a map for each part of the big document. Then we reduce it into a simpler hash table. This works well when using a lot of different nodes. In addition, each task is {\bf idem-potent}. It means that the order of the word count doesn't matter. Thus, it is really easy to user without waiting the other nodes to finish.
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/10/map-reduce}
+ \caption{\label{pic:map-reduce} Map Reduce illustrated on the Divide-and-Conquer algorithm in Figure \ref{pic:divide-and-conquer}}
+\end{figure}
 
 \paragraph{What's hard about cluster computing?}
 
 How to divide work across machines?
 \begin{itemize}
- \item Must copnsider network, data locality (Always better on its own machine)
- \item Moving data may be {\bf very} expensive
+ \item We Must consider network, data locality. (It's always better on its own machine.)
+ \item Moving data may be {\bf very} expensive!
 \end{itemize}
 
 How to deal with failures?
 \begin{itemize}
- \item 1 server fails every 3 years $=>$ 10K nodes see 10 faults/day
- \item Even worse: stragglers. Node has not failed but is slow.
+ \item 1 server fails every 3 years. Therefore, 10K nodes will give 10 faults/day.
+ \item Even worse: stragglers. The node has not failed but is slow.
 \end{itemize}
 
 How to deal with failures? {\bf Just launch another task!}
 
-Large Parallel Database did not support fault tolerance. Therefore, if the query fails, you have to redo it since the beginning. If the query takes longer than 3 hours $=>$ we will experience one failure on a server during the query $=>$ query is useles. =(
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/10/failure}
+ \caption{\label{pic:failure} To deal with failure, we can just launch another task.}
+\end{figure}
+
+Large Parallel Databases did not support fault tolerance until recently. Therefore, if the query fails you have to redo it since the beginning. For example, if the query takes longer than 3 hours you will experience one failure on a server during the query. Thus, the query is useless.
 
 How to deal with slow tasks? {\bf Just launch another task!}
 
-Map-Reduce is noe used by Google anymore (even if they invented it). Something more advanced exists. Why? 
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/10/slow}
+ \caption{\label{pic:failure} To deal with slow tasks, we can just launch another task.}
+\end{figure}
 
-Because Memory is really cheap! RAM 1 cent/Mb. 
+Map-Reduce is not used by Google anymore, even if they invented it. More advance techniques exist nowadays. Why? Because Memory is really cheap! (RAM: 1 cent/Mb)
 
 \subsection{Spark Computing Framework}
 
-Spark provides a programming abstraction and parallel runtime to hide this complexity. Spark does all the complex cluster computing stuff! How are Spark and MapReduce Different?
+Spark provides a programming abstraction and parallel runtime to hide all of these complexity. Table \ref{tab:spark-hadoop} shows the main differences between Spark and Hadoop Map-Reduce. The big advantage with Spark is that it deals itself with all the complex clustering between the nodes.
 
-{\bf TABLE!!}
+\begin{table}[H]
+ \begin{center}
+  \begin{tabular}{l|l|l}
+    & Hadoop Map Reduce & Apache Spark \\ \hline \hline
+    Storage & Disk only & In-memory or on disk \\ \hline
+    Operations & Map and Reduce & Map, Reduce, Join, Sample, etc. \\ \hline
+    Ease of use & Java program & Scala and Python shells \\ \hline
+  \end{tabular}
+ \end{center}
+ \caption{\label{tab:spark-hadoop} Main differences between Spark and Hadoop}
+\end{table}
 
-Spark tries to do as much as possible in RAM. If it can't, it will use memory on disk. Therefore, it's way more faster than simple Map Reduce! 
-
-Persist data {\bf in-memory}:
+One of the big advantage of Spark is that it uses in-memory storage. This can speed-up the computation time by a factor of 100 on the Logistic Regression for example. The good thing with Spark is that if the RAM is full, then it will use the memory on disk. We can see some interesting fact about having data {\bf in-memory}:
 \begin{itemize}
  \item Optimized for batch, data-parallel ML algorithms
  \item An efficient, general-purpose language for cluster processing of big data
  \item In-memory query processing (Spark SQL)
 \end{itemize}
 
-Practical Challenges with Hadoop:
+Spark is not only good because it's faster than Hadoop. For example, we can see that some practical Challenges with Hadoop are:
 \begin{itemize}
  \item Very {\bf low-level} programming model
  \item Very {\bf little re-use} of Map-Reduce code between applications
@@ -102,7 +135,7 @@ Practical Challenges with Hadoop:
  \item {\bf Relies heavily on Java reflection} to communicate with to-be-defined application code.
 \end{itemize}
 
-Practical Advantages of Spark:
+And some practical Advantages of Spark are:
 \begin{itemize}
  \item {\bf High-level programming model}: can be used like SQL (Dataframe) or like a tuple store.
  \item {\bf Interactivity}
@@ -111,123 +144,8 @@ Practical Advantages of Spark:
  \item {\bf Scala generics} instead of reflection: Spark code is generic over [Key, Value] types.
 \end{itemize}
 
-Fault Tolerance
+One last advantage of Spark is the way it deal with {\bf Fault tolerance}. Hadoop uses data replication on \href{https://en.wikipedia.org/wiki/Apache\_Hadoop#HDFS}{HDFS}. Therefore, once it's computed, you should not loose it. On the other hand, Spark remember {\bf how} to recompute everything. For example, it will remember which nodes failed and which road he used to compute everything.
 
-Hadoop: Once computed, don't lose it (data replication on HDFS)
+\subsubsection{Read more}
 
-Spark: Remember {\bf how} to recompute
-
-\subsubsection{Older Spark programming model}
-
-We use RDD (Resilient Distributed Dataset)
-\begin{itemize}
- \item Distributed array, n partitions
- \item Elements are lines of input
- \item Computed {\bf on demand}
- \item Computer = (re)read from input
-\end{itemize}
-
-You can do multiple cool things (ADD CODE + PICTURES):
-\begin{itemize}
- \item Count the lines
- \item Count the lines and comments
- \item Cache stuff
- \item filter
- \item map 
- \item flatMap
- \item Shuffle transformations
- \begin{itemize}
-  \item groupByKey
-  \item sortByKey
- \end{itemize}
- \item Getting data out of RDDs
- \begin{itemize}
-  \item reduce
-  \item take
-  \item collect
-  \item saveAsTextFile
- \end{itemize}
-\end{itemize}
-
-\subsubsection{Spark DataFrames}
-
-Bringing the gap between your experience with Pandas and the need for distributed computing. 
-
-Important to understand what RDDs are and what they offer, but today most of the tasks can be accomplished with DataFrames ({\bf higher lever of abstraction $=>$ less code})
-
-\subsubsection{Spark's Machine Learning Toolkit}
-
-MLLib:
-\begin{itemize}
- \item Classification
- \begin{itemize}
-  \item Logistic Regression
-  \item Decision Trees
-  \item Random Forests
- \end{itemize}
- \item Regression
- \begin{itemize}
-  \item Linear (with L1 or L2 regularization)
- \end{itemize}
- \item Unsupervised
- \begin{itemize}
-  \item Alternating Least Squares
-  \item K-Means
-  \item SVD
- \end{itemize}
- \item Optimizers
- \begin{itemize}
-  \item Optimization primitives (SGD, L-BGFS)
- \end{itemize}
-\end{itemize}
-
-\subsubsection{Spark Driver and Executors}
-
-\begin{itemize}
- \item Driver runs user interaction, acts as master for batch jobs
- \item Driver hosts machine learning models
- \item Executors hold data aprtitions
- \item Tasks process data blocks
- \item Typically tasks/executors = number of hardware threads
-\end{itemize}
-
-Architectural Consequences
-\begin{itemize}
- \item {\bf Simple programming}: Centralized model on driver, broadcast to other nodes
- \item Models must fit in single-machine memory, \emph{i.e.} Spark supports {\bf data parallelisme} but not {\bf model parallelism}
- \item Heavy load on the driver. Model {\bf update time grows} with number of nodes.
-\end{itemize}
-
-Other uses for MapReduce/Spark:
-
-Non-ML applications
-
-Data processing:
-\begin{itemize}
- \item Select columns
- \item Map functions over datasets
- \item Joins
- \item GroupBy and Aggregates
- \item ETL jobs
-\end{itemize}
-
-Other notable Spark tools:
-\begin{itemize}
- \item BlinkDB (approximate statistical queries)
- \item Graph operations (GraphX)
- \item Stream processing (Spark streaming)
- \item KeystoneML (Data Pipelines)
-\end{itemize}
-
-
-
-
-
-
-
-
-
-
-
-
-
+If you want to read more on Haddop, you can go on \href{http://hadoop.apache.org/}{Apache Hadoop website}. For Spark, you can go on \href{http://spark.apache.org/}{Aparche Spark website}. A good article comparing Spark and Hadoop can be found on \href{https://www.xplenty.com/blog/2014/11/apache-spark-vs-hadoop-mapreduce/}{Xplenty}. You can always find more information about Spark and Hadoop on Internet. But the thing you should know is that even if Spark is much faster and much easier to use, Hadoop is not ready yet for the \emph{elephant's graveyard}.
