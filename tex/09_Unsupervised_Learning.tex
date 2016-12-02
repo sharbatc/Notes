@@ -32,7 +32,7 @@ There are several way to organize/apply clustering :
   \end{itemize}
   \item \textbf{Hierarchical clustering}: Cluster coming from some sort of a hierarchy
   \begin{itemize}
-   \item \textbf{Agglomerative} (Bottom-Up): Initially, each point is a cluster. Then, we repeatedly combine the two ``nearest'' clusters into one.
+   \item \textbf{Agglomerative} (Bottom-Up): Initially, each point is a cluster (\emph{singleton}). Then, we repeatedly combine the two ``nearest'' clusters into one.
    \item \textbf{Divisive} (Top-Down): We start with only one cluster and recursively split it.
    \item \textbf{Flat clustering: } As opposed to hierarchical clustering, there is no inter-cluster structure.
   \end{itemize} 
@@ -110,11 +110,11 @@ We see in this case that the representation is easy. But the dimensionality expl
 
 \paragraph{Documents}
 
-Encoding has a big impact on clustering, in this case the way we define a document as sets of words has a direct impact on the distance metric :
+Encoding has a big impact on clustering, in this case the way we define a document as sets of words has a direct impact on the distance metric:
 \begin{itemize}
-	\item Sets as vectors : cosine distance
-	\item Sets as sets : Jaccard distance
-	\item Sets as points Euclidian distance
+	\item Sets as vectors: cosine distance
+	\item Sets as sets: Jaccard distance
+	\item Sets as points: Euclidian distance
 \end{itemize}
 
 \subsection{Hierarchical Clustering}
@@ -122,7 +122,7 @@ Encoding has a big impact on clustering, in this case the way we define a docume
 The key operation of hierarchical clustering is how to repeatedly combine two nearest clusters. There are also several other questions that also arise when speaking about hierarchical clustering such as :
 \begin{description}
 	\item [How is a cluster of more than one point represented ?]
-The key problem is how the "location" of each cluster represented throughout the merging process in order to choose which pair of cluster is closest. In the \textbf{Euclidean case}, each cluster has a \emph{centroid} computed from the average of its data points, note that a centroid doesn't have to be a data point it can be totally artificial. We can also use a \emph{clustroid}, namely the existing data point "closest" to all of the other points according to the following metrics :
+The key problem is how the "location" of each cluster represented throughout the merging process in order to choose which pair of cluster is closest. In the \textbf{Euclidean case}, each cluster has a \emph{centroid} computed from the average of its data points, note that a centroid doesn't have to be a data point it can be totally artificial. We can also use a \emph{clustroid}, namely the existing data point "closest" to all of the other points according to the following metrics:
 \begin{itemize}
 	\item Smallest maximum distance to other points.
 	\item Smallest average distance to other points.
@@ -131,8 +131,8 @@ The key problem is how the "location" of each cluster represented throughout the
 	\item [How is the "nearness" metric of cluster determined ?]
 We can measure the nearness between clusters according to different approaches:
 \begin{enumerate}
-	\item \emph{Intercluster distance} : Minimum of the distances between any two points, one from each cluster.
-	\item \emph{Cohesion} : Pick a metric e.g. maximum distance from the clustroid for example. And then merge clusters whose union is most cohesive. Cohesion can also be : \emph{diameter} of the merged cluster (max distance between points in the cluster), \emph{average distance} between points in the cluster, \emph{density-based approach} (ex: for geolocation data) see after.
+	\item \emph{Intercluster distance}: Minimum of the distances between any two points, one from each cluster.
+	\item \emph{Cohesion} : Pick a metric e.g. maximum distance from the clustroid for example. And then merge clusters whose union is most cohesive. Cohesion can also be: \emph{diameter} of the merged cluster (max distance between points in the cluster), \emph{average distance} between points in the cluster, \emph{density-based approach} (ex: for geolocation data) see after.
 \end{enumerate} 
 	\item [When should we stop combining clusters ?] 
 	It is always difficult to decide when we should stop clustering. One way would be to compute some measure of \emph{how well the clustering fits}. For example, we can use a sum of distances from cluster centres. Then, we can check if the graph of the error in function of the number of clusters has an elbow. Finally, we can choose the number of cluster minimizing this measure. Another way to check if the clustering is still good is to use the \href{https://en.wikipedia.org/wiki/Silhouette\_(clustering)}{silhouette} score. 
@@ -163,7 +163,7 @@ The most challenging and impactful decisions when using K-means is to choose the
 	\item Until no changes in assignments happen.
 	\item Until there are only small changes in quality.
 \end{itemize}
-As we said previously, \textbf{Initialization} is the most crucial part when running K-mean, we can choose to pick a random subset of k points from dataset or use methods like K-Means++ that iteratively constructs a random sample with good spacing across the dataset. However you choose the method for choosing your initial points, take into account the fact that optimal K-Means clustering is a NP-hard problem and that randomization helps avoiding bad configurations and saves up a lot of time/complexity.
+As we said previously, \textbf{initialization} is the most crucial part when running K-mean, we can choose to pick a random subset of k points from dataset or use methods like K-Means++ that iteratively constructs a random sample with good spacing across the dataset. However you choose the method for choosing your initial points, take into account the fact that optimal K-Means clustering is a NP-hard problem and that randomization helps avoiding bad configurations and saves up a lot of time/complexity.
 
 \subsubsection{K-means++}
 The idea of the K-means++ algorithm is the following:
@@ -211,9 +211,14 @@ In order to choose K, we can use the same techniques as when we have to stop the
  \item We execute the clustering for $K=1,2,3,...$
  \item We define $J$ as the ``average within cluster sum of squares''
  \item We plot $J$ against K.
- \item We pick K such that that $J(K) \simeq J(K+1)$
+ \item We pick K such that $J(K) \simeq J(K+1)$
 \end{itemize}
-%Add graph of elbow method
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/09/elbow}
+ \caption{\label{pic:elbow} Plot of the within-cluster sum of squares. The chosen clusters are three. That's the point K s.t. $J(K) \simeq J(K+1)$ }
+\end{figure}
 
 
 \subsection{DBSCAN}
@@ -228,7 +233,13 @@ The usual Centroid-based clustering methods, including k-Means, favor \textbf{sp
 \item \textbf{Density-connection} : We say that $p$ and $q$ are \textbf{density-connected} if there exists a point $o$ such that both $p$ and $q$ are \emph{density-reachable} from $o$.
 \end{itemize}
 We can now define a \textbf{cluster} as a set of points that are \textbf{mutually density-connected}, note that if a point is \emph{density-reachable} from a cluster point, it is also part of the cluster.
-%Insert figure about DBSCAN
+
+\begin{figure}[!h]%---------------FIG--------------
+ \centering
+ \includegraphics[width=10cm]{./img/09/dbscan}
+ \caption{\label{pic:dbscan} Points at A are core points. Points B and C are density-reachable from A and thus density-connected and belong to the same cluster. Point N is a noise point that is neither a core point nor density-reachable. (MinPts=3 or MinPts=4) }
+\end{figure}
+
 Here is a pseudocode version of the algorithm:
 
 \begin{algorithm}[H]
@@ -259,7 +270,7 @@ Here is a pseudocode version of the algorithm:
 
 
 \subsubsection{Performance}
-DBSCAN has to compute all pair point distances but it is using efficient indexing structures and assumes that the neighbourhood size is not too big in terms of points, therefore each neighbourhood query takes $O(n log n)$ time. Ultimately the whole algorithm can be made to run in $O(n log n)$ time. Nevertheless, note that fast neighbour search becomes progressively harder in higher dimensions and that fast implementations require that the data can be held in memory (therefore implying a $O(n^{2})$ out-of-memory implementation). The silver lining here is that DBSCAN can catch different shapes for clustering, other than plain spheres.
+DBSCAN has to compute all pair point distances but it is using efficient indexing structures and assumes that the neighbourhood size is not too big in terms of points, therefore each neighbourhood query takes $O(n \log n)$ time. Ultimately the whole algorithm can be made to run in $O(n \log n)$ time. Nevertheless, note that fast neighbour search becomes progressively harder in higher dimensions and that fast implementations require that the data can be held in memory (therefore implying a $O(n^{2})$ out-of-memory implementation). The silver lining here is that DBSCAN can catch different shapes for clustering, other than plain spheres.
 
 \subsection{Matrix Factorization}
 For problems with linear relationships between a response $Y$ and feature data $X$ we use the linear regression formula:
@@ -274,11 +285,24 @@ The way out of this kind of problem is that High-dimensional data will often hav
 \end{itemize}
 All of the aforementioned can be approximated using a lower-dimensional linear model. The idea is that a subset of features can be used to predict the values of the others, practically \textbf{d} coordinates defines a unique point on a \textbf{d} dimensional plane and from these measurements, we can determinate the other coordinates. Such methods are used in systems such as User product preferences, \href{https://en.wikipedia.org/wiki/Click-through_rate}{CTR} prediction, search engine optimization.
 Another aspect of the problem is that data may vary more depending on dimensions. Therefore, fitting a linear model to the top $k$ \emph{varying} or \emph{strongest} direction gives the best approximation of the data, in a least-squares sense. So we want to isolate the \emph{best} features.
-%Insert image plane
 
-\subsection{Matrix Factorization}
-%insert image matrix factorization
-In an Algebraic point of view, we want to approximate a high-dimensional and typically sparse matrix $S$ by a product of two dense matrices $A$ and $B$ with low \emph{inner} dimension. In the figure example, columns of $B$ represent the topics of the $n^{th}$ sample and rows of $A$ represent the distribution of topics in the $m^{th}$ feature. For further readings and information about matrix factorization : \href{http://www.quuxlabs.com/blog/2010/09/matrix-factorization-a-simple-tutorial-and-implementation-in-python/}{Matrix Factorization: A Simple Tutorial and Implementation in Python} or the article : \href{https://datajobs.com/data-science-repo/Recommender-Systems-[Netflix].pdf}{Matrix Factorization Techniques for Recommender Systems}.
+%\begin{figure}[H]%---------------FIG--------------
+ %\centering
+% \includegraphics[width=13cm]{./img/09/matrix_plane}
+ %\caption{\label{pic:matrix_plane}  }
+%\end{figure}
+
+
+In an Algebraic point of view, we want to approximate a high-dimensional and typically sparse matrix $S$ by a product of two dense matrices $A$ and $B$ with low \emph{inner} dimension. In the figure example, columns of $B$ represent the topics of the $n^{th}$ sample and rows of $A$ represent the distribution of topics in the $m^{th}$ feature.
+
+
+\begin{figure}[H]%---------------FIG--------------
+ \centering
+ \includegraphics[width=13cm]{./img/09/matrix_fact}
+ \caption{\label{pic:matrix_fact} Matrix representation of the \emph{matrix factorization} }
+\end{figure}
+
+For further readings and information about matrix factorization: \href{http://www.quuxlabs.com/blog/2010/09/matrix-factorization-a-simple-tutorial-and-implementation-in-python/}{Matrix Factorization: A Simple Tutorial and Implementation in Python} or the article : \href{https://datajobs.com/data-science-repo/Recommender-Systems-[Netflix].pdf}{Matrix Factorization Techniques for Recommender Systems}.
 
 \subsection{Performance}
 Performance is needed for several reasons, namely :
