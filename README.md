@@ -2,16 +2,12 @@
 
 [Download link](https://github.com/ADAEPFL/Notes/raw/master/notes.pdf)
 
-Please help us improve the notes by submitting issues and Pull Requests!
-
-
-### Compiling the whole PDF:
-
-Feel free to comment the ```\input{}``` of notes.tex when working on a section to speed up the compilation.
+Please help us to improve the notes by submitting Issues and Pull Requests!
 
 ### Compression:
 
-The ```compress_pdf_ghostscript.sh``` script provides a way to compress the original PDF to about half of its size.
+The ```compress_pdf_ghostscript.sh``` script provides a way to compress the original PDF to about half of its size (i.e., useful for smoother scrolling on smartphones/tablets).
+
 
 # Authors
 [Gael Lederrey](https://github.com/glederrey)
