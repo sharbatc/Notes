@@ -9,11 +9,11 @@ Please help us improve the notes by submitting issues and Pull Requests!
 
 Feel free to comment the ```\input{}``` of notes.tex when working on a section to speed up the compilation.
 
-### Compression
+### Compression:
 
-The ```compress_pdf_ghostscript.sh``` script provides a way to compress the PDF to about half of its size.
+The ```compress_pdf_ghostscript.sh``` script provides a way to compress the original PDF to about half of its size.
 
-# Credits
+# Authors
 [Gael Lederrey](https://github.com/glederrey)
 
 [Cristina Menghini](https://github.com/CriMenghini)
